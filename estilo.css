@@ -7,7 +7,6 @@ body{
         background-attachment: fixed;
 
 }
-
  *{
     box-sizing: border-box;
 }
@@ -46,6 +45,7 @@ border: 1px solid black;
     text-align: center;
     color: black;
 }
+// Esta es la etiqueta para los botones, usenla si quieren.
 .button{
     border: none;
     width: 100%;
@@ -55,7 +55,7 @@ border: 1px solid black;
     padding: 15px 20px;
     border-radius: 10px;
     cursor: pointer;
-
+// iguanas ranas
 }.button:hover{
     background: cadetblue;
 }
