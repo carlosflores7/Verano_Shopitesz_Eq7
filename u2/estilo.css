@@ -7,6 +7,7 @@ body{
         background-attachment: fixed;
 
 }
+
  *{
     box-sizing: border-box;
 }
@@ -45,7 +46,6 @@ border: 1px solid black;
     text-align: center;
     color: black;
 }
-// Esta es la etiqueta para los botones, usenla si quieren.
 .button{
     border: none;
     width: 100%;
@@ -55,7 +55,7 @@ border: 1px solid black;
     padding: 15px 20px;
     border-radius: 10px;
     cursor: pointer;
-// iguanas ranas
+
 }.button:hover{
     background: cadetblue;
 }
@@ -71,11 +71,30 @@ p{
     color: cadetblue;
 
 }
+.Revelador{
+    border: none;
+    width: 30%;
+    color: black;
+    font-size: 16px;
+    background: #DFC8EE;
+    padding: 3px 4px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
 @media(min-width: 768px){
     .formulario{
         margin: auto;
         width: 500px;
         margin-top: 110px;
         border-radius: 5%;
+    }
+    .lista{
+        margin: auto;
+        width: 500px;
+        margin-top: 50px;
+
+    }
+
     }
 }
