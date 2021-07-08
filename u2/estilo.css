@@ -11,6 +11,14 @@ body{
  *{
     box-sizing: border-box;
 }
+.fotoPerfil{
+    width: 25%;
+    padding: 1px;
+    margin-top: 11px;
+    margin: auto;
+    margin-left:180px;
+
+}
 
 .contenedor {
     width: 100%;
