@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ca005e08-66f3-4815-8c70-a29d5de6598d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/estilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/estilo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comunes/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comunes/menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pedidosclt/pedidocl.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidosclt/pedidocl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pedidosclt/pedidocliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidosclt/pedidocliente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/usuarios/registrarCuenta.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usuarios/registrarCuenta.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/vendedorpedido/pedidosadministrados.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vendedorpedido/pedidosadministrados.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/vendedorpedido/pedidosvendedoradministrativos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vendedorpedido/pedidosvendedoradministrativos.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
