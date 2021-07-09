@@ -1,0 +1,67 @@
+
+.tituloHeader{
+	color:blue;
+	font-size: 30px;
+	font-family: Impact, Haettenschweiler, 'Arial'
+}
+
+.linkButton{
+	background: red;
+	border: 1px solid black;
+	text-decoration: none;
+}
+body{
+	background-image: url('../../static/img/fondo.jpg');
+	background-size: cover;
+}
+
+header{
+	background: aqua;
+	background-image: url('../img/zorro.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 50%;
+	margin: 0%;
+	padding-top: 30px;
+	padding-left: 35%;
+}
+nav{
+	margin 0%;
+}
+
+#myCarousel{
+	max-width: 60%;
+}
+
+.carousel-caption{
+	font-weight: bold;
+}
+
+.crearCuenta{
+	max-width: 70%;
+}
+
+p[class="inicio"]{
+	text-align: justify;
+}
+
+.footer {
+  font-size: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+}
+
+#tablaCategorias{
+	min-width: 50%;
+	max-width: 70%;
+	text-align: center;
+}
+
+#tablaProductos{
+	max-width: 80%;
+}
