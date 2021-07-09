@@ -1,0 +1,24 @@
+{% extends 'Comunes/base.html' %}
+{% block navbar %}
+{% include 'Comunes/Menu.html' %}
+{% endblock %}
+{% block contenido %}
+ <script src="https://kit.fontawesome.com/2530d1feb2.js" crossorigin="anonymous"></script>
+ <h1 >Hola "nombre del perfil del usuario"</h1>
+
+<form class="lista" action="/login" method="POST">
+<img src="../../static/img/carlos.png" class="fotoPerfil" alt="Cinque Terre">
+    <ul class="list-group">
+        <li class="list-group-item">Nombre Completo:asedyoagsduyga </li>
+        <li class="list-group-item">direccion:Asdasd</li>
+        <li class="list-group-item">telefono:123123123</li>
+        <li class="list-group-item">Email:123123123asdawdw@sasd</li>
+         <li class="list-group-item">tipo (Cliente/Empleado)</li>
+          <li class="list-group-item">Estatus:Activo</li>
+        <a href="/tarjetas" class="list-group-item">Tarjeta Registrada</a>
+
+    </ul>
+
+</form>
+
+{% endblock %}

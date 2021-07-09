@@ -1,7 +1,7 @@
 {% extends 'comunes/base.html' %}
 {% block navbar %}
 	{{super()}}
-	{% include 'comunes/menu.html' %}
+
 {% endblock %}
 {% block contenido %}
 	<h1 class="text-center">Crear cuenta</h1>
@@ -34,7 +34,7 @@
 		<br>
 		<center>
 			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-ok"></span> Crear cuenta</button>
-			<a href="/validarSesion" class="btn btn-primary mb-3"><span class="glyphicon glyphicon-circle-arrow-left"></span> Regresar al inicio</a>
+			<a href="/" class="btn btn-primary mb-3"><span class="glyphicon glyphicon-circle-arrow-left"></span> Regresar al inicio</a>
 		</center>
 		
   <!-- Modal -->

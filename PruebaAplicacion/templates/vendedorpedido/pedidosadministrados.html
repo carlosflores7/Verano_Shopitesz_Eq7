@@ -1,4 +1,8 @@
 {% extends 'comunes/base.html' %}
+{% block navbar %}
+	{{super()}}
+	{% include 'comunes/menu.html' %}
+{% endblock %}
 
 {% block contenido %}
     <h1>PEDIDOS ADMINISTRADOS</h1>
@@ -25,7 +29,7 @@
             <td>$2200</td>
             <td>4 unidades</td>
             <th>ENTREGADO</th>
-            <th>ENTREGADO</th>
+
         </tr>
         <tr>
             <td>74821174</td>
@@ -33,9 +37,9 @@
             <td>04/07/2021</td>
             <td>05/07/2021</td>
             <td><input type="date" id="birthday" name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
             <td><input type="date"name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
 
             <td>$3000</td>
             <td>4 unidades</td>
@@ -46,11 +50,11 @@
             <td>Pago referenciado (Transferencia SPEI, Depósito en efectivo/cheque)</td>
             <td>07/07/2021</td>
             <td><input type="date"name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
             <td><input type="date"name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
             <td><input type="date"name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
 
             <td>$3000</td>
             <td>4 unidades</td>
@@ -63,7 +67,7 @@
             <td>05/06/2021</td>
             <td>09/06/2021</td>
             <td><input type="date"name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
 
             <td>$15000</td>
             <td>1 unidades</td>
@@ -74,11 +78,11 @@
             <td>Pago referenciado (Transferencia SPEI, Depósito en efectivo/cheque)</td>
             <td>07/07/2021</td>
             <td><input type="date"name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
             <td><input type="date"name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
             <td><input type="date"name="birthday"><BR>
-                <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Agregar fecha</a></td>
+                <a class="btn btn-primary btn sm" href="#" >Agregar fecha</a></td>
 
             <td>$2000</td>
             <td>4 unidades</td>

@@ -1,0 +1,28 @@
+{% extends 'Comunes/base.html' %}
+{% block contenido %}
+    <script src="https://kit.fontawesome.com/2530d1feb2.js" crossorigin="anonymous"></script>
+
+    <form class="formulario" action="/" >
+
+    <h1>Iniciar Sesion</h1>
+
+     <div class="contenedor">
+
+
+
+         <div class="input-contenedor">
+         <i class="fas fa-envelope icon"></i>
+         <input type="email" name="Correo" maxlength="50" placeholder="Introduce tu email." required>
+         </div>
+
+         <div class="input-contenedor">
+        <i class="fas fa-key icon"></i>
+         <input type="password" name="Contraseña" maxlength="30" placeholder="Introduce tu contraseña" required>
+
+         </div>
+         <input type="submit" value="Login" class="button">
+         <p> no tienes cuenta aun?<a class="link" href="/registrarCuenta">Registrarse</a></p>
+     </div>
+    </form>
+
+{% endblock %}

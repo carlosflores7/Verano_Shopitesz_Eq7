@@ -1,5 +1,8 @@
 {% extends 'comunes/base.html' %}
-
+{% block navbar %}
+	{{super()}}
+	{% include 'comunes/menu.html' %}
+{% endblock %}
 {% block contenido %}
     <title>Pedidos Relizados</title>
     <h1>DETALLES DE PEDIDO</h1>
@@ -64,7 +67,7 @@
             <td>$860</td>
             <th>ENVIADO</th>
             <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="">
-            <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Cargar Comentario</a></td>
+            <a class="btn btn-primary btn sm" href="#" >Cargar Comentario</a></td>
         </tr>
         <tr>
            <td><IMG src="{{url_for('static',filename='img/ninja.jpg')}}"></td>
@@ -77,7 +80,7 @@
             <td>$2750 </td>
             <th>PENDIENTE</th>
             <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="" disabled>
-            <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Cargar Comentario</a></td>
+            <a class="btn btn-primary btn sm" href="#" >Cargar Comentario</a></td>
         </tr>
         <tr>
             <td><IMG src="{{url_for('static',filename='img/switchpro.jpg')}}"></td>
@@ -90,7 +93,7 @@
             <td>$15000</td>
             <th>ENTREGADO</th>
             <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="">
-            <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Cargar Comentario</a></td>
+            <a class="btn btn-primary btn sm" href="#" >Cargar Comentario</a></td>
         </tr>
         <tr>
             <td><IMG src="{{url_for('static',filename='img/Skyrim.jpg')}}"></td>
@@ -103,7 +106,7 @@
             <td>$500</td>
             <th>PENDIENTE</th>
             <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="" disabled>
-            <a class="btn btn-primary btn sm" href="/productos/pedidosdetalle" >Cargar Comentario</a></td>
+            <a class="btn btn-primary btn sm" href="#" >Cargar Comentario</a></td>
         </tr>
     </table>
     </div>

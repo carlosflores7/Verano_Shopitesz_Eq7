@@ -16,10 +16,9 @@ def validarSesion():
 def registrarCuenta():
     return render_template("usuarios/registrarCuenta.html")
 
-@app.route("/login", methods=['POST'])
+@app.route("/login")
 def login():
-    correo=request.form['correo']
-    return "Validando al usuario "+correo
+    return render_template('usuarios/Login.html')
 
 @app.route("/productos")
 def consultarProductos():
@@ -32,6 +31,32 @@ def categorias():
 @app.route("/carrito")
 def carrito():
     return render_template("usuarios/carrito.html")
+
+@app.route('/tarjetas')
+def Tarjetas():
+    return render_template('Usuarios/tarjetas.html')
+
+
+@app.route('/verperfil')
+def verperfil():
+    return render_template('usuarios/VerPerfil.html')
+
+@app.route("/pedidosclt")
+def consultarPedidos():
+    #return "Retorna la lista de productos"
+    return render_template("pedidosclt/pedidocl.html")
+
+@app.route("/pedidosclt/pedidosdetalle")
+def detallesPeddidos():
+    return render_template("pedidosclt/pedidocliente.html")
+
+@app.route("/vendedorpedido/pedidosad")
+def vendedorpedidos():
+    return render_template("vendedorpedido/pedidosadministrados.html")
+
+@app.route("/vendedorpedido/pedidovendidosad")
+def vendedorpedidosadministrados():
+    return render_template("vendedorpedido/pedidosvendedoradministrativos.html")
 
 if __name__== '__main__':
     app.run(debug=True)
