@@ -36,10 +36,19 @@ def carrito():
 def Tarjetas():
     return render_template('Usuarios/tarjetas.html')
 
+@app.route('/tarjetas/registrada')
+def Tarjetasregistradas():
+    return render_template('Usuarios/tarjetaregistrada.html')
+
+
 
 @app.route('/verperfil')
 def verperfil():
     return render_template('usuarios/VerPerfil.html')
+
+@app.route('/verperfil/modificar')
+def modificarperfil():
+    return render_template('usuarios/modificarperfilcl.html')
 
 @app.route("/pedidosclt")
 def consultarPedidos():
@@ -48,6 +57,10 @@ def consultarPedidos():
 
 @app.route("/pedidosclt/pedidosdetalle")
 def detallesPeddidos():
+    return render_template("pedidosclt/pedidopedircl.html")
+
+@app.route("/pedidosclt/pedidospedir")
+def pedidospedir():
     return render_template("pedidosclt/pedidocliente.html")
 
 @app.route("/vendedorpedido/pedidosad")
