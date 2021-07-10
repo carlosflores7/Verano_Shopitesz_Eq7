@@ -57,19 +57,40 @@ def consultarPedidos():
 
 @app.route("/pedidosclt/pedidosdetalle")
 def detallesPeddidos():
-    return render_template("pedidosclt/pedidopedircl.html")
+    return render_template("pedidosclt/pedidocliente.html")
 
 @app.route("/pedidosclt/pedidospedir")
 def pedidospedir():
-    return render_template("pedidosclt/pedidocliente.html")
+    return render_template("pedidosclt/pedidopedircl.html")
+
+@app.route("/pedidosclt/pedidosclvarios")
+def pedidosclvarios():
+    return render_template("pedidosclt/pedidosclvarios.html")
+
+@app.route("/pedidosclt/pedidoscluno")
+def pedidoscluno():
+    return render_template("pedidosclt/pedidoscluno.html")
+
 
 @app.route("/vendedorpedido/pedidosad")
 def vendedorpedidos():
     return render_template("vendedorpedido/pedidosadministrados.html")
 
+@app.route("/vendedorpedido/aceptarpedido")
+def vendedorpedidosaceptar():
+    return render_template("vendedorpedido/aceptarpedido.html")
+
 @app.route("/vendedorpedido/pedidovendidosad")
 def vendedorpedidosadministrados():
     return render_template("vendedorpedido/pedidosvendedoradministrativos.html")
+
+@app.route("/vendedorpedido/pedidovendidaduno")
+def vendedorpedidosaduno():
+    return render_template("vendedorpedido/pedidosaduno.html")
+
+@app.route("/vendedorpedido/pedidovendidadvarios")
+def vendedorpedidosadvarios():
+    return render_template("vendedorpedido/pedidosadvarios.html")
 
 if __name__== '__main__':
     app.run(debug=True)

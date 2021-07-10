@@ -1,0 +1,54 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+	{{super()}}
+	{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+    <title>Pedidos Relizados</title>
+    <h1>DETALLES DE PEDIDO</h1>
+    <div class="table">
+    <table class="table table-striped">
+        <tr>
+            <th>IMAGEN</th>
+            <th>NOMBRE Y DESCRIPCION</th>
+            <th>ID PEDIDO</th>
+            <th>ID PRODUCTO</th>
+            <th>CANTIDAD PEDIDA</th>
+            <th>CANTIDAD ENVIADA</th>
+            <th>CANTIDAD ACEPTADA</th>
+            <th>CANTIDAD RECHAZADA</th>
+            <th>PRECIO POR UNIDAD</th>
+            <th>ESTATUS</th>
+            <th>COMENTARIO</th>
+        </tr>
+        </thead>
+        <tr>
+            <td><IMG src="{{url_for('static',filename='img/cyber.jpg')}}"></td>
+            <td>VIDEOJUEGO CYBERPUNK 2077 VERSION PARA PC</td>
+            <td>87128712</td>
+            <TD>78907297</TD>
+            <td> 4 </td>
+            <td> <input type="number" placeholder="4" disabled></td>
+            <td> 3 </td>
+            <td> 1 </td>
+            <td>$500 </td>
+            <th>ENTREGADO</th>
+            <td>El producto llego con una copia defectuosa</td>
+        </tr>
+        <tr>
+            <td><IMG src="{{url_for('static',filename='img/outriders.jpg')}}"></td>
+            <td>VIDEOJUEGO OUTRIDERS VERSION PARA PC</td>
+            <td>87128712</td>
+            <td>72247487</td>
+            <td>2</td>
+           <td> <input type="number" placeholder="1" disabled></td>
+            <td>1</td>
+            <td>1</td>
+            <td>$860</td>
+            <th>ENTREGADO</th>
+            <td>El producto llego con una copia defectuosa</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary btn sm" href="#" >Mandar Informacion</a></td>
+    </div>
+{% endblock %}

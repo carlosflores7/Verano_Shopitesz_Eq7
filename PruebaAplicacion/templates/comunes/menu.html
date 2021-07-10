@@ -13,8 +13,22 @@
         <li><a href="/categorias">Categorías</a></li>
         <li><a href="/carrito">Carrito</a></li>
         <li><a href="/verperfil">Perfil</a></li>
-        <li><a href="/pedidosclt">Pedidos</a></li>
-        <li><a href="/vendedorpedido/pedidosad">Administrar Pedidos</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/pedidosclt/pedidospedir">HACER UN PEDIDO</a></li>
+          <li><a href="/pedidosclt">PEDIDOS</a></li>
+          <li><a href="/pedidosclt/pedidosdetalle">DETALLES PEDIDOS</a></li>
+        </ul>
+      </li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS ADMINISTRADOS
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/vendedorpedido/aceptarpedido">ACEPTAR UN PEDIDO</a></li>
+          <li><a href="/vendedorpedido/pedidosad">PEDIDOS ADMINISTRADOS</a></li>
+          <li><a href="/vendedorpedido/pedidovendidosad"">DETALLES DE PEDIDOS ADMINISTRADOS</a></li>
+        </ul>
+      </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/registrarCuenta"><span class="glyphicon glyphicon-user"></span> Crear cuenta</a></li>

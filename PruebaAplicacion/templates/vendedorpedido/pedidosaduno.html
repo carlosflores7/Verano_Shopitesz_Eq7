@@ -1,0 +1,41 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+	{{super()}}
+	{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+    <title>Pedidos Relizados</title>
+    <h1>DETALLES DE PEDIDO</h1>
+    <div class="table">
+    <table class="table table-striped">
+        <tr>
+            <th>IMAGEN</th>
+            <th>NOMBRE Y DESCRIPCION</th>
+            <th>ID PEDIDO</th>
+            <th>ID PRODUCTO</th>
+            <th>CANTIDAD PEDIDA</th>
+            <th>CANTIDAD ENVIADA</th>
+            <th>CANTIDAD ACEPTADA</th>
+            <th>CANTIDAD RECHAZADA</th>
+            <th>PRECIO POR UNIDAD</th>
+            <th>ESTATUS</th>
+            <th>COMENTARIO</th>
+        </tr>
+        </thead>
+        <tr>
+            <td><IMG src="{{url_for('static',filename='img/BIO.jpg')}}"></td>
+            <td>VIDEOJUEGO BIOMUTANT VERSION PARA PC</td>
+            <td>74821174</td>
+            <td>71287257</td>
+            <td>4</td>
+            <td><input type="number" class="form-control" value="4" ></td>
+            <td>4</td>
+            <td>4</td>
+            <td>$860</td>
+            <th>ENVIADO</th>
+            <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="El cliente aun no agrega un comentario" disabled></td>
+        </tr>
+    </table>
+        <a class="btn btn-primary mb-3" href="#" >MANDAR INFORMACION DEL PEDIDO</a>
+    </div>
+{% endblock %}

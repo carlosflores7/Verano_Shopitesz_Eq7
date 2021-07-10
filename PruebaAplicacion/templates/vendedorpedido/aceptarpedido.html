@@ -1,0 +1,44 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+	{{super()}}
+	{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+    <h1>PEDIDOS POR ACEPTAR</h1>
+    <div class="table">
+    <table class="table table-striped" >
+        <thead>
+            <th>ID PEDIDO</th>
+            <th>FORMA DE PAGO</th>
+            <th>FECHA DE REGISTRO</th>
+            <th>FECHA DE ATENCION</th>
+            <th>FECHA DE RECEPCION</th>
+            <th>TOTAL A PAGAR</th>
+            <th>TOTAL DE UNIDADES</th>
+            <th>AGREGAR A PEDIDOS ADMINISTRADOS</th>
+        </thead>
+        <tr>
+            <td>87128712</td>
+            <td>Pago referenciado (Transferencia SPEI, Depósito en efectivo/cheque)</td>
+            <td>01/04/2021</td>
+            <td>02/07/2021</td>
+            <td>05/07/2021</td>
+            <td>$2200</td>
+            <td>4 unidades</td>
+            <TH><a class="btn btn-primary mb-3" href="/vendedorpedido/pedidosad" >ACEPTAR</a>
+                <a class="btn btn-danger mb-3" href="#" >DENEGAR</a> </TH>
+        </tr>
+        <tr>
+            <td>74821174</td>
+            <td>Pago referenciado (Transferencia SPEI, Depósito en efectivo/cheque)</td>
+            <td>04/07/2021</td>
+            <td>05/07/2021</td>
+            <td>09/07/2021</td>
+            <td>$3000</td>
+            <td>4 unidades</td>
+            <TH><a class="btn btn-primary mb-3" href="/vendedorpedido/pedidosad" >ACEPTAR</a>
+            <a class="btn btn-danger mb-3" href="#" >DENEGAR</a></TH>
+        </tr>
+    </table>
+    </div>
+{% endblock %}
