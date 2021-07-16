@@ -1,0 +1,57 @@
+{% extends 'Comunes/base.html' %}
+{% block navbar %}
+{{super()}}
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+  <script src="https://kit.fontawesome.com/2530d1feb2.js" crossorigin="anonymous"></script>
+<h1>Tarjeta de Credito/Debito Registrada</h1>
+
+<form class="TarjetasCuadro">
+        <div class="contenedor2">
+
+        <div >
+
+            <i class="fas fa-user-shield"></i>
+            <label >Propietario de la tarjeta</label>
+            <input type="text" name="PropietarioTarjeta" maxlength="50" value="CARLOS FLORES" disabled>
+        </div>
+
+        <div >
+             <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-visa"></i>
+            <label >Numero de la tarjeta</label>
+            <input type="number" name="NumeroTarjeta" maxlength="16" value="220640405252698" disabled>
+        </div>
+
+        <div >
+            <i class="fas fa-dollar-sign"></i>
+            <label >Saldo de la tarjeta</label>
+            <input type="number" name="Saldo" value="50000" disabled>
+        </div>
+
+        <div >
+            <i class="fas fa-university"></i>
+            <label >Banco al que pertenece</label>
+            <input type="text" name="BancoP" value="CITIBANAMEX" disabled>
+        </div>
+
+        <div >
+            <label >Estatus en la que se encuentra A/B</label>
+            <input type="text" name="Estatus" value="A" disabled>
+        </div>
+
+         <a href="/verperfil" class="list-group-item">Regresar</a>
+            <a href="/tarjetas" class="list-group-item">Modificar Tarjeta</a>
+
+  </div>
+
+</form>
+
+
+
+
+
+
+
+{% endblock %}

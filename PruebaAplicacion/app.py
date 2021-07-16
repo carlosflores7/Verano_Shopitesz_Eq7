@@ -1,7 +1,12 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect,url_for,flash
 from flask_bootstrap import Bootstrap
+from modelo.Dao import db,Categoria,Producto
+from flask_login import login_required,login_user,logout_user,current_user,login_manager
 app = Flask(__name__)
 Bootstrap(app)
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+app.secret_key='Cl4v3'
 
 @app.route("/")
 def inicio():
@@ -22,11 +27,96 @@ def login():
 
 @app.route("/productos")
 def consultarProductos():
-    return render_template("productos/consultaGeneral.html")
+    producto = Producto()
+    return render_template("productos/consultaGeneral.html",productos=producto.consultaGeneral())
 
-@app.route("/categorias")
-def categorias():
-    return render_template("productos/categorias.html")
+
+#CRUD de Categorias
+@app.route('/Categorias')
+def consultaCategorias():
+    cat=Categoria()
+    return render_template('productos/categorias.html',categorias=cat.consultaGeneral())
+
+@app.route('/Categorias/consultarImagen/<int:id>')
+def consultarImagenCategoria(id):
+    cat=Categoria()
+    return cat.consultarImagen(id)
+
+
+@app.route('/Categorias/nueva')
+@login_required
+def nuevaCategoria():
+    if current_user.is_authenticated and current_user.is_admin():
+        return render_template('categorias/agregar.html')
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Categorias/agregar',methods=['post'])
+@login_required
+def agregarCategoria():
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            cat=Categoria()
+            cat.nombre=request.form['nombre']
+            cat.imagen=request.files['imagen'].stream.read()
+            cat.estatus='Activa'
+            cat.agregar()
+            flash('¡ Categoria agregada con exito !')
+        except:
+            flash('¡ Error al agregar la categoria !')
+        return redirect(url_for('consultaCategorias'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+
+@app.route('/Categorias/<int:id>')
+@login_required
+def consultarCategoria(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        cat=Categoria()
+        return render_template('categorias/editar.html',cat=cat.consultaIndividuall(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+
+@app.route('/Categorias/editar',methods=['POST'])
+@login_required
+def editarCategoria():
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            cat=Categoria()
+            cat.idCategoria=request.form['id']
+            cat.nombre=request.form['nombre']
+            imagen=request.files['imagen'].stream.read()
+            if imagen:
+                cat.imagen=imagen
+            cat.estatus=request.values.get("estatus","Inactiva")
+            cat.editar()
+            flash('¡ Categoria editada con exito !')
+        except:
+            flash('¡ Error al editar la categoria !')
+
+        return redirect(url_for('consultaCategorias'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Categorias/eliminar/<int:id>')
+@login_required
+def eliminarCategoria(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            categoria=Categoria()
+            #categoria.eliminar(id)
+            categoria.eliminacionLogica(id)
+            flash('Categoria eliminada con exito')
+        except:
+            flash('Error al eliminar la categoria')
+        return redirect(url_for('consultaCategorias'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+#Fin del crud de categorias
+
 
 @app.route("/carrito")
 def carrito():
@@ -70,7 +160,6 @@ def pedidosclvarios():
 @app.route("/pedidosclt/pedidoscluno")
 def pedidoscluno():
     return render_template("pedidosclt/pedidoscluno.html")
-
 
 @app.route("/vendedorpedido/pedidosad")
 def vendedorpedidos():

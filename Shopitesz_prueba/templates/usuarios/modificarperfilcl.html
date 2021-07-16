@@ -1,0 +1,25 @@
+{% extends 'Comunes/base.html' %}
+{% block navbar %}
+{{super()}}
+{% include 'Comunes/Menu.html' %}
+{% endblock %}
+{% block contenido %}
+ <script src="https://kit.fontawesome.com/2530d1feb2.js" crossorigin="anonymous"></script>
+ <h1 >Hola "nombre del perfil del usuario"</h1>
+
+<form class="lista" action="/login" method="POST">
+<img src="../../static/img/carlos.png" class="fotoPerfil" alt="Cinque Terre">
+    <ul class="list-group">
+        <li class="list-group-item">Nombre Completo: <input type="text" name="nombre" maxlength="50" placeholder="asedyoagsduyga" required> </li>
+        <li class="list-group-item">direccion: <input type="text" name="direccion" maxlength="50" placeholder="Asdasd" required> </li>
+        <li class="list-group-item">telefono: <input type="number" name="telefono" maxlength="50" placeholder="123123123" required> </li></li>
+        <li class="list-group-item">Email:<input type="email" name="email" maxlength="50" placeholder="123123123asdawdw@sasd " required> </li></li>
+         <li class="list-group-item">tipo  <input type="text" name="tipo" maxlength="50" placeholder="(Cliente/Empleado)" required> </li></li>
+          <li class="list-group-item">Estatus: <input type="text" name="estatus" maxlength="50" placeholder="Activo" required> </li></li>
+        <a class="list-group-item" href="/verperfil" >Guardar datos modificados </a>
+
+    </ul>
+
+</form>
+
+{% endblock %}

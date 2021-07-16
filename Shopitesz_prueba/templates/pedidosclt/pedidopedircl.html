@@ -1,0 +1,41 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+	{{super()}}
+	{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+    <h1>Registro de Pedido</h1>
+    <div class="table">
+    <table class="table table-striped" >
+
+            <th></th>
+            <th></th>
+
+      <td>
+        IdPedido<br>
+          Tarjeta:<br>
+           Direccion:<br>
+          Fecha:<br>
+          Total a pagar:<br>
+          Total de productos:<br>
+      </td>
+<td>
+        71872158<br>
+        <select  name="disciplina">
+    <option value="0">--Eliga la tarjeta--</option>
+    <option value="1">1425 4125 4154 4158</option>
+    <option value="2">7181 4174 4171 7175</option>
+    <option value="3">7471 7428 5278 2527</option>
+            </select><br>
+    Zamora Ruta de Chapultepc #138
+    <br>
+        09/07/2021<br>
+     $5000<br>
+    15<br>
+
+</td>
+    </table>
+        <a class="btn btn-primary mb-3" href="/pedidosclt">Confirmar Pedido</a>
+        <a class="btn btn-danger mb-3" href="/carrito">Cancelar</a>
+    </div>
+{% endblock %}

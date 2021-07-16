@@ -1,0 +1,48 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">SHOPITESZ</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">CATALOGOS
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/Categorias">CATEGORIAS</a></li>
+          <li><a href="/productos">PRODUCTOS</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">USUARIOS
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/registrarCuenta">CLIENTES</a></li>
+          <li><a href=""> </a></li>
+          <li><a href="#">VENDEDORES</a></li>
+        </ul>
+      </li>
+     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/pedidosclt/pedidospedir">HACER UN PEDIDO</a></li>
+          <li><a href="/pedidosclt">PEDIDOS</a></li>
+          <li><a href="/pedidosclt/pedidosdetalle">DETALLES PEDIDOS</a></li>
+        </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+            {% if not current_user.is_authenticated %}
+            <li><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesion</a></li>
+            {% else %}
+            <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
+            {% endif %}
+            <li><a href="/Usuarios/nuevo"><span class="glyphicon glyphicon-user"></span> Crear cuenta</a></li>
+      </ul>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,207 @@
+
+.tituloHeader{
+	color:blue;
+	font-size: 30px;
+	font-family: Impact, Haettenschweiler, 'Arial'
+}
+
+.linkButton{
+	background: red;
+	border: 1px solid black;
+	text-decoration: none;
+}
+body{
+	background-image: url('../../static/img/fondo.jpg');
+	background-size: cover;
+}
+
+header{
+	background: aqua;
+	background-image: url('../img/zorro.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 50%;
+	margin: 0%;
+	padding-top: 30px;
+	padding-left: 35%;
+}
+nav{
+	margin 0%;
+}
+
+#myCarousel{
+	max-width: 60%;
+}
+
+.carousel-caption{
+	font-weight: bold;
+}
+
+.crearCuenta{
+	max-width: 70%;
+}
+
+p[class="inicio"]{
+	text-align: justify;
+}
+
+.footer {
+  font-size: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+}
+
+#tablaCategorias{
+	min-width: 50%;
+	max-width: 70%;
+	text-align: center;
+}
+
+#tablaProductos{
+	max-width: 80%;
+}
+*{
+    box-sizing: border-box;
+}
+.fotoPerfil{
+    width: 25%;
+    padding: 1px;
+    margin-top: 11px;
+    margin: auto;
+    margin-left:180px;
+
+}
+
+.contenedor {
+    width: 100%;
+    padding: 15px;
+
+}
+.contenedor2 {
+    width: 100%;
+    padding: 15px;
+
+}
+.formulario{
+    background: #fff;
+    margin-top: 150px;
+    padding: 3px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+
+}
+input[type ="email"],
+input[type ="password"],
+{
+    font-size: 28px;
+    width: 82%;
+    padding: 18PX;
+    border: none;
+}
+input[type ="text"],
+{
+    font-size: 28px;
+    width: 82%;
+    padding: 11PX;
+    border: none;
+
+}
+input[type ="number"]{
+    font-size: 12px;
+    width: 50%;
+    padding: 7PX;
+    border: 1px solid black;
+
+}
+
+.input-contenedor{
+margin-bottom: 15px;
+border: 1px solid black;
+
+}
+.input-contenedor2{
+margin-bottom: 1px;
+border: 1px solid black;
+
+}
+.icon{
+    min-width: 58px;
+    text-align: center;
+    color: black;
+}
+.button{
+    border: none;
+    width: 100%;
+    color: black;
+    font-size: 28px;
+    background: #2491AB;
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}.button:hover{
+    background: cadetblue;
+}
+p{
+    text-align: center;
+}
+.link{
+    text-decoration: none;
+    color: #2491AB;
+    font-weight: 680;
+}
+.link:hover{
+    color: cadetblue;
+
+}
+.Revelador{
+    border: none;
+    width: 30%;
+    color: black;
+    font-size: 16px;
+    background: #DFC8EE;
+    padding: 3px 4px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+
+.TarjetasCuadro{
+     background: #fff;
+    margin-top: 150px;
+    padding: 1px;
+
+}
+
+@media(min-width: 768px){
+    .formulario{
+        margin: auto;
+        width: 500px;
+        margin-top: 110px;
+        border-radius: 5%;
+    }
+    .lista{
+        margin: auto;
+        width: 500px;
+        margin-top: 50px;
+
+    }
+    .TarjetasCuadro{
+        margin: auto;
+        width: 500px;
+        margin-top: 110px;
+        border-radius: 5%;
+    }
+
+    }
+
+}

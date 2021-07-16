@@ -7,30 +7,22 @@
     <h1 align="center">Productos de "@@@@@@@"</h1>
     <center>
         <table class="table table-bordered table-hover" id="tablaProductos">
-        <thead>
+       <thead>
             <th>NOMBRE</th>
-            <th>DESCRIPCIÓN</th>
+            <th>DESCRIPCION</th>
+            <th>CATEGORIA</th>
             <th>PRECIO</th>
             <th>STOCK</th>
-            <th>Imagen</th>
-            <th></th>
-        </thead>
-        <tr>
-            <td>Laptop DELL</td>
-            <td>Procesador: i5, 256GB SSD, 16GB en RAM</td>
-            <td>$18,000</td>
-            <td>5 unidades</td>
-            <td><img src="../../static/img/producto.jpg" width="100px"></td>
-            <td><button type="button" class="btn btn-danger" >Agregar al carrito</button></td>
-        </tr>
-        <tr>
-             <td>Laptop HP</td>
-            <td>Procesador: i7, 512GB HDD, 16GB en RAM</td>
-            <td>$14,000</td>
-            <td>3 unidades</td>
-            <td><img src="../../static/img/producto.jpg" width="100px"></td>
-            <td><button type="button" class="btn btn-danger" >Agregar al carrito</button></td>
-        </tr>
+       </thead>
+            {% for prod in productos %}
+            <tr>
+                <td>{{prod.nombre}}</td>
+                <td>{{prod.descripcion}}</td>
+                <td>{{prod.categoria.nombre}}</td>
+                <td>{{prod.precioVenta}}</td>
+                <td>{{prod.existencia}}</td>
+            </tr>
+        {% endfor %}
     </table>
     </center>
 {% endblock %}

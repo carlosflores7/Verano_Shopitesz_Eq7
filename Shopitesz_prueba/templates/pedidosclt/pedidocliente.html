@@ -1,0 +1,113 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+	{{super()}}
+	{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+    <title>Pedidos Relizados</title>
+    <h1>DETALLES DE PEDIDO</h1>
+    <div class="table">
+    <table class="table table-striped">
+        <tr>
+            <th>IMAGEN</th>
+            <th>NOMBRE Y DESCRIPCION</th>
+            <th>ID PEDIDO</th>
+            <th>CANTIDAD PEDIDA</th>
+            <th>CANTIDAD ENVIADA</th>
+            <th>CANTIDAD ACEPTADA</th>
+            <th>CANTIDAD RECHAZADA</th>
+            <th>PRECIO POR UNIDAD</th>
+            <th>ESTATUS</th>
+            <th>COMENTARIO</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>
+                <table >
+                    <tr>
+                        <td>
+                        <IMG src="{{url_for('static',filename='img/cyber.jpg')}}">
+                        </td>
+                         <td>
+                        <IMG src="{{url_for('static',filename='img/outriders.jpg')}}">
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+            <td>
+                <table >
+                    <tr>
+                        <td>
+                        VIDEOJUEGO CYBERPUNK 2077 VERSION PARA PC
+                        </td>
+                        <td>
+                        VIDEOJUEGO Outriders 2077 VERSION PARA PC
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>87128712</td>
+            <td> 4   2 </td>
+            <td> 4   2 </td>
+            <td> 3   1 </td>
+            <td> 1   1 </td>
+            <td>$500  $700 </td>
+            <th>ENTREGADO</th>
+            <td>El producto llego con una copia defectuosa</td>
+        </tr>
+        <tr>
+            <td><IMG src="{{url_for('static',filename='img/BIO.jpg')}}"></td>
+            <td>VIDEOJUEGO BIOMUTANT VERSION PARA PC</td>
+            <td>74821174</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>$860</td>
+            <th>ENVIADO</th>
+            <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="">
+            <a class="btn btn-primary btn sm" href="#" >Cargar Comentario</a></td>
+        </tr>
+        <tr>
+           <td><IMG src="{{url_for('static',filename='img/ninja.jpg')}}"></td>
+            <td>VIDEOJUEGO NINJA GAIDEN MASTER COLLECTION VERSION PARA PC</td>
+            <td>82473474</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>$2750 </td>
+            <th>PENDIENTE</th>
+            <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="" disabled>
+            <a class="btn btn-primary btn sm" href="#" >Cargar Comentario</a></td>
+        </tr>
+        <tr>
+            <td><IMG src="{{url_for('static',filename='img/switchpro.jpg')}}"></td>
+            <td>CONSOLA DE VIDEOJUEGOS NINTENDO SWITCH PRO</td>
+            <td>15412469</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>$15000</td>
+            <th>ENTREGADO</th>
+            <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="">
+            <a class="btn btn-primary btn sm" href="#" >Cargar Comentario</a></td>
+        </tr>
+        <tr>
+            <td><IMG src="{{url_for('static',filename='img/Skyrim.jpg')}}"></td>
+            <td>VIDEOJUEGO SKYRIM NINTENDO SWITCH</td>
+              <td>7181751</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>4</td>
+            <td>$500</td>
+            <th>PENDIENTE</th>
+            <td><input type="text" class="form-control"  placeholder="Agrega un comentario" value="" disabled>
+            <a class="btn btn-primary btn sm" href="#" >Cargar Comentario</a></td>
+        </tr>
+    </table>
+    </div>
+{% endblock %}
