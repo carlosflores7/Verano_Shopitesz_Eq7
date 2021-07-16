@@ -56,6 +56,31 @@ class Producto(db.Model):
     def consultaGeneral(self):
         return self.query.all()
 
+    def consultaIndividuall(self, id):
+        return Producto.query.get(id)
+
+    def consultarImagen(self, id):
+        return self.consultaIndividuall(id).foto
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self,id):
+        prod=self.consultaIndividuall(id)
+        db.session.delete(prod)
+        db.session.commit()
+
+    def eliminacionLogica(self,id):
+        prod = self.consultaIndividuall(id)
+        prod.estatus='Inactiva'
+        prod.editar()
+
+
 class Usuario(UserMixin,db.Model):
     __tablename__='Usuarios'
     idUsuario=Column(Integer,primary_key=True)
@@ -111,7 +136,6 @@ class Usuario(UserMixin,db.Model):
     #Definir el método para la autenticacion
     def validar(self,email,password):
         usuario=Usuario.query.filter(Usuario.email==email).first()
-        print(usuario.nombreCompleto+","+usuario.estatus)
         if usuario!=None and usuario.validarPassword(password) and usuario.is_active():
             return usuario
         else:

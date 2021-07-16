@@ -14,15 +14,19 @@ app.secret_key='Cl4v3'
 login_manager=LoginManager()
 login_manager.init_app(app)
 login_manager.login_view='mostrar_login'
-login_manager.refresh_view="mostrar_login"
-login_manager.needs_refresh_message=("Tu sesión ha expirado, por favor inicia nuevamente tu sesión")
-login_manager.needs_refresh_message_category="info"
-
+login_manager.login_message='¡ Tu sesión expiró !'
+login_manager.login_message_category="info"
+#Implementación de la gestion de usuarios con flask-login
+login_manager=LoginManager()
+login_manager.init_app(app)
+login_manager.login_view='mostrar_login'
+login_manager.login_message='¡ Tu sesión expiró !'
+login_manager.login_message_category="info"
 
 @app.before_request
 def before_request():
     session.permanent=True
-    app.permanent_session_lifetime=timedelta(minutes=1)
+    app.permanent_session_lifetime=timedelta(minutes=10)
 
 @app.route("/")
 def inicio():
@@ -42,7 +46,7 @@ def cargar_usuario(id):
 
 @app.route('/Usuarios/nuevo')
 def nuevoUsuario():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and not current_user.is_admin:
         return render_template('principal.html')
     else:
         return render_template('usuarios/registrarCuenta.html')
@@ -72,7 +76,6 @@ def login():
     password=request.form['password']
     usuario=Usuario()
     user=usuario.validar(correo,password)
-    print('Credenciales:'+request.form['correo']+","+request.form['password'])
     if user!=None:
         login_user(user)
         return render_template('principal.html')
@@ -87,14 +90,20 @@ def cerrarSesion():
     return redirect(url_for('mostrar_login'))
 
 @app.route('/Usuarios/verPerfil')
+@login_required
 def verperfil():
-    return render_template('usuarios/VerPerfil.html')
-
+    return render_template('usuarios/editar.html')
+#fin de manejo de usuarios
 @app.route("/productos")
 def consultarProductos():
     #return "Retorna la lista de productos"
     producto=Producto()
     return render_template("productos/consultaGeneral.html",productos=producto.consultaGeneral())
+
+@app.route('/productos/consultarImagen/<int:id>')
+def consultarImagenProducto(id):
+    prod=Producto()
+    return prod.consultarImagen(id)
 
 @app.route("/productos/agregar")
 def agregarProducto():
@@ -142,20 +151,26 @@ def nuevaCategoria():
 @app.route('/Categorias/agregar',methods=['post'])
 @login_required
 def agregarCategoria():
-    if current_user.is_authenticated and current_user.is_admin():
-        try:
-            cat=Categoria()
-            cat.nombre=request.form['nombre']
-            cat.imagen=request.files['imagen'].stream.read()
-            cat.estatus='Activa'
-            cat.agregar()
-            flash('¡ Categoria agregada con exito !')
-        except:
-            flash('¡ Error al agregar la categoria !')
-        return redirect(url_for('consultaCategorias'))
-    else:
-        return redirect(url_for('mostrar_login'))
+    try:
+        if current_user.is_authenticated:
+            if current_user.is_admin():
+                try:
+                    cat = Categoria()
+                    cat.nombre = request.form['nombre']
+                    cat.imagen = request.files['imagen'].stream.read()
+                    cat.estatus = 'Activa'
+                    cat.agregar()
+                    flash('¡ Categoria agregada con exito !')
+                except:
+                    flash('¡ Error al agregar la categoria !')
+                return redirect(url_for('consultaCategorias'))
+            else:
+                abort(404)
 
+        else:
+            return redirect(url_for('mostrar_login'))
+    except:
+        abort(500)
 
 @app.route('/Categorias/<int:id>')
 @login_required
