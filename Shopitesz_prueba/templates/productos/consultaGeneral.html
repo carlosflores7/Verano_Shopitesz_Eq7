@@ -5,6 +5,12 @@
 {% endblock %}
 {% block contenido %}
     <h1>LISTADO DE PRODUCTOS</h1>
+    {% if current_user.is_authenticated and current_user.is_vendedor() %}
+    <a href="/productos/nuevo" class="btn btn-success">
+         <span class="glyphicon glyphicon-plus-sign"></span>
+        Agregar Categoria
+    </a>
+    {% endif %}
     <div class="table-responsive">
     <table class="table">
         <thead>
@@ -14,6 +20,7 @@
             <th>PRECIO</th>
             <th>IMAGEN</th>
             <th>STOCK</th>
+            <th>ESTATUS</th>
         </thead>
         {% for prod in productos %}
             <tr>
@@ -23,6 +30,7 @@
                 <td>{{prod.precioVenta}}</td>
                 <td><img src="/productos/consultarImagen/{{prod.idProducto}}" width="100px" height="80px"></td>
                 <td>{{prod.existencia}}</td>
+                <td>{{prod.estatus}}</td>
             </tr>
         {% endfor %}
     </table>

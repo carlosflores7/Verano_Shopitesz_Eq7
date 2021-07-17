@@ -77,7 +77,7 @@ class Producto(db.Model):
 
     def eliminacionLogica(self,id):
         prod = self.consultaIndividuall(id)
-        prod.estatus='Inactiva'
+        prod.estatus='Inactivo'
         prod.editar()
 
 

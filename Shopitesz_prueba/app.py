@@ -105,13 +105,50 @@ def consultarImagenProducto(id):
     prod=Producto()
     return prod.consultarImagen(id)
 
-@app.route("/productos/agregar")
+
+@app.route('/productos/nuevo')
+@login_required
+def nuevoProducto():
+    if current_user.is_authenticated and current_user.is_vendedor():
+            return render_template('productos/agregar.html')
+    else:
+        abort(404)
+
+@app.route("/productos/agregar",methods=['post'])
+@login_required
 def agregarProducto():
-    return "<b>agregando un producto</b><table><th>Prueba</th></table>"
+    try:
+        if current_user.is_authenticated:
+            if current_user.is_vendedor():
+                try:
+                    prod=Producto()
+                    prod.idCategoria=request.form['idcategoria']
+                    prod.nombre=request.form['nombre']
+                    prod.descripcion=request.form['descripcion']
+                    prod.precioVenta=request.form['precioventa']
+                    prod.existencia=request.form['existencia']
+                    prod.foto=request.files['foto'].stream.read()
+                    prod.especificaciones=request.files['especificaciones'].stream.read()
+                    prod.estatus ='Activo'
+                    prod.agregar()
+                    flash('!Prodcuto agregado con exito¡')
+                except:
+                    flash('! Error al agregar producto¡')
+                return redirect(url_for('consultarProductos'))
+            else:
+                abort(404)
+        else:
+            return redirect(url_for('mostrar_login'))
+    except:
+        abort(500)
 
 @app.route("/productos/actualizar")
 def actualizarProducto():
     return "actualizando un producto"
+
+
+#Fin Cru de productos
+
 @app.route("/cesta")
 def consultarCesta():
     return "consultando la cesta de compra"
@@ -124,9 +161,7 @@ def consultarProductosCategoria(id):
 def consultarCliente(nombre):
     return "consultando al cliente:"+nombre
 
-@app.route("/productos/<float:precio>")
-def consultarPorductosPorPrecio(precio):
-    return "Hola"+str(precio)
+
 
 #CRUD de Categorias
 @app.route('/Categorias')
