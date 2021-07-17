@@ -31,8 +31,10 @@
         <div class="radio">
             <label>Tipo:</label>
             <label class="radio-inline"><input type="radio" name="tipo" value="Comprador" checked>Comprador</label>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
             <label class="radio-inline"><input type="radio" name="tipo" value="Vendedor">Vendedor</label>
             <label class="radio-inline"><input type="radio" name="tipo" value="Administrador">Administrador</label>
+            {% endif %}
         </div>
         <button type="submit" class="btn btn-primary mb-3">
             <span class="glyphicon glyphicon-floppy-disk"></span>

@@ -165,7 +165,7 @@ def editarProducto():
             prod.idCategoria=request.form['idCategoria']
             prod.nombre=request.form['nombre']
             prod.descripcion = request.form['descripcion']
-            prod.precioVenta = request.form['precioventa']
+            prod.precioVenta = request.form['precioVenta']
             prod.existencia = request.form['existencia']
             foto=request.files['foto'].stream.read()
             if foto:
