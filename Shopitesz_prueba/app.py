@@ -94,6 +94,9 @@ def cerrarSesion():
 def verperfil():
     return render_template('usuarios/editar.html')
 #fin de manejo de usuarios
+
+
+#incio de CRUD DE PRODUCTOS
 @app.route("/productos")
 def consultarProductos():
     #return "Retorna la lista de productos"
@@ -141,6 +144,38 @@ def agregarProducto():
             return redirect(url_for('mostrar_login'))
     except:
         abort(500)
+
+@app.route('/productos/<int:id>')
+@login_required
+def consultaProductos(id):
+    if current_user.is_authenticated and current_user.id_vendedor():
+        prod=Producto()
+        return render_template('productos/editar.html',prod=prod.consultaIndividuall(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+
+@app.route('/Categorias/editar',methods=['POST'])
+@login_required
+def editarProducto():
+    if current_user.is_authenticated and current_user.is_vendedor():
+        try:
+            prod=Producto()
+            prod.idProducto = request.form['idProducto']
+            prod.idCategoria=request.form['idCategoria']
+            prod.nombre=request.form['nombre']
+            imagen=request.files['imagen'].stream.read()
+            if imagen:
+                cat.imagen=imagen
+            cat.estatus=request.values.get("estatus","Inactiva")
+            cat.editar()
+            flash('¡ Categoria editada con exito !')
+        except:
+            flash('¡ Error al editar la categoria !')
+
+        return redirect(url_for('consultaCategorias'))
+    else:
+        return redirect(url_for('mostrar_login'))
 
 @app.route("/productos/actualizar")
 def actualizarProducto():
