@@ -1,26 +1,60 @@
-{% extends 'Comunes/base.html' %}
+{% extends 'comunes/base.html' %}
 {% block navbar %}
-{{super()}}
-{% include 'Comunes/Menu.html' %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
 {% endblock %}
 {% block contenido %}
- <script src="https://kit.fontawesome.com/2530d1feb2.js" crossorigin="anonymous"></script>
- <h1 >Hola "nombre del perfil del usuario"</h1>
 
-<form class="lista" action="/login" method="POST">
-<img src="../../static/img/carlos.png" class="fotoPerfil" alt="Cinque Terre">
-    <ul class="list-group">
-        <li class="list-group-item">Nombre Completo:asedyoagsduyga </li>
-        <li class="list-group-item">direccion:Asdasd</li>
-        <li class="list-group-item">telefono:123123123</li>
-        <li class="list-group-item">Email:123123123asdawdw@sasd</li>
-         <li class="list-group-item">tipo (Cliente/Empleado)</li>
-          <li class="list-group-item">Estatus:Activo</li>
-        <a class="list-group-item" href="/tarjetas/registrada">Tarjeta Registrada</a>
-        <a class="list-group-item" href="/verperfil/modificar" >Modificar datos</a>
-        <a href="/tarjetas" class="list-group-item">Modificar Tarjeta</a>
-    </ul>
-
-</form>
-
+    <h1 class="bg-primary text-center">Perfil</h1>
+    <form action="/Usuarios/modificar" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre completo:</label>
+            <input class="form-control form-control-lg" type="text" name="nombre" maxlength="50"  placeholder="Nombre Completo"  value="{{current_user.nombreCompleto}}"  required readonly>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" maxlength="50" class="form-control form-control-lg" required value="{{current_user.email}}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" name="direccion" maxlength="60" class="form-control" required value="{{current_user.direccion}}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="telefono">Telefono:</label>
+            <input type="tel" name="telefono" maxlength="12" class="form-control" required value="{{current_user.telefono}}" readonly>
+        </div>
+        <div class="form-group">
+            <a href="/Usuarios/verTarjetas" class="btn btn-lg btn-success">
+            <span class="glyphicon glyphicon-fire"></span>
+            Metodos de pago
+        </a>
+        </div>
+        <div class="radio">
+            <label>Genero:</label>
+            {% if current_user.genero=='F' %}
+            <label >Femenino</label>
+            {% else %}
+            <label >Masculino</label>
+            {% endif %}
+        </div>
+        <div class="radio">
+            <label>Tipo:</label>
+            {% if current_user.is_authenticated %}
+            {% if current_user.is_comprador() %}
+                <label>Comprador</label>
+            {% endif%}
+            {% if current_user.is_vendedor() %}
+                <label>Vendedor</label>
+            {% endif %}
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            editar perfil
+        </button>
+        <a href="/" class="btn btn-danger mb-3">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span>
+            Regresar
+        </a>
+    </form>
 {% endblock %}

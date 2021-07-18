@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto,Usuario
+from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjetas
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -93,7 +93,19 @@ def cerrarSesion():
 @app.route('/Usuarios/verPerfil')
 @login_required
 def verperfil():
+    #return render_template('usuarios/editar.html')
+    return render_template('usuarios/VerPerfil.html')
+
+@app.route('/Usuarios/editarPerfil')
+@login_required
+def ediatarPerfil():
     return render_template('usuarios/editar.html')
+
+@app.route('/Usuarios/verTarjetas')
+@login_required
+def verTarjetas():
+    return render_template('usuarios/tarjetaregistrada.html')
+
 #fin de manejo de usuarios
 
 

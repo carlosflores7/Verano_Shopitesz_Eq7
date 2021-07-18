@@ -144,3 +144,13 @@ class Usuario(UserMixin,db.Model):
     def agregar(self):
         db.session.add(self)
         db.session.commit()
+
+class Tarjetas(db.Model):
+    __tablename__ = 'Tarjetas'
+    idTarjeta = Column(Integer, primary_key=True)
+    idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
+    noTarjeta = Column(String, nullable=False)
+    saldo = Column(Float, nullable=False)
+    banco = Column(String, nullable=False)
+    estatus=Column(String, nullable=False)
+

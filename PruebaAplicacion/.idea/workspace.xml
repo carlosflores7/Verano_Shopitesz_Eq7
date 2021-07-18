@@ -12,14 +12,9 @@
       <change beforePath="$PROJECT_DIR$/modelo/Dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/modelo/Dao.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prueba.txt" beforeDir="false" afterPath="$PROJECT_DIR$/prueba.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/estilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/estilo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/fondo_pantalla.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/fondo_pantalla2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/login.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/zorro.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categorias/agregar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categorias/consultaGeneral.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categorias/editar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comunes/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comunes/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/categorias/agregar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categorias/agregar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/categorias/consultaGeneral.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categorias/consultaGeneral.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/categorias/editar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categorias/editar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/comunes/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comunes/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/principal.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/principal.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/productos/consultaGeneral.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/productos/consultaGeneral.html" afterDir="false" />
