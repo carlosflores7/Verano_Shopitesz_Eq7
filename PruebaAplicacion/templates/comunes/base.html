@@ -1,12 +1,11 @@
 {% extends 'bootstrap/base.html' %}
 {% block title %}
-    SHOPTITESZ - Tienda en linea
+    SHOPTITESZ - TIENDA EN LINEA
 {% endblock %}
 {% block styles %}
     {{super()}}
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
 {% endblock %}
-
 {% block navbar %}
     <header>
         <h1 class="tituloHeader">SHOPITESZ - TIENDA VIRTUAL DEL ITESZ</h1>
@@ -14,8 +13,8 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-{% block contenido %}
- <!--Sistema de alertas de Bootstrap -->
+    {% block contenido %}
+        <!--Sistema de alertas de Bootstrap -->
        <div class="alert alert-success alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
            <strong>
@@ -24,9 +23,6 @@
                {% endfor %}
            </strong>
         </div>
-{% endblock %}
-</div>
-<div class="footer">
-  <p>ShopItesz - Tienda en línea ® Todos los derechos reservados - 2021</p>
+    {% endblock %}
 </div>
 {% endblock %}

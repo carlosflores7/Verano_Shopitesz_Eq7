@@ -1,65 +1,48 @@
 {% extends 'comunes/base.html' %}
-{% block navbar %}
-	{{super()}}
-
-{% endblock %}
 {% block contenido %}
-	<h1 class="text-center">Crear cuenta</h1>
-	<center>
-	<form class="crearCuenta">
-		<div class="form-group">
-			<label>Nombre completo:</label>
-			<input type="text" name="nombre" maxlength="50" class="form-control">
-		</div>
-
-		<div class="form-group">
-			<label>Dirección</label>
-			<input type="text" name="direccion" maxlength="60" class="form-control">
-		</div>
-
-		<div class="form-group">
-			<label>Teléfono:</label>
-			<input type="tel" name="telefono" maxlength="12" class="form-control">
-		</div>
-
-		<div class="form-group">
-			<label>Email:</label>
-			<input type="email" name="email" maxlength="50" class="form-control">
-		</div>
-
-		<div class="form-group">
-			<label>Password:</label>
-			<input type="password" name="clave" maxlength="20" class="form-control">
-		</div>
-		<br>
-		<center>
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-ok"></span> Crear cuenta</button>
-			<a href="/" class="btn btn-primary mb-3"><span class="glyphicon glyphicon-circle-arrow-left"></span> Regresar al inicio</a>
-		</center>
-		
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Registro de usuario</h4>
+    {{super()}}
+    <h1 class="bg-primary text-center">Registro de cuentas</h1>
+    <form action="/Usuarios/agregar" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" name="nombre" maxlength="50"  placeholder="Nombre Completo", class="form-control">
         </div>
-        <div class="modal-body">
-          <p>¿Estás seguro que deseas registrar al usuario?</p>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" maxlength="50" placeholder="ejemplo@hotmail.com" class="form-control">
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+        <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" name="direccion" maxlength="60" placeholder="Ruta de chapultepec #138" class="form-control">
         </div>
-      </div>
-      
-    </div>
-  </div>
-	</form>
-</center>
-<br>
-<br>
+        <div class="form-group">
+            <label for="clave">Password:</label>
+            <input type="password" name="password" maxlength="20" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="telefono">Telefono:</label>
+            <input type="tel" name="telefono" maxlength="12" placeholder="351 913 8233" class="form-control">
+        </div>
+        <div class="radio">
+            <label>Genero:</label>
+            <label class="radio-inline"><input type="radio" name="genero" value="F" checked>Femenino</label>
+            <label class="radio-inline"><input type="radio" name="genero" value="M">Masculino</label>
+        </div>
+        <div class="radio">
+            <label>Tipo:</label>
+            <label class="radio-inline"><input type="radio" name="tipo" value="Comprador" checked>Comprador</label>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
+            <label class="radio-inline"><input type="radio" name="tipo" value="Vendedor">Vendedor</label>
+            <label class="radio-inline"><input type="radio" name="tipo" value="Administrador">Administrador</label>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            Registrar
+        </button>
+        <a href="/Usuarios/iniciarSesion" class="btn btn-danger mb-3">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span>
+            Regresar
+        </a>
+    </form>
 {% endblock %}

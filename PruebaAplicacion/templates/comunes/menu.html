@@ -6,34 +6,45 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">ShopItesz</a>
+      <a class="navbar-brand" href="#">SHOPITESZ</a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><a href="/categorias">Categorías</a></li>
-        <li><a href="/carrito">Carrito</a></li>
-        <li><a href="/verperfil">Perfil</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">CATALOGOS
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/Categorias">CATEGORIAS</a></li>
+          <li><a href="/productos">PRODUCTOS</a></li>
+        </ul>
+      </li>
+        {% if current_user.is_authenticated and current_user.is_admin() %}
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">USUARIOS
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/registrarCuenta">CLIENTES</a></li>
+          <li><a href=""> </a></li>
+        </ul>
+      </li>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/pedidosclt/pedidospedir">HACER UN PEDIDO</a></li>
           <li><a href="/pedidosclt">PEDIDOS</a></li>
           <li><a href="/pedidosclt/pedidosdetalle">DETALLES PEDIDOS</a></li>
         </ul>
-      </li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS ADMINISTRADOS
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/vendedorpedido/aceptarpedido">ACEPTAR UN PEDIDO</a></li>
-          <li><a href="/vendedorpedido/pedidosad">PEDIDOS ADMINISTRADOS</a></li>
-          <li><a href="/vendedorpedido/pedidovendidosad">DETALLES DE PEDIDOS ADMINISTRADOS</a></li>
-        </ul>
-      </li>
-      </ul>
+{% endif %}
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/registrarCuenta"><span class="glyphicon glyphicon-user"></span> Crear cuenta</a></li>
-        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+            {% if not current_user.is_authenticated %}
+            <li><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesion</a></li>
+            {% else %}
+            <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
+            {% endif %}
+            <li><a href="/Usuarios/nuevo"><span class="glyphicon glyphicon-user"></span> Crear cuenta</a></li>
       </ul>
-    </div>
+    </ul>
   </div>
 </nav>

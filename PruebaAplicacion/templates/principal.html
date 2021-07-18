@@ -1,10 +1,14 @@
 {% extends 'comunes/base.html' %}
 {% block navbar %}
-	{{super()}}
-	{% include 'comunes/menu.html' %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
 {% endblock %}
 {% block contenido %}
-    <h1 class="bg-primary text-center">Bienvenido</h1>
+    {{super()}}
+    {%if current_user.is_authenticated %}
+        <p>Bienvenido <b>{{current_user.nombreCompleto}}</b></p>
+    {% endif %}
+<h1 class="bg-primary text-center">Bienvenido</h1>
 <br>
 <center>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -89,4 +93,6 @@
 </div>
 </center>
 <br>
+    <a href="/productos" class="btn btn-success">Productos</a>
+    <a href="/Usuarios/iniciarSesion" class="btn btn-primary">Iniciar Sesion</a>
 {% endblock %}
