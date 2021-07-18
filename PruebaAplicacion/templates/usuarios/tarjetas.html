@@ -4,42 +4,41 @@
   <script src="https://kit.fontawesome.com/2530d1feb2.js" crossorigin="anonymous"></script>
 <h1>Añadir Tarjeta de credito/Debito</h1>
 
-<form class="TarjetasCuadro">
+<form action="/tarjetas/agregar" class="TarjetasCuadro" method="post" enctype="multipart/form-data">
         <div class="contenedor2">
-
-        <div >
-
-            <i class="fas fa-user-shield"></i>
-            <label >Propietario de la tarjeta</label>
-            <input type="text" name="PropietarioTarjeta" maxlength="50" required >
+        <div>
+            <label for="ID" >ID:</label>
+            <input type="number" name="ID" maxlength="16" required disabled value="{{current_user.idUsuario}}">
         </div>
-
-        <div >
+            <div>
+            <label for="IDT" >ID:</label>
+            <input type="number" name="IDT" maxlength="10" required>
+              </div>
+            <div >
              <i class="fab fa-cc-mastercard"></i>
             <i class="fab fa-cc-visa"></i>
-            <label >Numero de la tarjeta</label>
-            <input type="number" name="NumeroTarjeta" maxlength="16" required>
+            <label for="noTarjeta" >Numero de la tarjeta</label>
+            <input type="number" name="noTarjeta" maxlength="16" required>
         </div>
 
         <div >
             <i class="fas fa-dollar-sign"></i>
-            <label >Saldo de la tarjeta</label>
+            <label for="Saldo">Saldo de la tarjeta</label>
             <input type="number" name="Saldo" required>
         </div>
 
         <div >
             <i class="fas fa-university"></i>
-            <label >Banco al que pertenece</label>
-            <input type="text" name="BancoP" required>
+            <label for="Banco">Banco al que pertenece</label>
+            <input type="text" name="Banco" required>
         </div>
 
         <div >
-            <label >Estatus en la que se encuentra A/B</label>
+            <label for="Estatus" >Estatus en la que se encuentra A/B</label>
             <input type="text" name="Estatus" maxlength="1" required>
         </div>
-
-            <input type="submit" value="Registrar Tarjeta" class="button">
-
+            <input type="submit" value="Registrar Tarjeta"  class="btn btn-danger">
+            <a href='/Usuarios/verTarjetas' class="btn btn-danger">Cancelar</a>
   </div>
 
 </form>

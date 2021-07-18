@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjetas
+from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -79,6 +79,7 @@ def login():
     user=usuario.validar(correo,password)
     if user!=None:
         login_user(user)
+
         return render_template('principal.html')
     else:
         flash('Nombre de usuario o contraseña incorrectos')
@@ -104,8 +105,38 @@ def ediatarPerfil():
 @app.route('/Usuarios/verTarjetas')
 @login_required
 def verTarjetas():
-    return render_template('usuarios/tarjetaregistrada.html')
+    tar=Tarjeta()
+    return render_template("/usuarios/tarjetaregistrada.html",Tarjetas=tar.consultaIndividual())
 
+@app.route('/usuarios/agregarNuevaTarjeta')
+@login_required
+def agregarTarjeta():
+    if current_user.is_authenticated :
+        return render_template("/usuarios/tarjetas.html")
+
+@app.route("/tarjetas/agregar",methods=['post'])
+@login_required
+def subirtarjeta():
+    try:
+        if current_user.is_authenticated:
+
+                try:
+                    tar=Tarjeta()
+                    tar.idUsuario=request.form['ID']
+                    tar.noTarjeta=request.form['noTarjeta']
+                    tar.saldo=request.form['Saldo']
+                    tar.banco=request.form['Banco']
+                    tar.estatus =request.form['Estatus']
+                    tar.agregar()
+                    flash('!tarjeta agregada con exito¡')
+                except:
+                    flash('! Error al agregar tarjeta¡')
+                return redirect(url_for('verTarjetas'))
+        else:
+            return redirect(url_for('mostrar_login'))
+    except:
+        #abort(500)
+        return
 #fin de manejo de usuarios
 
 

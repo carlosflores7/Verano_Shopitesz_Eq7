@@ -13,31 +13,21 @@
         Agregar Nueva Tarjeta
     </a>
       {% endif %}
+
     <table class="table table-bordered table-hover justify-content-center" id="tablaCategorias">
         <th>ID</th>
-        <th>NOMBRE</th>
-         {% if current_user.is_authenticated and current_user.is_admin() %}
-        <th>ESTATUS</th>
-        {% endif %}
-        <th>IMAGEN</th>
-        {% if current_user.is_authenticated and current_user.is_admin() %}
-        <th>Ver</th>
-         {% endif %}
-        {% for cat in categorias %}
+        <th>NoTarjeta</th>
+        <th>Saldo</th>
+        <th>Banco</th>
+        <th>Estatus</th>
+
+        {% for cat in Tarjetas %}
             <tr>
-                <td>{{cat.idCategoria}}</td>
-                <td>{{cat.nombre}}</td>
-                {% if current_user.is_authenticated and current_user.is_admin() %}
-                     <td>{{cat.estatus}}</td>
-                {% endif %}
-                <td><img src="/Categorias/consultarImagen/{{cat.idCategoria}}" width="100px" height="80px"></td>
-                {% if current_user.is_authenticated and current_user.is_admin() %}
-                <td>
-                    <a href="/Categorias/{{cat.idCategoria}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                    </a>
-                </td>
-                {% endif %}
+                <td>{{cat.idTarjeta}}</td>
+                <td>{{cat.noTarjeta}}</td>
+                <td>{{cat.saldo}}</td>
+                <td>{{cat.banco}}</td>
+                <td>{{cat.estatus}}</td>
             </tr>
         {% endfor %}
     </table>

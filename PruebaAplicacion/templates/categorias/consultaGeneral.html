@@ -8,12 +8,14 @@
 <div>
     <h1 class="bg-primary text-center">Listado de Categorias</h1>
      {% if current_user.is_authenticated and current_user.is_admin() %}
+
     <a href="/Categorias/nueva">
          <span class="glyphicon glyphicon-plus-sign"></span>
         Agregar Categoria
     </a>
       {% endif %}
-    <table class="table table-bordered table-hover justify-content-center" id="tablaCategorias">
+
+    <table class="table table-bordered table-hover justify-content-center" id="tablametodos">
         <th>ID</th>
         <th>NOMBRE</th>
          {% if current_user.is_authenticated and current_user.is_admin() %}

@@ -145,7 +145,7 @@ class Usuario(UserMixin,db.Model):
         db.session.add(self)
         db.session.commit()
 
-class Tarjetas(db.Model):
+class Tarjeta(db.Model):
     __tablename__ = 'Tarjetas'
     idTarjeta = Column(Integer, primary_key=True)
     idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
@@ -154,3 +154,9 @@ class Tarjetas(db.Model):
     banco = Column(String, nullable=False)
     estatus=Column(String, nullable=False)
 
+    def consultaIndividual(self):
+        return self.query.all()
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
