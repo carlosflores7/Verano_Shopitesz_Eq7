@@ -8,34 +8,34 @@
         <div class="contenedor2">
         <div>
             <label for="ID" >ID:</label>
-            <input type="number" name="ID" maxlength="16" required disabled value="{{current_user.idUsuario}}">
+            <input type="number" name="ID" maxlength="16" required readonly value="{{current_user.idUsuario}}" class="form-control">
         </div>
             <div>
             <label for="IDT" >ID:</label>
-            <input type="number" name="IDT" maxlength="10" required>
+            <input type="number" name="IDT" maxlength="10" required class="form-control">
               </div>
             <div >
              <i class="fab fa-cc-mastercard"></i>
             <i class="fab fa-cc-visa"></i>
             <label for="noTarjeta" >Numero de la tarjeta</label>
-            <input type="number" name="noTarjeta" maxlength="16" required>
+            <input type="text" name="noTarjeta" maxlength="16" required class="form-control">
         </div>
 
         <div >
             <i class="fas fa-dollar-sign"></i>
             <label for="Saldo">Saldo de la tarjeta</label>
-            <input type="number" name="Saldo" required>
+            <input type="text" name="Saldo" required class="form-control">
         </div>
 
         <div >
             <i class="fas fa-university"></i>
             <label for="Banco">Banco al que pertenece</label>
-            <input type="text" name="Banco" required>
+            <input type="text" name="Banco" required class="form-control">
         </div>
 
         <div >
             <label for="Estatus" >Estatus en la que se encuentra A/B</label>
-            <input type="text" name="Estatus" maxlength="1" required>
+            <input type="text" name="Estatus" maxlength="1"  frequired class="form-control">
         </div>
             <input type="submit" value="Registrar Tarjeta"  class="btn btn-danger">
             <a href='/Usuarios/verTarjetas' class="btn btn-danger">Cancelar</a>
