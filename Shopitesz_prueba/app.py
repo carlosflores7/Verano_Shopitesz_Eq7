@@ -6,7 +6,8 @@ from modelo.Dao import db,Categoria,Producto,Usuario
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'
+#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'#usuario del bruno
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://User_Shopitesz:popo@localhost/shopitesz'#USuario Adame
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='Cl4v3'
 
@@ -115,8 +116,8 @@ def nuevoProducto():
     if current_user.is_authenticated and current_user.is_vendedor():
             return render_template('productos/agregar.html')
     else:
-        abort(404)
-
+        #abort(404)
+        return
 @app.route("/productos/agregar",methods=['post'])
 @login_required
 def agregarProducto():
@@ -139,11 +140,13 @@ def agregarProducto():
                     flash('! Error al agregar producto¡')
                 return redirect(url_for('consultarProductos'))
             else:
-                abort(404)
+                #abort(404)
+                return
         else:
             return redirect(url_for('mostrar_login'))
     except:
-        abort(500)
+        #abort(500)
+        return
 
 @app.route('/productos/<int:id>')
 @login_required
@@ -249,12 +252,14 @@ def agregarCategoria():
                     flash('¡ Error al agregar la categoria !')
                 return redirect(url_for('consultaCategorias'))
             else:
-                abort(404)
+               # abort(404)
+                return
 
         else:
             return redirect(url_for('mostrar_login'))
     except:
-        abort(500)
+        #abort(500)
+        return
 
 @app.route('/Categorias/<int:id>')
 @login_required
