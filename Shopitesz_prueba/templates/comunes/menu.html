@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">SHOPITESZ</a>
+      <a class="navbar-brand" href="/" >SHOPITESZ</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/">Home</a></li>
@@ -24,27 +24,28 @@
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/registrarCuenta">CLIENTES</a></li>
-          <li><a href=""> </a></li>
+          <li><a href="/Usuarios/nuevo"><span class="glyphicon glyphicon-user"></span> Crear cuenta</a></li>
         </ul>
       </li>
         {% endif %}
-        {% if current_user.is_authenticated %}
-     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
+        {% if current_user.is_authenticated and current_user.is_comprador() %}
+     <li class="dropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/pedidosclt/pedidospedir">HACER UN PEDIDO</a></li>
           <li><a href="/pedidosclt">PEDIDOS</a></li>
           <li><a href="/pedidosclt/pedidosdetalle">DETALLES PEDIDOS</a></li>
         </ul>
-{% endif %}
-      <ul class="nav navbar-nav navbar-right">
+         <li><a href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-user"></span>perfil</a></li>
+         {% endif %}
             {% if not current_user.is_authenticated %}
             <li><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesion</a></li>
             {% else %}
             <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
             {% endif %}
-            <li><a href="/Usuarios/nuevo"><span class="glyphicon glyphicon-user"></span> Crear cuenta</a></li>
-      </ul>
+
+
     </ul>
   </div>
 </nav>

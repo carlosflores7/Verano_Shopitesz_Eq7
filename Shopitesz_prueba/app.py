@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto,Usuario
+from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -79,6 +79,7 @@ def login():
     user=usuario.validar(correo,password)
     if user!=None:
         login_user(user)
+
         return render_template('principal.html')
     else:
         flash('Nombre de usuario o contraseña incorrectos')
@@ -93,7 +94,93 @@ def cerrarSesion():
 @app.route('/Usuarios/verPerfil')
 @login_required
 def verperfil():
+    #return render_template('usuarios/editar.html')
+    return render_template('usuarios/VerPerfil.html')
+
+@app.route('/Usuarios/editarPerfil')
+@login_required
+def ediatarPerfil():
     return render_template('usuarios/editar.html')
+#CRU Tarjetas
+@app.route('/Usuarios/verTarjetas/<int:id>')
+@login_required
+def verTarjetas(id):
+    tar=Tarjeta()
+    return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaGeneral(id))
+
+@app.route('/usuarios/agregarNuevaTarjeta/<int:id>')
+@login_required
+def agregarTarjeta(id):
+    if current_user.is_authenticated :
+        return render_template("/tarjetas/tarjetas.html")
+
+@app.route("/tarjetas/agregar/<int:id>",methods=['post'])
+@login_required
+def subirtarjeta(id):
+    try:
+        if current_user.is_authenticated:
+                try:
+                    tar=Tarjeta()
+                    tar.idUsuario=request.form['ID']
+                    tar.noTarjeta=request.form['noTarjeta']
+                    tar.saldo=request.form['Saldo']
+                    tar.banco=request.form['Banco']
+                    tar.estatus =request.form['Estatus']
+                    tar.agregar()
+                    flash('!tarjeta agregada con exito¡')
+                except:
+                    flash('! Error al agregar tarjeta¡')
+                return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaGeneral(id))
+        else:
+            return redirect(url_for('mostrar_login'))
+    except:
+        #abort(500)
+        return render_template("/")
+
+@app.route('/Tarjeta/<int:id>')
+@login_required
+def EditarTarjetas(id):
+    if current_user.is_authenticated():
+        tar=Tarjeta()
+        return render_template('tarjetas/editar.html', tar=tar.consulta(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+@app.route('/tarjeta/editar/<int:id>',methods=['POST'])
+@login_required
+def editandoTarjeta(id):
+    if current_user.is_authenticated:
+        try:
+            tar=Tarjeta()
+            tar.idTarjeta=request.form['ID']
+            tar.idUsuario=request.form['IDU']
+            tar.noTarjeta=request.form['noTarjeta']
+            tar.saldo=request.form['Saldo']
+            tar.banco=request.form['Banco']
+            tar.estatus=request.form['Estatus']
+            tar.editar()
+            flash('! Tarjeta editada con exito')
+        except:
+            flash('! Error al editar el producto')
+        return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaGeneral(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/tarjeta/eliminar/<int:id>')
+@login_required
+def eliminarTarjeta(id):
+    if  current_user.is_authenticated():
+        try:
+            tar=Tarjeta()
+            tar.eliminar(id)
+            flash('Tarjeta Eliminada')
+        except:
+            flash('Error al eliminar tarjeta')
+        return redirect((url_for('verperfil')))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+#Fin CRUD Tarjetas
+
 #fin de manejo de usuarios
 
 
@@ -113,7 +200,6 @@ def consultarImagenProducto(id):
 def consultarEspecificionesProducto(id):
     prod=Producto()
     return prod.consultarEspecificaciones(id)
-
 
 @app.route('/productos/nuevo')
 @login_required
@@ -162,7 +248,6 @@ def consultaProductos(id):
     else:
         return redirect(url_for('mostrar_login'))
 
-
 @app.route('/productos/editar',methods=['POST'])
 @login_required
 def editarProducto():
@@ -189,6 +274,7 @@ def editarProducto():
         return redirect(url_for('consultarProductos'))
     else:
         return redirect(url_for('mostrar_login'))
+
 
 @app.route('/productos/eliminar/<int:id>')
 @login_required

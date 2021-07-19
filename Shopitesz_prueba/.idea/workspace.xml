@@ -17,95 +17,26 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="111" column="48" selection-start-line="111" selection-start-column="23" selection-end-line="111" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/productos/consultaGeneral.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/productos/editar.html">
+        <entry file="file://$PROJECT_DIR$/templates/comunes/base.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
-              <caret line="35" column="42" lean-forward="true" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
+              <caret line="26" column="6" lean-forward="true" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/categorias/editar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
-              <caret column="33" lean-forward="true" selection-start-column="33" selection-end-column="33" />
-              <folding>
-                <element signature="e#2239#2246#1" expanded="true" />
-                <element signature="e#2956#2963#1" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/usuarios/editar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/usuarios/carrito.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/categorias/agregar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/usuarios/VerPerfil.html">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modelo/Dao.py">
+        <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="65" column="60" selection-start-line="65" selection-start-column="60" selection-end-line="65" selection-end-column="60" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/categorias/consultaGeneral.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="16" lean-forward="true" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="82" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/modelo/Dao.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -137,17 +68,16 @@
         <option value="$PROJECT_DIR$/templates/categorias/editar.html" />
         <option value="$PROJECT_DIR$/templates/usuarios/registrarCuenta.html" />
         <option value="$PROJECT_DIR$/modelo/Dao.py" />
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/productos/consultaGeneral.html" />
         <option value="$PROJECT_DIR$/templates/productos/editar.html" />
+        <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-12" />
-    <option name="y" value="-12" />
-    <option name="width" value="2074" />
-    <option name="height" value="2106" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="954" />
+    <option name="width" value="972" />
+    <option name="height" value="1046" />
   </component>
   <component name="ProjectId" id="1vUQfw1igMFba2C9dwYpNavr40s" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -163,50 +93,6 @@
             <path>
               <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
               <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-              <item name="modelo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="categorias" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="comunes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="productos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="usuarios" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shopitesz_prueba" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shopitesz_prueba" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -225,13 +111,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC BRUNO\OneDrive\Documentos\Verano_Shopitesz_Eq7\Shopitesz_prueba\modelo" />
+      <recent name="C:\Users\PC BRUNO\Documents\Shopitesz_ejemplo\static\img" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC BRUNO\OneDrive\Documentos\Verano_Shopitesz_Eq7\Shopitesz_prueba" />
+      <recent name="C:\Users\PC BRUNO\OneDrive\Documentos\Verano_Shopitesz_Eq7\Shopitesz_prueba\static" />
+      <recent name="C:\Users\PC BRUNO\OneDrive\Documentos\Verano_Shopitesz_Eq7\Shopitesz_prueba\modelo" />
       <recent name="C:\Users\PC BRUNO\OneDrive\Documentos\Shopitesz_prueba\templates\usuarios" />
       <recent name="C:\Users\PC BRUNO\OneDrive\Documentos\Shopitesz_prueba\templates" />
-      <recent name="C:\Users\PC BRUNO\OneDrive\Documentos\Shopitesz_prueba\static\img" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\PC BRUNO\Documents\Shopitesz_ejemplo\static\img" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -315,15 +204,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="2061" height="1053" extended-state="6" />
-    <editor active="true" />
+    <frame x="954" y="0" width="972" height="1046" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09135803" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18522485" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4994995" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32968238" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4994995" weight="0.3274918" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -355,7 +243,7 @@
     <entry file="file://$PROJECT_DIR$/templates/pedidosclt/pedidocl.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/usuarios/login.html">
+    <entry file="file://$PROJECT_DIR$/templates/usuarios/Login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="56" />
@@ -369,16 +257,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comunes/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-          <folding>
-            <element signature="e#626#633#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -418,29 +296,34 @@
         <state relative-caret-position="-51" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/usuarios/VerPerfil.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/productos/consultaGeneral.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        <state relative-caret-position="425">
+          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
+    <entry file="file://$PROJECT_DIR$/templates/productos/editar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="111" column="48" selection-start-line="111" selection-start-column="23" selection-end-line="111" selection-end-column="48" />
+        <state relative-caret-position="595">
+          <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/categorias/editar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="33" selection-start-column="33" selection-end-column="33" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#2239#2246#1" expanded="true" />
+            <element signature="e#2956#2963#1" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/usuarios/editar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
+        <state relative-caret-position="1020">
           <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
         </state>
       </provider>
@@ -455,38 +338,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/usuarios/VerPerfil.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/categorias/consultaGeneral.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="29" column="16" lean-forward="true" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="82" />
+          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="82" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/productos/editar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" column="42" lean-forward="true" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/categorias/editar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret column="33" lean-forward="true" selection-start-column="33" selection-end-column="33" />
-          <folding>
-            <element signature="e#2239#2246#1" expanded="true" />
-            <element signature="e#2956#2963#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modelo/Dao.py">
+    <entry file="file://$PROJECT_DIR$/../PruebaAplicacion/modelo/Dao.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="65" column="60" selection-start-line="65" selection-start-column="60" selection-end-line="65" selection-end-column="60" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelo/Dao.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/principal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comunes/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="6" lean-forward="true" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
         </state>
       </provider>
     </entry>

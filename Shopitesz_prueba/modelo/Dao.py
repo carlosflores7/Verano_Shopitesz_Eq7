@@ -147,3 +147,29 @@ class Usuario(UserMixin,db.Model):
     def agregar(self):
         db.session.add(self)
         db.session.commit()
+
+class Tarjeta(db.Model):
+    __tablename__ = 'Tarjetas'
+    idTarjeta = Column(Integer, primary_key=True)
+    idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
+    noTarjeta = Column(String, nullable=False)
+    saldo = Column(Float, nullable=False)
+    banco = Column(String, nullable=False)
+    estatus=Column(String, nullable=False)
+
+    def consultaGeneral(self,id):
+        return self.query.filter(Tarjeta.idUsuario==id).all()
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+    def consulta(self, id):
+        return Tarjeta.query.get(id)
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+    def eliminar(self, id):
+        tar = self.consulta(id)
+        db.session.delete(tar)
+        db.session.commit()

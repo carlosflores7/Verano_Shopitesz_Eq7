@@ -1,0 +1,26 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+	{{super()}}
+	{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+    <h1 class="bg-primary text-center">Categorías</h1>
+    <center>
+      <table class="table table-bordered table-hover justify-content-center" id="tablaCategorias">
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>ESTATUS</th>
+                <th>IMAGEN</th>
+                <th>Ver</th>
+                {% for cat in categorias %}
+            <tr>
+                <td>{{cat.idCategoria}}</td>
+                <td>{{cat.nombre}}</td>
+                <td>{{cat.estatus}}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+    </center>
+    
+{% endblock %}

@@ -927,10 +927,25 @@
       <change beforePath="$PROJECT_DIR$/venv/pip-selfcheck.json" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pip-selfcheck.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/pyvenv.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/venv/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -941,7 +956,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -968,15 +983,15 @@
         <option value="$PROJECT_DIR$/templates/productos/consultaGeneral.html" />
         <option value="$PROJECT_DIR$/modelo/Dao.py" />
         <option value="$PROJECT_DIR$/templates/productos/categorias.html" />
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/comunes/menu.html" />
+        <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-10" />
-    <option name="width" value="2070" />
-    <option name="height" value="2092" />
+    <option name="x" value="-6" />
+    <option name="width" value="972" />
+    <option name="height" value="1046" />
   </component>
   <component name="ProjectId" id="1v3jTBim7mSgn5QSMQqiCa7T2QU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -1019,30 +1034,6 @@
               <item name="PruebaAplicacion" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="PruebaAplicacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PruebaAplicacion" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="comunes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PruebaAplicacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PruebaAplicacion" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="pedidosclt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PruebaAplicacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PruebaAplicacion" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="productos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PruebaAplicacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PruebaAplicacion" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="usuarios" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -1062,9 +1053,22 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC BRUNO\OneDrive\Documentos\Verano_Shopitesz_Eq7\PruebaAplicacion\modelo" />
       <recent name="C:\Users\pc\Documents\GitHub\Verano_Shopitesz_Eq7\PruebaAplicacion\templates\tarjetas" />
       <recent name="C:\Users\Carlos Flores\Documents\Proyectos\PruebaVerano\templates\usuarios" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Python.app">
     <configuration name="Dao" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -1095,9 +1099,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\PC BRUNO\Documents\Shopitesz_ejemplo\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
@@ -1106,16 +1110,20 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="true" />
-      <option name="INPUT_FILE" value="C:\Users\pc\Documents\GitHub\Verano_Shopitesz_Eq7\PruebaAplicacion\app.py" />
+      <option name="INPUT_FILE" value="C:\Users\PC BRUNO\OneDrive\Documentos\Verano_Shopitesz_Eq7\PruebaAplicacion\app.py" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.app" />
+      <item itemvalue="Python.Dao" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Dao" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -1139,9 +1147,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-5" y="0" width="1035" height="1046" extended-state="0" />
+    <frame x="-6" y="0" width="972" height="1046" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2862863" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5824411" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1165,12 +1173,32 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/flask_bootstrap/templates/bootstrap/base.html">
@@ -1187,20 +1215,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/usuarios/tarjetas.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/usuarios/tarjetaregistrada.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="73" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/usuarios/tarjetas.html" />
+    <entry file="file://$PROJECT_DIR$/templates/usuarios/tarjetaregistrada.html" />
     <entry file="file://$PROJECT_DIR$/templates/usuarios/modificarperfilcl.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1284,16 +1300,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2261">
-          <caret line="136" column="51" lean-forward="true" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/principal.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1530">
@@ -1354,6 +1360,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="102" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
         </state>
       </provider>
     </entry>
