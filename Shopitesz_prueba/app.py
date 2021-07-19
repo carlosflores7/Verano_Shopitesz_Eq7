@@ -6,8 +6,8 @@ from modelo.Dao import db,Categoria,Producto,Usuario
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
-#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'#usuario del bruno
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://User_Shopitesz:popo@localhost/shopitesz'#USuario Adame
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'#usuario del bruno
+#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://User_Shopitesz:popo@localhost/shopitesz'#USuario Adame
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='Cl4v3'
 
@@ -109,6 +109,11 @@ def consultarImagenProducto(id):
     prod=Producto()
     return prod.consultarImagen(id)
 
+@app.route('/productos/consultarEspecificaciones/<int:id>')
+def consultarEspecificionesProducto(id):
+    prod=Producto()
+    return prod.consultarEspecificaciones(id)
+
 
 @app.route('/productos/nuevo')
 @login_required
@@ -170,9 +175,10 @@ def editarProducto():
             prod.descripcion = request.form['descripcion']
             prod.precioVenta = request.form['precioVenta']
             prod.existencia = request.form['existencia']
-            prod.especificaciones.files['especificaciones'].stream.read()
+            especificaciones=request.files['especificaciones'].stream.read()
             foto=request.files['foto'].stream.read()
-            if foto:
+            if foto and especificaciones:
+                prod.especificaciones=especificaciones
                 prod.foto=foto
                 prod.estatus=request.values.get("estatus","Inactivo")
                 prod.editar()

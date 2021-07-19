@@ -62,6 +62,9 @@ class Producto(db.Model):
     def consultarImagen(self, id):
         return self.consultaIndividuall(id).foto
 
+    def consultarEspecificaciones(self, id):
+        return self.consultaIndividuall(id).especificaciones
+
     def agregar(self):
         db.session.add(self)
         db.session.commit()
