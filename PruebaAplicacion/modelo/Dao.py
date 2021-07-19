@@ -160,3 +160,13 @@ class Tarjeta(db.Model):
     def agregar(self):
         db.session.add(self)
         db.session.commit()
+    def consulta(self, id):
+        return Tarjeta.query.get(id)
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+    def eliminar(self, id):
+        tar = self.consulta(id)
+        db.session.delete(tar)
+        db.session.commit()

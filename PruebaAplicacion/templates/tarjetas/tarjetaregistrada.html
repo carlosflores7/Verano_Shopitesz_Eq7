@@ -20,7 +20,9 @@
         <th>Saldo</th>
         <th>Banco</th>
         <th>Estatus</th>
-
+    {% if current_user.is_authenticated  %}
+            <th>Ver</th>
+        {% endif %}
         {% for cat in Tarjetas %}
             <tr>
                 <td>{{cat.idTarjeta}}</td>
@@ -28,6 +30,13 @@
                 <td>{{cat.saldo}}</td>
                 <td>{{cat.banco}}</td>
                 <td>{{cat.estatus}}</td>
+                {% if current_user.is_authenticated %}
+                    <td>
+                        <a href="/Tarjeta/{{cat.idTarjeta}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

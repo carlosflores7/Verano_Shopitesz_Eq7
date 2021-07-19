@@ -101,18 +101,18 @@ def verperfil():
 @login_required
 def ediatarPerfil():
     return render_template('usuarios/editar.html')
-
+#CRU Tarjetas
 @app.route('/Usuarios/verTarjetas')
 @login_required
 def verTarjetas():
     tar=Tarjeta()
-    return render_template("/usuarios/tarjetaregistrada.html",Tarjetas=tar.consultaIndividual())
+    return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaIndividual())
 
 @app.route('/usuarios/agregarNuevaTarjeta')
 @login_required
 def agregarTarjeta():
     if current_user.is_authenticated :
-        return render_template("/usuarios/tarjetas.html")
+        return render_template("/tarjetas/tarjetas.html")
 
 @app.route("/tarjetas/agregar",methods=['post'])
 @login_required
@@ -136,7 +136,52 @@ def subirtarjeta():
             return redirect(url_for('mostrar_login'))
     except:
         #abort(500)
-        return
+        return render_template("/")
+
+@app.route('/Tarjeta/<int:id>')
+@login_required
+def EditarTarjetas(id):
+    if current_user.is_authenticated():
+        tar=Tarjeta()
+        return render_template('tarjetas/editar.html', tar=tar.consulta(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+@app.route('/tarjeta/editar',methods=['POST'])
+@login_required
+def editandoTarjeta():
+    if current_user.is_authenticated:
+        try:
+            tar=Tarjeta()
+            tar.idTarjeta=request.form['ID']
+            tar.idUsuario=request.form['IDU']
+            tar.noTarjeta=request.form['noTarjeta']
+            tar.saldo=request.form['Saldo']
+            tar.banco=request.form['Banco']
+            tar.estatus=request.form['Estatus']
+            tar.editar()
+            flash('! Tarjeta editada con exito')
+        except:
+            flash('! Error al editar el producto')
+        return redirect(url_for('verTarjetas'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/tarjeta/eliminar/<int:id>')
+@login_required
+def eliminarTarjeta(id):
+    if  current_user.is_authenticated():
+        try:
+            tar=Tarjeta()
+            tar.eliminar(id)
+            flash('Tarjeta Eliminada')
+        except:
+            flash('Error al eliminar tarjeta')
+        return redirect(url_for('verTarjetas'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+
+
 #fin de manejo de usuarios
 
 
