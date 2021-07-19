@@ -7,7 +7,7 @@
 <div>
 
     <h1 class="bg-primary text-center">Editar Tarjeta</h1>
-    <form action="/tarjeta/editar" method="post" enctype="multipart/form-data">
+    <form action="/tarjeta/editar/{{current_user.idUsuario}}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="ID"> idTarjeta: </label>
             <input type="number" name="ID"   class="form-control" value="{{tar.idTarjeta}}" readonly >
@@ -40,7 +40,7 @@
                 <span class="glyphicon glyphicon-trash"></span>
                 Eliminar
             </a>
-            <a href="/Usuarios/verTarjetas'" class="btn btn-info">
+            <a href="/Usuarios/verTarjetas/{{current_user.idUsuario}}'" class="btn btn-info">
                 <span class="glyphicon glyphicon-arrow-left"></span>
                 Cancelar
             </a>

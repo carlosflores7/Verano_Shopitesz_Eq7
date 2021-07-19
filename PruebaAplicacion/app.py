@@ -108,18 +108,17 @@ def verTarjetas(id):
     tar=Tarjeta()
     return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaGeneral(id))
 
-@app.route('/usuarios/agregarNuevaTarjeta')
+@app.route('/usuarios/agregarNuevaTarjeta/<int:id>')
 @login_required
-def agregarTarjeta():
+def agregarTarjeta(id):
     if current_user.is_authenticated :
         return render_template("/tarjetas/tarjetas.html")
 
-@app.route("/tarjetas/agregar",methods=['post'])
+@app.route("/tarjetas/agregar/<int:id>",methods=['post'])
 @login_required
-def subirtarjeta():
+def subirtarjeta(id):
     try:
         if current_user.is_authenticated:
-
                 try:
                     tar=Tarjeta()
                     tar.idUsuario=request.form['ID']
@@ -131,7 +130,7 @@ def subirtarjeta():
                     flash('!tarjeta agregada con exito¡')
                 except:
                     flash('! Error al agregar tarjeta¡')
-                return redirect(url_for('verTarjetas'))
+                return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaGeneral(id))
         else:
             return redirect(url_for('mostrar_login'))
     except:
@@ -146,9 +145,9 @@ def EditarTarjetas(id):
         return render_template('tarjetas/editar.html', tar=tar.consulta(id))
     else:
         return redirect(url_for('mostrar_login'))
-@app.route('/tarjeta/editar',methods=['POST'])
+@app.route('/tarjeta/editar/<int:id>',methods=['POST'])
 @login_required
-def editandoTarjeta():
+def editandoTarjeta(id):
     if current_user.is_authenticated:
         try:
             tar=Tarjeta()
@@ -162,7 +161,7 @@ def editandoTarjeta():
             flash('! Tarjeta editada con exito')
         except:
             flash('! Error al editar el producto')
-        return redirect(url_for('verTarjetas'))
+        return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaGeneral(id))
     else:
         return redirect(url_for('mostrar_login'))
 
@@ -176,11 +175,11 @@ def eliminarTarjeta(id):
             flash('Tarjeta Eliminada')
         except:
             flash('Error al eliminar tarjeta')
-        return redirect(url_for('verTarjetas'))
+        return redirect((url_for('verperfil')))
     else:
         return redirect(url_for('mostrar_login'))
 
-
+#Fin CRUD Tarjetas
 
 #fin de manejo de usuarios
 
@@ -197,6 +196,10 @@ def consultarImagenProducto(id):
     prod=Producto()
     return prod.consultarImagen(id)
 
+@app.route('/productos/consultarEspecificaciones/<int:id>')
+def consultarEspecificionesProducto(id):
+    prod=Producto()
+    return prod.consultarEspecificaciones(id)
 
 @app.route('/productos/nuevo')
 @login_required
@@ -245,7 +248,6 @@ def consultaProductos(id):
     else:
         return redirect(url_for('mostrar_login'))
 
-
 @app.route('/productos/editar',methods=['POST'])
 @login_required
 def editarProducto():
@@ -258,9 +260,10 @@ def editarProducto():
             prod.descripcion = request.form['descripcion']
             prod.precioVenta = request.form['precioVenta']
             prod.existencia = request.form['existencia']
-            prod.especificaciones.files['especificaciones'].stream.read()
+            especificaciones=request.files['especificaciones'].stream.read()
             foto=request.files['foto'].stream.read()
-            if foto:
+            if foto and especificaciones:
+                prod.especificaciones=especificaciones
                 prod.foto=foto
                 prod.estatus=request.values.get("estatus","Inactivo")
                 prod.editar()
@@ -271,6 +274,7 @@ def editarProducto():
         return redirect(url_for('consultarProductos'))
     else:
         return redirect(url_for('mostrar_login'))
+
 
 @app.route('/productos/eliminar/<int:id>')
 @login_required
