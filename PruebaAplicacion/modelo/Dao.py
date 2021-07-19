@@ -154,8 +154,8 @@ class Tarjeta(db.Model):
     banco = Column(String, nullable=False)
     estatus=Column(String, nullable=False)
 
-    def consultaIndividual(self):
-        return self.query.all()
+    def consultaGeneral(self,id):
+        return self.query.filter(Tarjeta.idUsuario ==id).all()
 
     def agregar(self):
         db.session.add(self)

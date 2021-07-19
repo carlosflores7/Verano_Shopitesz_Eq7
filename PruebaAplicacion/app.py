@@ -102,11 +102,11 @@ def verperfil():
 def ediatarPerfil():
     return render_template('usuarios/editar.html')
 #CRU Tarjetas
-@app.route('/Usuarios/verTarjetas')
+@app.route('/Usuarios/verTarjetas/<int:id>')
 @login_required
-def verTarjetas():
+def verTarjetas(id):
     tar=Tarjeta()
-    return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaIndividual())
+    return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaGeneral(id))
 
 @app.route('/usuarios/agregarNuevaTarjeta')
 @login_required

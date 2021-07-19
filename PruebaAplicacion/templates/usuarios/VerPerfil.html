@@ -28,7 +28,7 @@
             <input type="number" name="ID" maxlength="12" class="form-control" required value="{{current_user.idUsuario}}" readonly>
         </div>
         <div class="form-group">
-            <a href="/Usuarios/verTarjetas" class="btn btn-lg btn-success">
+            <a href="/Usuarios/verTarjetas/{{current_user.idUsuario}}" class="btn btn-lg btn-success">
             <span class="glyphicon glyphicon-fire"></span>
             Metodos de pago
         </a>
