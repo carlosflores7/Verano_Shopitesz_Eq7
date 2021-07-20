@@ -110,9 +110,14 @@ def editarPerfil():
         usuario.direccion = request.form['direccion']
         usuario.telefono = request.form['telefono']
         usuario.email = request.form['email']
-        usuario.password = request.form['password']
+        if request.form['password'] != '':
+            usuario.password = request.form['password']
+
         usuario.tipo = request.form['tipo']
-        usuario.estatus = 'Activo'
+        if request.form['bandera'] == 'admin':
+            usuario.estatus = request.form['estatus']
+        else:
+            usuario.estatus = 'Activo'
         usuario.genero = request.form['genero']
         usuario.editar()
         flash('¡ Usuario modificado con exito !')
@@ -254,7 +259,8 @@ def consultarEspecificionesProducto(id):
 @login_required
 def nuevoProducto():
     if current_user.is_authenticated and current_user.is_vendedor():
-            return render_template('productos/agregar.html')
+            cat = Categoria()
+            return render_template('productos/agregar.html',cat=cat.consultaGeneral())
     else:
         #abort(404)
         return
@@ -266,7 +272,7 @@ def agregarProducto():
             if current_user.is_vendedor():
                 try:
                     prod=Producto()
-                    prod.idCategoria=request.form['idcategoria']
+                    prod.idCategoria=request.form['Categoria']
                     prod.nombre=request.form['nombre']
                     prod.descripcion=request.form['descripcion']
                     prod.precioVenta=request.form['precioventa']
@@ -275,9 +281,9 @@ def agregarProducto():
                     prod.especificaciones=request.files['especificaciones'].stream.read()
                     prod.estatus ='Activo'
                     prod.agregar()
-                    flash('!Prodcuto agregado con exito¡')
+                    flash('!Producto agregado con exito!')
                 except:
-                    flash('! Error al agregar producto¡')
+                    flash('! Error al agregar producto !')
                 return redirect(url_for('consultarProductos'))
             else:
                 #abort(404)
@@ -293,7 +299,8 @@ def agregarProducto():
 def consultaProductos(id):
     if current_user.is_authenticated and current_user.is_vendedor():
         prod=Producto()
-        return render_template('productos/editar.html',prod=prod.consultaIndividuall(id))
+        cat=Categoria()
+        return render_template('productos/editar.html',prod=prod.consultaIndividuall(id),cat=cat.consultaGeneral())
     else:
         return redirect(url_for('mostrar_login'))
 
@@ -304,21 +311,22 @@ def editarProducto():
         try:
             prod=Producto()
             prod.idProducto = request.form['id']
-            prod.idCategoria=request.form['idCategoria']
+            prod.idCategoria=request.form['Categoria']
             prod.nombre=request.form['nombre']
             prod.descripcion = request.form['descripcion']
             prod.precioVenta = request.form['precioVenta']
             prod.existencia = request.form['existencia']
             especificaciones=request.files['especificaciones'].stream.read()
             foto=request.files['foto'].stream.read()
-            if foto and especificaciones:
-                prod.especificaciones=especificaciones
-                prod.foto=foto
-                prod.estatus=request.values.get("estatus","Inactivo")
-                prod.editar()
-                flash('! Producto editada con exito')
+            if foto:
+                prod.foto = foto
+            if especificaciones:
+                prod.especificaciones = especificaciones
+            prod.estatus = request.form['estatus']
+            prod.editar()
+            flash('! Producto editado con éxito !')
         except:
-            flash('! Error al editar el producto')
+            flash('! Error al editar el producto !')
 
         return redirect(url_for('consultarProductos'))
     else:
@@ -340,6 +348,19 @@ def eliminarProductos(id):
     else:
         return redirect(url_for('mostrar_login'))
 
+@app.route('/productos/eliminacionfisica/<int:id>')
+@login_required
+def eliminacionfisicaproducto(id):
+    if  current_user.is_authenticated and current_user.is_vendedor():
+        try:
+            prod=Producto()
+            prod.eliminar(id)
+            flash('Producto eliminado')
+        except:
+            flash('Error al eliminar Producto')
+        return redirect((url_for('consultarProductos')))
+    else:
+        return redirect(url_for('mostrar_login'))
 #Fin Cru de productos
 
 @app.route("/cesta")
