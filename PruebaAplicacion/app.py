@@ -6,8 +6,7 @@ from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'#usuario del bruno
-#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://User_Shopitesz:popo@localhost/shopitesz'#USuario Adame
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'#usuario
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='Cl4v3'
 
@@ -65,7 +64,7 @@ def agregarUsuario():
         usuario.tipo=request.values.get("tipo","Comprador")
         usuario.estatus='Activo'
         usuario.agregar()
-        flash('¡ Usuario registrado con exito')
+        flash('¡ Usuario registrado con éxito !')
     except:
         flash('¡ Error al agregar al usuario !')
     return render_template('usuarios/registrarCuenta.html')
@@ -79,8 +78,12 @@ def login():
     user=usuario.validar(correo,password)
     if user!=None:
         login_user(user)
-
-        return render_template('principal.html')
+        if current_user.is_active():
+            return render_template('principal.html')
+        else:
+            logout_user()
+            flash('Cuenta inactiva')
+            return redirect(url_for('mostrar_login'))
     else:
         flash('Nombre de usuario o contraseña incorrectos')
         return render_template('usuarios/login.html')
@@ -97,10 +100,56 @@ def verperfil():
     #return render_template('usuarios/editar.html')
     return render_template('usuarios/VerPerfil.html')
 
-@app.route('/Usuarios/editarPerfil')
+@app.route('/Usuarios/editarPerfil',methods=['POST'])
 @login_required
-def ediatarPerfil():
-    return render_template('usuarios/editar.html')
+def editarPerfil():
+    try:
+        usuario = Usuario()
+        usuario.idUsuario = request.form['ID']
+        usuario.nombreCompleto = request.form['nombre']
+        usuario.direccion = request.form['direccion']
+        usuario.telefono = request.form['telefono']
+        usuario.email = request.form['email']
+        usuario.password = request.form['password']
+        usuario.tipo = request.form['tipo']
+        usuario.estatus = 'Activo'
+        usuario.genero = request.form['genero']
+        usuario.editar()
+        flash('¡ Usuario modificado con exito !')
+    except:
+        flash('¡ Error al modificar al usuario !')
+    if request.form['bandera'] == 'admin':
+        return redirect(url_for('verUsuarios'))
+    else:
+        return redirect(url_for('verperfil'))
+
+@app.route('/Usuarios/eliminar/<int:id>')
+@login_required
+def eliminarPerfil(id):
+    if current_user.is_authenticated:
+        try:
+            usuario = Usuario()
+            usuario.eliminacionLogica(id)
+            logout_user()
+            flash('Usuario eliminado con exito')
+        except:
+            flash('Error al eliminar el usuario')
+        return redirect(url_for('inicio'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Usuarios/todos')
+@login_required
+def verUsuarios():
+    usuarios = Usuario()
+    return render_template('usuarios/consultaGeneral.html',usuarios=usuarios.consultaGeneral())
+
+@app.route('/Usuarios/<int:id>')
+@login_required
+def usuarioIndividual(id):
+    usuario = Usuario()
+    return render_template('usuarios/consultaIndividual.html',usuario=usuario.consultaIndividual(id))
+
 #CRU Tarjetas
 @app.route('/Usuarios/verTarjetas/<int:id>')
 @login_required
