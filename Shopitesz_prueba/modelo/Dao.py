@@ -139,7 +139,7 @@ class Usuario(UserMixin,db.Model):
     #Definir el método para la autenticacion
     def validar(self,email,password):
         usuario=Usuario.query.filter(Usuario.email==email).first()
-        if usuario!=None and usuario.validarPassword(password) and usuario.is_active():
+        if usuario!=None and usuario.validarPassword(password):
             return usuario
         else:
             return None
@@ -147,6 +147,21 @@ class Usuario(UserMixin,db.Model):
     def agregar(self):
         db.session.add(self)
         db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self,id):
+        return self.query.get(id)
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminacionLogica(self,id):
+        usuario = self.consultaIndividual(id)
+        usuario.estatus = 'Inactivo'
+        usuario.editar()
 
 class Tarjeta(db.Model):
     __tablename__ = 'Tarjetas'

@@ -1,13 +1,12 @@
 from datetime import timedelta
 
-from flask import Flask,render_template,request,redirect,url_for,flash,session
+from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
 from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'#usuario del bruno
-#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://User_Shopitesz:popo@localhost/shopitesz'#USuario Adame
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'#usuario
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='Cl4v3'
 
@@ -34,6 +33,7 @@ def inicio():
     #return "Bienvenido a la tienda en linea Shopitesz"
     return render_template('principal.html')
 
+#Inicio del CRUD de usuarios
 @app.route('/Usuarios/iniciarSesion')
 def mostrar_login():
     if current_user.is_authenticated:
@@ -47,43 +47,52 @@ def cargar_usuario(id):
 
 @app.route('/Usuarios/nuevo')
 def nuevoUsuario():
-    if current_user.is_authenticated and not current_user.is_admin:
-        return render_template('principal.html')
+    if current_user.is_authenticated and not current_user.is_admin():
+        abort(404)
     else:
         return render_template('usuarios/registrarCuenta.html')
 
 @app.route('/Usuarios/agregar',methods=['post'])
 def agregarUsuario():
-    try:
-        usuario=Usuario()
-        usuario.nombreCompleto=request.form['nombre']
-        usuario.telefono=request.form['telefono']
-        usuario.direccion=request.form['direccion']
-        usuario.email=request.form['email']
-        usuario.genero=request.form['genero']
-        usuario.password=request.form['password']
-        usuario.tipo=request.values.get("tipo","Comprador")
-        usuario.estatus='Activo'
-        usuario.agregar()
-        flash('¡ Usuario registrado con exito')
-    except:
-        flash('¡ Error al agregar al usuario !')
+    if current_user.is_authenticated and not current_user.is_admin():
+        return render_template('principal.html')
+    else:
+        try:
+            usuario = Usuario()
+            usuario.nombreCompleto = request.form['nombre']
+            usuario.telefono = request.form['telefono']
+            usuario.direccion = request.form['direccion']
+            usuario.email = request.form['email']
+            usuario.genero = request.form['genero']
+            usuario.password = request.form['password']
+            usuario.tipo = request.values.get("tipo", "Comprador")
+            usuario.estatus = 'Activo'
+            usuario.agregar()
+            flash('¡ Usuario registrado con éxito !')
+        except:
+            flash('¡ Error al agregar al usuario !')
     return render_template('usuarios/registrarCuenta.html')
-
 
 @app.route("/Usuarios/validarSesion",methods=['POST'])
 def login():
-    correo=request.form['correo']
-    password=request.form['password']
-    usuario=Usuario()
-    user=usuario.validar(correo,password)
-    if user!=None:
-        login_user(user)
-
-        return render_template('principal.html')
+    if not current_user.is_authenticated:
+        correo = request.form['correo']
+        password = request.form['password']
+        usuario = Usuario()
+        user = usuario.validar(correo, password)
+        if user != None:
+            login_user(user)
+            if current_user.is_active():
+                return render_template('principal.html')
+            else:
+                logout_user()
+                flash('Cuenta inactiva')
+                return redirect(url_for('mostrar_login'))
+        else:
+            flash('Nombre de usuario o contraseña incorrectos')
+            return render_template('usuarios/login.html')
     else:
-        flash('Nombre de usuario o contraseña incorrectos')
-        return render_template('usuarios/login.html')
+        abort(404)
 
 @app.route('/Usuarios/cerrarSesion')
 @login_required
@@ -94,14 +103,72 @@ def cerrarSesion():
 @app.route('/Usuarios/verPerfil')
 @login_required
 def verperfil():
-    #return render_template('usuarios/editar.html')
     return render_template('usuarios/VerPerfil.html')
 
-@app.route('/Usuarios/editarPerfil')
+@app.route('/Usuarios/editarPerfil',methods=['POST'])
 @login_required
-def ediatarPerfil():
-    return render_template('usuarios/editar.html')
-#CRU Tarjetas
+def editarPerfil():
+    try:
+        usuario = Usuario()
+        usuario.idUsuario = request.form['ID']
+        usuario.nombreCompleto = request.form['nombre']
+        usuario.direccion = request.form['direccion']
+        usuario.telefono = request.form['telefono']
+        usuario.email = request.form['email']
+        if request.form['password'] != '':
+            usuario.password = request.form['password']
+
+        usuario.tipo = request.form['tipo']
+        if request.form['bandera'] == 'admin':
+            usuario.estatus = request.form['estatus']
+        else:
+            usuario.estatus = 'Activo'
+        usuario.genero = request.form['genero']
+        usuario.editar()
+        flash('¡ Usuario modificado con exito !')
+    except:
+        flash('¡ Error al modificar al usuario !')
+    if request.form['bandera'] == 'admin':
+        return redirect(url_for('verUsuarios'))
+    else:
+        return redirect(url_for('verperfil'))
+
+@app.route('/Usuarios/eliminar/<int:id>')
+@login_required
+def eliminarPerfil(id):
+    if current_user.is_authenticated and current_user.idUsuario == id:
+        try:
+            usuario = Usuario()
+            usuario.eliminacionLogica(id)
+            logout_user()
+            flash('Usuario eliminado con exito')
+        except:
+            flash('Error al eliminar el usuario')
+        return redirect(url_for('inicio'))
+    else:
+        abort(404)
+
+@app.route('/Usuarios/todos')
+@login_required
+def verUsuarios():
+    if current_user.is_admin():
+        usuarios = Usuario()
+        return render_template('usuarios/consultaGeneral.html', usuarios=usuarios.consultaGeneral())
+    else:
+        abort(404)
+
+@app.route('/Usuarios/<int:id>')
+@login_required
+def usuarioIndividual(id):
+    if current_user.is_admin():
+        usuario = Usuario()
+        return render_template('usuarios/consultaIndividual.html',usuario=usuario.consultaIndividual(id))
+    else:
+        abort(404)
+
+#Fin del CRUD de usuarios
+
+#CRUD Tarjetas
 @app.route('/Usuarios/verTarjetas/<int:id>')
 @login_required
 def verTarjetas(id):
@@ -205,7 +272,8 @@ def consultarEspecificionesProducto(id):
 @login_required
 def nuevoProducto():
     if current_user.is_authenticated and current_user.is_vendedor():
-            return render_template('productos/agregar.html')
+            cat = Categoria()
+            return render_template('productos/agregar.html',cat=cat.consultaGeneral())
     else:
         #abort(404)
         return
@@ -217,7 +285,7 @@ def agregarProducto():
             if current_user.is_vendedor():
                 try:
                     prod=Producto()
-                    prod.idCategoria=request.form['idcategoria']
+                    prod.idCategoria=request.form['Categoria']
                     prod.nombre=request.form['nombre']
                     prod.descripcion=request.form['descripcion']
                     prod.precioVenta=request.form['precioventa']
@@ -226,9 +294,9 @@ def agregarProducto():
                     prod.especificaciones=request.files['especificaciones'].stream.read()
                     prod.estatus ='Activo'
                     prod.agregar()
-                    flash('!Prodcuto agregado con exito¡')
+                    flash('!Producto agregado con exito!')
                 except:
-                    flash('! Error al agregar producto¡')
+                    flash('! Error al agregar producto !')
                 return redirect(url_for('consultarProductos'))
             else:
                 #abort(404)
@@ -244,7 +312,8 @@ def agregarProducto():
 def consultaProductos(id):
     if current_user.is_authenticated and current_user.is_vendedor():
         prod=Producto()
-        return render_template('productos/editar.html',prod=prod.consultaIndividuall(id))
+        cat=Categoria()
+        return render_template('productos/editar.html',prod=prod.consultaIndividuall(id),cat=cat.consultaGeneral())
     else:
         return redirect(url_for('mostrar_login'))
 
@@ -255,21 +324,22 @@ def editarProducto():
         try:
             prod=Producto()
             prod.idProducto = request.form['id']
-            prod.idCategoria=request.form['idCategoria']
+            prod.idCategoria=request.form['Categoria']
             prod.nombre=request.form['nombre']
             prod.descripcion = request.form['descripcion']
             prod.precioVenta = request.form['precioVenta']
             prod.existencia = request.form['existencia']
             especificaciones=request.files['especificaciones'].stream.read()
             foto=request.files['foto'].stream.read()
-            if foto and especificaciones:
-                prod.especificaciones=especificaciones
-                prod.foto=foto
-                prod.estatus=request.values.get("estatus")
-                prod.editar()
-                flash('! Producto editada con exito')
+            if foto:
+                prod.foto = foto
+            if especificaciones:
+                prod.especificaciones = especificaciones
+            prod.estatus = request.form['estatus']
+            prod.editar()
+            flash('! Producto editado con éxito !')
         except:
-            flash('! Error al editar el producto')
+            flash('! Error al editar el producto !')
 
         return redirect(url_for('consultarProductos'))
     else:
@@ -291,7 +361,7 @@ def eliminarProductos(id):
     else:
         return redirect(url_for('mostrar_login'))
 
-@app.route('/productis/eliminacionfisica/<int:id>')
+@app.route('/productos/eliminacionfisica/<int:id>')
 @login_required
 def eliminacionfisicaproducto(id):
     if  current_user.is_authenticated and current_user.is_vendedor():
@@ -304,9 +374,6 @@ def eliminacionfisicaproducto(id):
         return redirect((url_for('consultarProductos')))
     else:
         return redirect(url_for('mostrar_login'))
-
-
-
 #Fin Cru de productos
 
 @app.route("/cesta")
@@ -439,6 +506,14 @@ def pedidosclvarios():
 def pedidoscluno():
     return render_template("pedidosclt/pedidoscluno.html")
 
+#error
+@app.errorhandler(404)
+def error_404(e):
+    return render_template("comunes/error_404.html"),404
+
+@app.errorhandler(405)
+def error_405(e):
+    return render_template("comunes/error_405.html"),405
 
 if __name__=='__main__':
     db.init_app(app)#Inicializar la BD - pasar la configuración de la url de la BD
