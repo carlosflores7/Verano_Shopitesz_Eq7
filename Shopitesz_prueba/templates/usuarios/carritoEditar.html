@@ -1,0 +1,134 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+{{super()}}
+<div>
+    <h1 class="bg-primary text-center">Edicion de Producto</h1>
+    <form action="/Usuarios/verCarrito/editar" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="idCarrito"> id Carrito: </label>
+            <input type="number" name="idCarrito"  required class="form-control" value="{{carrito.idCarrito}}" readonly class="form-control">
+        </div>
+         <div class="form-group">
+            <label for="idUsuario"> id Usuario: </label>
+            <input type="number" name="idUsuario"  required class="form-control" value="{{carrito.idUsuario}}" readonly class="form-control">
+        </div>
+         <div class="form-group">
+            <label for="idProducto"> id Producto: </label>
+            <input type="number" name="idProducto"  required class="form-control" value="{{carrito.idProducto}}" readonly class="form-control">
+        </div>
+
+        <div>
+            <a href="#" data-toggle="modal" data-target="#imagen">
+                    <span class="glyphicon glyphicon-eye-open"></span>Ver Imagen
+                    </a>
+                    <div id="imagen" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Imagen del producto:</h4>
+              </div>
+              <div class="modal-body">
+                <img src="/productos/consultarImagen/{{carrito.idProducto}}" width="500px" height="400px">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
+
+        <div>
+            <a href="#" data-toggle="modal" data-target="#especificaciones">
+                    <span class="glyphicon glyphicon-eye-open"></span>Ver Especificacione
+                    </a>
+                    <div id="especificaciones" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">especificaciones del producto:</h4>
+              </div>
+              <div class="modal-body">
+                <img src="/productos/consultarEspecificaciones/{{carrito.idProducto}}" width="500px" height="400px">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="fecha">fecha en que se agrego:</label>
+            <input type="date" name="fecha"  maxlength="100" value="{{carrito.fecha}}" class="form-control">
+        </div>
+         <div class="form-group">
+            <label for="cantidad">cantidad:</label>
+            <input type="text" name="cantidad"  maxlength="200" value="{{carrito.cantidad}}" class="form-control">
+        </div>
+        <div class="form-control">
+            <label for="estatus">Estatus:</label>
+            <select name='estatus'>
+            {% if carrito.estatus=='Activo' %}
+                <option selected>Activo</option>
+                <option>Inactivo</option>
+            {% else %}
+                <option>Activo</option>
+                <option selected>Pendiente</option>
+            {% endif %}
+            </select>
+        </div>
+
+           <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-floppy-disk"></span>
+                Guardar
+            </button>
+            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#eliminar">
+                <span class="glyphicon glyphicon-trash"></span>
+                Eliminar
+            </a>
+            <a href="/Usuarios/verCarrito/{{current_user.idUsuario}}" class="btn btn-info">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                Cancelar
+            </a>
+    </form>
+
+
+<div id="eliminar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Eliminación de Producto</h4>
+      </div>
+      <div class="modal-body">
+        <p>¿ Estas seguro de eliminar el Carrito</p>
+      </div>
+      <div class="modal-footer">
+          <a class="btn btn-primary" href="/Usuarios/verCarrito/eliminacionfisica/{{carrito.idCarrito}}">Aceptar</a>
+          <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+</div>
+
+{% endblock %}

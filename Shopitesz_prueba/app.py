@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta, Envio, Paqueteria, Pedido, Carrito
+from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta, Envio, Paqueteria, Pedido, Carrito, DetallePedidos
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -382,6 +382,18 @@ def eliminacionfisicaproducto(id):
         return redirect(url_for('mostrar_login'))
 #Fin Cru de productos
 
+#CRUD de DetallesPedidos
+
+@app.route('/Pedidos/verpedidos/detallespedidos/<int:id>')
+@login_required
+def verDetallesPedido(id):
+    detallepedido=DetallePedidos()
+    return render_template("/pedidosclt/consultaDetallespedido.html",detallepedido=detallepedido.consultaGeneral(id))
+
+
+#Fin CRUD de detallesPedidos
+
+
 #CRUD DE CARRITO
 
 @app.route('/Usuarios/verCarrito/<int:id>')
@@ -390,6 +402,48 @@ def verCarrito(id):
     carrito=Carrito()
     prod=Producto()
     return render_template("/usuarios/carrito.html",carrito=carrito.consultaGeneral(id),prod=prod.consultaGeneral())
+
+@app.route('/Usuarios/verCarrito/ed/<int:id>')
+@login_required
+def editarCarrrito(id):
+    carrito=Carrito()
+    if current_user.is_authenticated and current_user.is_comprador():
+        return render_template("usuarios/carritoEditar.html",carrito=carrito.consultaIndividual(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Usuarios/verCarrito/editar',methods=['POST'])
+@login_required
+def editarCarritoBien():
+    if  current_user.is_authenticated and current_user.is_comprador():
+        try:
+            carrito = Carrito()
+            carrito.idCarrito = request.form['idCarrito']
+            carrito.idUsuario = request.form['idUsuario']
+            carrito.idProducto = request.form['idProducto']
+            carrito.fecha = request.form['fecha']
+            carrito.cantidad = request.form['cantidad']
+            carrito.estatus = request.form['estatus']
+            carrito.editar()
+            flash('! Carrito editado con exito')
+            return redirect(url_for('mostrar_login'))
+        except:
+            flash('! Error al editar el Producto ')
+
+
+@app.route('/Usuarios/verCarrito/eliminacionfisica/<int:id>')
+@login_required
+def eliminacionfisicaCarrito(id):
+    if  current_user.is_authenticated and current_user.is_comprador:
+        try:
+            carrito=Carrito()
+            carrito.eliminar(id)
+            flash('carrito eliminado')
+        except:
+            flash('Error al eliminar Producto')
+        return redirect((url_for('mostrar_login')))
+    else:
+        return redirect(url_for('mostrar_login'))
 
 
 #FIN DE CRUD CARRITO
@@ -505,10 +559,9 @@ def consultarEnvios():
 def editarEnvio(id):
     envio = Envio()
     paq = Paqueteria()
-    ped = Pedido()
+
     if current_user.is_authenticated and current_user.is_vendedor():
-        return render_template("envios/editar.html",envio=envio.consultaIndividual(id),paq=paq.consultaGeneral(),
-                               ped=ped.consultaGeneral())
+        return render_template("envios/editar.html",envio=envio.consultaIndividual(id),paq=paq.consultaGeneral())
     else:
         return redirect(url_for('mostrar_login'))
 

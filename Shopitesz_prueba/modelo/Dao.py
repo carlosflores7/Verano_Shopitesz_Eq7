@@ -216,6 +216,15 @@ class Carrito(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def consulta(self, id):
+        return Carrito.query.get(id)
+
+    def eliminar(self, id):
+        carrito = self.consulta(id)
+        db.session.delete(carrito)
+        db.session.commit()
+
+
 class Pedido(db.Model):
     __tablename__ = 'Pedidos'
     idPedido = Column(Integer, primary_key=True, nullable=False)
@@ -306,3 +315,6 @@ class DetallePedidos(db.Model):
     subtotal = Column(Float, nullable=False)
     estatus = Column(String, nullable=False)
     comentario = Column(String, nullable=False)
+
+    def consultaGeneral(self, id):
+        return self.query.filter(DetallePedidos.idPedido== id).all()

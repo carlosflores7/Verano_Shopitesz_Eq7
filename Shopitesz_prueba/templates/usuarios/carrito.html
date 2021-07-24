@@ -15,6 +15,7 @@
         <th>FECHA EN QUE SE AGREGO</th>
         <th>CANTIDAD</th>
         <th>ESTATUS</th>
+        <th>VER</th>
         {% for car in carrito %}
             <tr>
                 <td>{{car.idProducto}}</td>
@@ -24,7 +25,10 @@
                 <td>{{car.fecha}}</td>
                 <td>{{car.cantidad}}</td>
                 <td>{{car.estatus}}</td>
-                <td>
+                <td><a href="/Usuarios/verCarrito/ed/{{car.idCarrito}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
