@@ -37,6 +37,11 @@
                 <td>{{detped.subtotal}}</td>
                 <td>{{detped.estatus}}</td>
                 <td>{{detped.comentario}}</td>
+                 <td>
+                        <a href="/Pedidos/verpedidos/detallespedidos/en/{{detped.idDetalle}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                 </td>
             </tr>
         {% endfor %}
     </table>

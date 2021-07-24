@@ -230,7 +230,7 @@ class Pedido(db.Model):
     idPedido = Column(Integer, primary_key=True, nullable=False)
     idComprador = Column(Integer, ForeignKey('Usuario.idUsuario'), nullable=False)
     idVendedor = Column(Integer, ForeignKey('Usuario.idUsuario'), nullable=False)
-    idTarjeta = Column(String, ForeignKey('Tarjeta.idTarjeta'),nullable=False)
+    idTarjeta = Column(Integer, ForeignKey('Tarjeta.idTarjeta'),nullable=False)
     fechaRegistro = Column(String, nullable=False)
     fechaAtencion = Column(String, nullable=False)
     fechaRecepcion = Column(String, nullable=False)
@@ -318,3 +318,10 @@ class DetallePedidos(db.Model):
 
     def consultaGeneral(self, id):
         return self.query.filter(DetallePedidos.idPedido== id).all()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaIndividual(self, id):
+        return self.query.get(id)

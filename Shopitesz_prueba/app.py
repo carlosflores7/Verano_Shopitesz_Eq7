@@ -388,7 +388,41 @@ def eliminacionfisicaproducto(id):
 @login_required
 def verDetallesPedido(id):
     detallepedido=DetallePedidos()
-    return render_template("/pedidosclt/consultaDetallespedido.html",detallepedido=detallepedido.consultaGeneral(id))
+    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
+     return render_template("/pedidosclt/consultaDetallespedido.html",detallepedido=detallepedido.consultaGeneral(id))
+
+@app.route('/Pedidos/verpedidos/detallespedidos/en/<int:id>')
+@login_required
+def editarDetallesPedidos(id):
+    detallepedido=DetallePedidos()
+    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
+        return render_template("pedidosclt/editarDetallespedido.html",detallepedido=detallepedido.consultaIndividual(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Pedidos/verpedidos/detallespedidos/editarPedidos',methods=['POST'])
+@login_required
+def modDetallesPedidos():
+    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
+        try:
+            detallepedido=DetallePedidos()
+            detallepedido.idDetalle = request.form['idDetalle']
+            detallepedido.idPedido = request.form['idPedido']
+            detallepedido.idProducto = request.form['idProducto']
+            detallepedido.precio = request.form['precio']
+            detallepedido.cantidadPedida = request.form['cantidadPedida']
+            detallepedido.cantidadEnviada = request.form['cantidadEnviada']
+            detallepedido.cantidadAceptada = request.form['cantidadAceptada']
+            detallepedido.cantidadRechazada = request.form['cantidadRechazada']
+            detallepedido.subtotal = request.form['subtotal']
+            detallepedido.comentario = request.form['comentario']
+            detallepedido.estatus = request.form['estatus']
+            detallepedido.editar()
+            flash('! Detalles Pedido editada con exito')
+            return redirect(url_for('mostrar_login'))
+        except:
+            flash('! Error al editar Detalles Pedido ')
+
 
 
 #Fin CRUD de detallesPedidos
@@ -631,8 +665,41 @@ def modEnvio():
 @login_required
 def verPedidos(id):
     pedido=Pedido()
-    return render_template("pedidosclt/consulta.html",pedido=pedido.consultaGeneral(id))
+    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
+     return render_template("pedidosclt/consulta.html",pedido=pedido.consultaGeneral(id))
+    else:
+        return redirect(url_for('mostrar_login'))
 
+@app.route('/Pedidos/verpedidos/en/<int:id>')
+@login_required
+def editarPedidos(id):
+    pedido = Pedido()
+    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
+        return render_template("pedidosclt/editarPedido.html",pedido=pedido.consultaIndividual(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Pedidos/editarPedidos',methods=['POST'])
+@login_required
+def modPedidos():
+    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
+        try:
+            pedido = Pedido()
+            pedido.idPedido = request.form['idPedido']
+            pedido.idComprador = request.form['idComprador']
+            pedido.idVendedor = request.form['idVendedor']
+            pedido.idTarjeta = request.form['idTarjeta']
+            pedido.fechaRegistro = request.form['fechaRegistro']
+            pedido.fechaAtencion = request.form['fechaAtencion']
+            pedido.fechaRecepcion = request.form['fechaRecepcion']
+            pedido.fechaCierre = request.form['fechaCierre']
+            pedido.total = request.form['total']
+            pedido.estatus = request.form['estatus']
+            pedido.editar()
+            flash('! Pedido editada con exito')
+            return redirect(url_for('mostrar_login'))
+        except:
+            flash('! Error al editar la Paqueteria ')
 
 #FIN DE CRUD DE PEDIDOS
 
