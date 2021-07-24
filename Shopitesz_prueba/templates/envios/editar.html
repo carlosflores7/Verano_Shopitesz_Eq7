@@ -1,0 +1,64 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% block contenido %}
+        <!--Sistema de alertas de Bootstrap -->
+       <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+           <strong>
+               {% for msg in get_flashed_messages() %}
+                    {{msg}}
+               {% endfor %}
+           </strong>
+        </div>
+        <form action="/Envios/editar" method="post">
+          IDENVIO:
+          <input type="number" name="IDENVIO" value="{{envio.IDENVIO}}" readonly class="form-control">
+          <br>
+          IDPEDIDO:
+          <input type="number" name="IDPEDIDO" value="{{envio.IDPEDIDO}}" class="form-control">
+          <br>
+          PAQUETERIA:
+          <select name="IDPAQUETERIA">
+            {% for p in paq %}
+              <option value="{{p.IDPAQUETERIA}}">
+                {{p.NOMBRE}}
+              </option>
+            {% endfor %}
+          </select>
+          <br>
+
+          FECHAENVIO:
+          <input type="date" name="FECHAENVIO" value="{{envio.FECHAENVIO}}" class="form-control">
+          <br>
+          FECHAENTREGA:
+          <input type="date" name="FECHAENTREGA" value="{{envio.FECHAENTREGA}}" class="form-control">
+          <br>
+          NOGUIA:
+          <input type="text" name="NOGUIA" value="{{envio.NOGUIA}}" class="form-control">
+          <br>
+          PESOPAQUETE:
+          <input type="number" name="PESOPAQUETE" value="{{envio.PESOPAQUETE}}" class="form-control">
+          <br>
+          PRECIOGR:
+          <input type="number" name="PRECIOGR" value="{{envio.PRECIOGR}}" class="form-control">
+          <br>
+          TOTALPAGAR:
+          <input type="number" name="TOTALPAGAR" value="{{envio.TOTALPAGAR}}" class="form-control">
+          <br>
+          ESTATUS:
+          <select name="ESTATUS" class="form-control">
+            <option name="PENDIENTE">PENDIENTE</option>
+            <option name="TRANSITO">TRANSITO</option>
+            <option name="ENTREGADO">ENTREGADO</option>
+          </select>
+          <br>
+          <button type="sumbit" >Modificar datos</button>
+
+    {% endblock %}
+</div>
+{% endblock %}

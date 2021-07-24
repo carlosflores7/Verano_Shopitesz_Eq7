@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta
+from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta, Envio, Paqueteria, Pedido, Carrito
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -268,10 +268,16 @@ def consultarEspecificionesProducto(id):
     prod=Producto()
     return prod.consultarEspecificaciones(id)
 
+@app.route('/productos/consultarNombre/<int:id>')
+def consultarNombreProducto(id):
+    prod=Producto()
+    return prod.consultarNombre(id)
+
+
 @app.route('/productos/nuevo')
 @login_required
 def nuevoProducto():
-    if current_user.is_authenticated and current_user.is_vendedor():
+    if current_user.is_authenticated and current_user.is_admin():
             cat = Categoria()
             return render_template('productos/agregar.html',cat=cat.consultaGeneral())
     else:
@@ -282,7 +288,7 @@ def nuevoProducto():
 def agregarProducto():
     try:
         if current_user.is_authenticated:
-            if current_user.is_vendedor():
+            if current_user.is_admin():
                 try:
                     prod=Producto()
                     prod.idCategoria=request.form['Categoria']
@@ -310,7 +316,7 @@ def agregarProducto():
 @app.route('/productos/<int:id>')
 @login_required
 def consultaProductos(id):
-    if current_user.is_authenticated and current_user.is_vendedor():
+    if current_user.is_authenticated and current_user.is_admin:
         prod=Producto()
         cat=Categoria()
         return render_template('productos/editar.html',prod=prod.consultaIndividuall(id),cat=cat.consultaGeneral())
@@ -320,7 +326,7 @@ def consultaProductos(id):
 @app.route('/productos/editar',methods=['POST'])
 @login_required
 def editarProducto():
-    if current_user.is_authenticated and current_user.is_vendedor():
+    if current_user.is_authenticated and current_user.is_admin:
         try:
             prod=Producto()
             prod.idProducto = request.form['id']
@@ -349,7 +355,7 @@ def editarProducto():
 @app.route('/productos/eliminar/<int:id>')
 @login_required
 def eliminarProductos(id):
-    if current_user.is_authenticated and current_user.is_vendedor():
+    if current_user.is_authenticated and current_user.is_admin:
         try:
             prod=Producto()
             prod.eliminacionLogica(id)
@@ -364,7 +370,7 @@ def eliminarProductos(id):
 @app.route('/productos/eliminacionfisica/<int:id>')
 @login_required
 def eliminacionfisicaproducto(id):
-    if  current_user.is_authenticated and current_user.is_vendedor():
+    if  current_user.is_authenticated and current_user.is_admin:
         try:
             prod=Producto()
             prod.eliminar(id)
@@ -376,18 +382,17 @@ def eliminacionfisicaproducto(id):
         return redirect(url_for('mostrar_login'))
 #Fin Cru de productos
 
-@app.route("/cesta")
-def consultarCesta():
-    return "consultando la cesta de compra"
+#CRUD DE CARRITO
 
-@app.route("/productos/categoria/<int:id>")
-def consultarProductosCategoria(id):
-    return "consultando los productos de la cetogoria: "+str(id)
+@app.route('/Usuarios/verCarrito/<int:id>')
+@login_required
+def verCarrito(id):
+    carrito=Carrito()
+    prod=Producto()
+    return render_template("/usuarios/carrito.html",carrito=carrito.consultaGeneral(id),prod=prod.consultaGeneral())
 
-@app.route("/clientes/<string:nombre>")
-def consultarCliente(nombre):
-    return "consultando al cliente:"+nombre
 
+#FIN DE CRUD CARRITO
 
 
 #CRUD de Categorias
@@ -484,6 +489,167 @@ def eliminarCategoria(id):
 
 #Fin del crud de categorias
 
+#Crud de envios
+
+@app.route("/Envios")
+@login_required
+def consultarEnvios():
+    envio= Envio()
+    if current_user.is_authenticated and current_user.is_vendedor():
+        return render_template("envios/consultaGeneral.html",envio=envio.consultaGeneral())
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Envios/<int:id>')
+@login_required
+def editarEnvio(id):
+    envio = Envio()
+    paq = Paqueteria()
+    ped = Pedido()
+    if current_user.is_authenticated and current_user.is_vendedor():
+        return render_template("envios/editar.html",envio=envio.consultaIndividual(id),paq=paq.consultaGeneral(),
+                               ped=ped.consultaGeneral())
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Envios/nueva')
+@login_required
+def nuevoEnvio():
+    paq = Paqueteria()
+    ped = Pedido()
+    if current_user.is_authenticated and current_user.is_vendedor():
+        return render_template('envios/agregar.html',paq=paq.consultaGeneral(),ped=ped.consultaGeneral())
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Envios/agregar',methods=['post'])
+@login_required
+def agregarEnvio():
+        if current_user.is_authenticated and current_user.is_vendedor():
+                try:
+                    envio = Envio()
+                    envio.IDPEDIDO = request.form['IDPEDIDO']
+                    envio.IDPAQUETERIA = request.form['IDPAQUETERIA']
+                    envio.FECHAENVIO = request.form['FECHAENVIO']
+                    envio.FECHAENTREGA = request.form['FECHAENTREGA']
+                    envio.NOGUIA = request.form['NOGUIA']
+                    envio.PESOPAQUETE = request.form['PESOPAQUETE']
+                    envio.PRECIOGR = request.form['PRECIOGR']
+                    envio.TOTALPAGAR = request.form['TOTALPAGAR']
+                    envio.ESTATUS = "PENDIENTE"
+                    envio.agregar()
+                    flash('¡ Envio Registrado con exito !')
+                    return redirect(url_for('consultarEnvios'))
+                except:
+                    flash('¡ Error al agregar la categoria !')
+
+
+
+
+@app.route('/Envios/editar',methods=['POST'])
+@login_required
+def modEnvio():
+    if  current_user.is_authenticated and current_user.is_vendedor():
+        try:
+            envio = Envio()
+            envio.IDENVIO = request.form['IDENVIO']
+            envio.IDPEDIDO = request.form['IDPEDIDO']
+            envio.IDPAQUETERIA = request.form['IDPAQUETERIA']
+            envio.FECHAENVIO = request.form['FECHAENVIO']
+            envio.FECHAENTREGA = request.form['FECHAENTREGA']
+            envio.NOGUIA = request.form['NOGUIA']
+            envio.PESOPAQUETE = request.form['PESOPAQUETE']
+            envio.PRECIOGR = request.form['PRECIOGR']
+            envio.TOTALPAGAR = request.form['TOTALPAGAR']
+            envio.ESTATUS = request.form['ESTATUS']
+            envio.editar()
+            flash('! Envio editado con exito')
+            return redirect(url_for('consultarEnvios'))
+        except:
+            flash('! Error al editar el Envio ')
+
+
+
+#Fin de crud de envios
+
+#CRUD DE PEDIDOS
+
+@app.route('/Pedidos/verpedidos/<int:id>')
+@login_required
+def verPedidos(id):
+    pedido=Pedido()
+    return render_template("pedidosclt/consulta.html",pedido=pedido.consultaGeneral(id))
+
+
+#FIN DE CRUD DE PEDIDOS
+
+
+
+#CRUD de paquterias
+
+@app.route("/Paqueterias")
+@login_required
+def consultarPaqueterias():
+    paqueteria = Paqueteria()
+    if current_user.is_authenticated and current_user.is_admin():
+        return render_template("paqueterias/consultaGeneral.html",paqueteria=paqueteria.consultaGeneral())
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Paqueterias/<int:id>')
+@login_required
+def editarPaqueterias(id):
+    paqueteria = Paqueteria()
+    if current_user.is_authenticated and current_user.is_admin():
+        return render_template("paqueterias/editar.html",paqueteria=paqueteria.consultaIndividual(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/Paqueterias/nueva')
+@login_required
+def nuevaPaqueteria():
+    if current_user.is_authenticated and current_user.is_admin():
+        return render_template('paqueterias/agregar.html')
+    else:
+        return redirect(url_for('mostrar_login'))
+
+
+@app.route('/Paqueterias/agregar',methods=['post'])
+@login_required
+def agregarPaqueteria():
+        if current_user.is_authenticated and current_user.is_admin():
+                try:
+                    paqueteria = Paqueteria()
+                    paqueteria.NOMBRE = request.form['NOMBRE']
+                    paqueteria.PAGINAWEB = request.form['PAGINAWEB']
+                    paqueteria.PRECIOGR = request.form['PRECIOGR']
+                    paqueteria.TELEFONO = request.form['TELEFONO']
+                    paqueteria.ESTATUS = "Activo"
+                    paqueteria.agregar()
+                    flash('¡ Paqueteria Registrado con exito !')
+                    return redirect(url_for('consultarPaqueterias'))
+                except:
+                    flash('¡ Error al agregar la categoria !')
+
+@app.route('/Paqueterias/editar',methods=['POST'])
+@login_required
+def modPaqueterias():
+    if  current_user.is_authenticated and current_user.is_admin():
+        try:
+            paqueteria = Paqueteria()
+            paqueteria.IDPAQUETERIA = request.form['IDPAQUETERIA']
+            paqueteria.NOMBRE = request.form['NOMBRE']
+            paqueteria.PAGINAWEB = request.form['PAGINAWEB']
+            paqueteria.PRECIOGR = request.form['PRECIOGR']
+            paqueteria.TELEFONO = request.form['TELEFONO']
+            paqueteria.ESTATUS = request.form['ESTATUS']
+            paqueteria.editar()
+            flash('! Paqueteria editada con exito')
+            return redirect(url_for('consultarPaqueterias'))
+        except:
+            flash('! Error al editar la Paqueteria ')
+
+#FIN DE CRUD de paqueterias
 
 @app.route("/pedidosclt")
 def consultarPedidos():

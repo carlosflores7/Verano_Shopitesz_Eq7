@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column,Integer,String,BLOB,ForeignKey,Float
+from sqlalchemy import Column,Integer,String,BLOB,ForeignKey,Float,Date
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -64,6 +64,9 @@ class Producto(db.Model):
 
     def consultarEspecificaciones(self, id):
         return self.consultaIndividuall(id).especificaciones
+
+    def consultarNombre(self, id):
+        return self.consultaIndividuall(id).nombre
 
     def agregar(self):
         db.session.add(self)
@@ -184,7 +187,122 @@ class Tarjeta(db.Model):
     def editar(self):
         db.session.merge(self)
         db.session.commit()
+
     def eliminar(self, id):
         tar = self.consulta(id)
         db.session.delete(tar)
         db.session.commit()
+
+class Carrito(db.Model):
+    __tablename__ ='Carrito'
+    idCarrito = Column(Integer, primary_key=True)
+    idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
+    idProducto = Column(Integer, ForeignKey ('Productos.idProducto'))
+    fecha = Column(String, nullable=False)
+    cantidad = Column(Integer, nullable=False)
+    estatus = Column(String, nullable=False)
+
+    def consultaGeneral(self,id):
+        return self.query.filter(Carrito.idUsuario==id).all()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaIndividual(self,id):
+        return self.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+class Pedido(db.Model):
+    __tablename__ = 'Pedidos'
+    idPedido = Column(Integer, primary_key=True, nullable=False)
+    idComprador = Column(Integer, ForeignKey('Usuario.idUsuario'), nullable=False)
+    idVendedor = Column(Integer, ForeignKey('Usuario.idUsuario'), nullable=False)
+    idTarjeta = Column(String, ForeignKey('Tarjeta.idTarjeta'),nullable=False)
+    fechaRegistro = Column(String, nullable=False)
+    fechaAtencion = Column(String, nullable=False)
+    fechaRecepcion = Column(String, nullable=False)
+    fechaCierre = Column(String, nullable=False)
+    total = Column(Float, nullable=False)
+    estatus = Column(String, nullable=False)
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaIndividual(self, id):
+        return self.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaGeneral(self, id):
+        return self.query.filter(Pedido.idComprador== id and Pedido.idVendedor==id).all()
+
+class Paqueteria(db.Model):
+    __tablename__='PAQUETERIAS'
+    IDPAQUETERIA = Column(Integer, primary_key=True)
+    NOMBRE = Column(String, nullable=False)
+    PAGINAWEB = Column(String, nullable=False)
+    PRECIOGR = Column(Float, nullable=False)
+    TELEFONO = Column(Integer, nullable=False)
+    ESTATUS = Column(String, nullable=False)
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaIndividual(self,id):
+        return self.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+class Envio(db.Model):
+    __tablename__='ENVIOS'
+    IDENVIO = Column(Integer, primary_key=True)
+    IDPEDIDO = Column(Integer, ForeignKey('Pedidos.idPedido'), nullable=False)
+    IDPAQUETERIA = Column(Integer, ForeignKey('PAQUETERIAS.IDPAQUETERIA'), nullable=False)
+    FECHAENVIO = Column(String)
+    FECHAENTREGA = Column(String)
+    NOGUIA = Column(String)
+    PESOPAQUETE = Column(Float)
+    PRECIOGR = Column(Float)
+    TOTALPAGAR = Column(Float)
+    ESTATUS = Column(String)
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def consultaIndividual(self,id):
+        return self.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+class DetallePedidos(db.Model):
+    __tablename__ = 'DetallePedidos'
+    idDetalle = Column(Integer, primary_key=True)
+    idPedido = Column(Integer, ForeignKey('Pedidos.idPedido'))
+    idProducto = Column(Integer, ForeignKey('Productos.idProducto'))
+    precio = Column(Float, nullable=False)
+    cantidadPedida = Column(Integer, nullable=False)
+    cantidadEnviada = Column(Integer, nullable=False)
+    cantidadAceptada = Column(Integer, nullable=False)
+    cantidadRechazada = Column(Integer, nullable=False)
+    subtotal = Column(Float, nullable=False)
+    estatus = Column(String, nullable=False)
+    comentario = Column(String, nullable=False)
