@@ -4,6 +4,7 @@ from flask import Flask,render_template,request,redirect,url_for,flash,session,a
 from flask_bootstrap import Bootstrap
 from modelo.Dao import db,Categoria,Producto,Usuario ,Tarjeta, Envio, Paqueteria, Pedido, Carrito, DetallePedidos
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
+import json
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz1:Banano0420@localhost/shopitesz'#usuario

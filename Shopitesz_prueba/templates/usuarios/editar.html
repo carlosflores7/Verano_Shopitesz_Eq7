@@ -57,5 +57,11 @@
             <span class="glyphicon glyphicon-circle-arrow-left"></span>
             Regresar
         </a>
-    </form>
+    </form><div id="notificaciones">
+
+</div>
+{% endblock %}
+{% block scripts %}
+{{super()}}
+    <script src="{{url_for('static',filename='js/usuarios.js')}}"></script>
 {% endblock %}
