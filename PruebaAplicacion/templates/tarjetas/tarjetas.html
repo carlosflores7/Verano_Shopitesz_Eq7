@@ -4,16 +4,18 @@
   <script src="https://kit.fontawesome.com/2530d1feb2.js" crossorigin="anonymous"></script>
 <h1>Añadir Tarjeta de credito/Debito</h1>
 
-<form action="/tarjetas/agregar/{{current_user.idUsuario}}" class="TarjetasCuadro" method="post" enctype="multipart/form-data">
+<form action="/tarjetas/agregar/{{current_user.idUsuario}}" onsubmit="return validarTarjetas(this)" class="TarjetasCuadro" method="post" enctype="multipart/form-data">
         <div class="contenedor2">
         <div>
             <label for="ID" >ID:</label>
             <input type="number" name="ID" maxlength="16" required readonly value="{{current_user.idUsuario}}" class="form-control">
         </div>
+             {% if current_user.is_authenticated and current_user.is_admin()%}
             <div>
             <label for="IDT" >ID:</label>
-            <input type="number" name="IDT" maxlength="10" required class="form-control">
+            <input type="number" name="IDT" maxlength="10"  class="form-control">
               </div>
+            {% endif %}
             <div >
              <i class="fab fa-cc-mastercard"></i>
             <i class="fab fa-cc-visa"></i>
@@ -42,11 +44,19 @@
   </div>
 
 </form>
+</div>
+
+<div id="notificaciones">
+
+</div>
 
 
 
 
 
 
-
+{% endblock %}
+{% block scripts %}
+{{super()}}
+    <script src="{{url_for('static',filename='js/Tarjetas.js')}}"></script>
 {% endblock %}

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55abfa77-7874-4441-9179-7b96acef3f9d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/js/Tarjetas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modelo/Dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/modelo/Dao.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pedidosclt/editarPedido.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidosclt/editarPedido.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tarjetas/editar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tarjetas/editar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tarjetas/tarjetas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tarjetas/tarjetas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/usuarios/VerPerfil.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usuarios/VerPerfil.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,6 +288,15 @@
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="editorHistoryManager">

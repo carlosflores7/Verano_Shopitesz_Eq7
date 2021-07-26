@@ -33,12 +33,14 @@
             <label for="telefono">Telefono:</label>
             <input type="tel" name="telefono" maxlength="12" class="form-control" required value="{{current_user.telefono}}">
         </div>
+         {% if current_user.is_authenticated and current_user.is_comprador()%}
         <div class="form-group">
             <a href="/Usuarios/verTarjetas/{{current_user.idUsuario}}" class="btn btn-lg btn-success">
             <span class="glyphicon glyphicon-fire"></span>
             Metodos de pago
         </a>
         </div>
+          {% endif %}
         <div class="radio">
             <label>Genero:</label>
             {% if current_user.genero=='F' %}
