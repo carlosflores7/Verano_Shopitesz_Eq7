@@ -1,0 +1,45 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+{{super()}}
+<div>
+    <h1 class="bg-primary text-center">Listado de Categorias</h1>
+     {% if current_user.is_authenticated and current_user.is_admin() %}
+
+    <a href="/Paqueterias/nueva">
+         <span class="glyphicon glyphicon-plus-sign"></span>
+        Agregar Paqueteria
+    </a>
+      {% endif %}
+
+    <table class="table table-bordered table-hover justify-content-center" id="tablametodos">
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>PAGINA WEB</th>
+        <th>PRECIO POR GRAMO</th>
+        <th>TELEFONO</th>
+        <th>ESTATUS</th>
+        <th>Ver</th>
+        {% for paq in paqueteria %}
+            <tr>
+                <td>{{paq.IDPAQUETERIA}}</td>
+                <td>{{paq.NOMBRE}}</td>
+                <td>{{paq.PAGINAWEB}}</td>
+                <td>{{paq.PRECIOGR}}</td>
+                <td>{{paq.TELEFONO}}</td>
+                <td>{{paq.ESTATUS}}</td>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                    <td>
+                        <a href="/Paqueterias/{{paq.IDPAQUETERIA}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

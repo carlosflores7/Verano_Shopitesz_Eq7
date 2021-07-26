@@ -1,0 +1,33 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<div>
+    <h1 class="bg-primary text-center">Registro de Paqueterias</h1>
+    <form action="/Paqueterias/agregar" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="NOMBRE">Nombre:</label>
+            <input type="text" name="NOMBRE" required maxlength="60" placeholder="Nombre de la Paqueteria" class="form-control">
+        </div>
+
+         <div class="form-group">
+            <label for="PAGINAWEB">Pagina Web:</label>
+            <input type="text" name="PAGINAWEB" required maxlength="60" placeholder="Pagina web de la Paqueteria" class="form-control">
+        </div>
+
+         <div class="form-group">
+            <label for="PRECIOGR">Precio por Gramos de la paqueteria:</label>
+            <input type="float" name="PRECIOGR" required maxlength="60" placeholder="Precio por Gramo" class="form-control">
+        </div>
+
+         <div class="form-group">
+            <label for="TELEFONO">Telefono:</label>
+            <input type="text" name="TELEFONO" required maxlength="60" placeholder="Telefono de la Paqueteria" class="form-control">
+        </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a href="/Paqueterias" class="btn btn-danger">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

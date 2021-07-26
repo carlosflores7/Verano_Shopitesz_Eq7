@@ -1,0 +1,60 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+{{super()}}
+<div>
+    <h1 class="bg-primary text-center">Listado de Pedidos</h1>
+    <table class="table table-bordered table-hover justify-content-center" id="tablametodos">
+        <th>ID PEDIDO</th>
+        {% if current_user.is_authenticated and current_user.is_vendedor() %}
+        <th>ID COMPRADOR</th>
+        {% endif %}
+        {% if current_user.is_authenticated and current_user.is_comprador() %}
+        <th>ID VENDEDOR</th>
+        {% endif %}
+        <th>ID TARJETA</th>
+        <th>FECGA DE REGISTRO</th>
+        <th>FECHA DE ATENCION</th>
+        <th>FECHA DE CIERRE</th>
+        <th>FECHA DE RECEPCION</th>
+        <th>TOTAL</th>
+        <th>ESTATUS</th>
+        <th>VER DETALLES</th>
+        <th>VER</th>
+        {% for ped in pedido %}
+            <tr>
+                <td>{{ped.idPedido}}</td>
+                {% if current_user.is_authenticated and current_user.is_vendedor() %}
+                <td>{{ped.idComprador}}</td>
+                {% endif %}
+                {% if current_user.is_authenticated and current_user.is_comprador() %}
+                <td>{{ped.idVendedor}}</td>
+                {% endif %}
+                <td>{{ped.idTarjeta}}</td>
+                <td>{{ped.fechaRegistro}}</td>
+                <td>{{ped.fechaAtencion}}</td>
+                <td>{{ped.fechaRecepcion}}</td>
+                <td>{{ped.fechaCierre}}</td>
+                <td>{{ped.total}}</td>
+                <td>{{ped.estatus}}</td>
+                {% if current_user.is_authenticated %}
+                    <td>
+                        <a href="/Pedidos/verpedidos/detallespedidos/{{ped.idPedido}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                    </td>
+                <td>
+                        <a href="/Pedidos/verpedidos/en/{{ped.idPedido}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                 </td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

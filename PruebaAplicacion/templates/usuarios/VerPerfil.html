@@ -1,19 +1,16 @@
+
 {% extends 'comunes/base.html' %}
-{% block navbar %}
-    {{super()}}
-    {% include 'comunes/menu.html' %}
-{% endblock %}
 {% block contenido %}
-{{super()}}
-    <h1 class="bg-primary text-center">Perfil</h1>
-    <form action="/Usuarios/editarPerfil" method="POST">
-        <div class="form-group">
+    {{super()}}
+    <h1 class="bg-primary text-center" onclick="alert('Se hizo click')" onclick="imprimirMsg()">Modificacion de Usuarios</h1>
+    <form action="/Usuarios/editarPerfil" method="POST" onsubmit="return validar(this)">
+         <div class="form-group">
             <label for="ID">ID:</label>
             <input type="number" name="ID" maxlength="12" class="form-control" required value="{{current_user.idUsuario}}" readonly>
         </div>
         <div class="form-group">
             <label for="nombre">Nombre completo:</label>
-            <input class="form-control form-control-lg" type="text" name="nombre" maxlength="50"  placeholder="Nombre Completo"  value="{{current_user.nombreCompleto}}"  required>
+            <input class="form-control form-control-lg" type="text" name="nombre" maxlength="50"   value="{{current_user.nombreCompleto}}" required>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
@@ -24,12 +21,17 @@
             <input type="text" name="direccion" maxlength="60" class="form-control" required value="{{current_user.direccion}}">
         </div>
         <div class="form-group">
-            <label for="telefono">Telefono:</label>
-            <input type="tel" name="telefono" maxlength="12" class="form-control" required value="{{current_user.telefono}}">
+            <label for="clave">Password:</label>
+            <input type="password" name="password" id="password" maxlength="20" class="form-control" >
+        </div>
+        <input type="checkbox" id="verPassword" onchange="verPasswords()">Ver password
+        <div class="form-group">
+            <label for="clave">Confirmar Password:</label>
+            <input type="password" name="passwordConfirmacion" id="passwordConfirmacion" maxlength="20" class="form-control" >
         </div>
         <div class="form-group">
-            <label for="clave">Password:</label>
-            <input type="password" name="password" maxlength="20" class="form-control" value="">
+            <label for="telefono">Telefono:</label>
+            <input type="tel" name="telefono" maxlength="12" class="form-control" required value="{{current_user.telefono}}">
         </div>
         <div class="form-group">
             <a href="/Usuarios/verTarjetas/{{current_user.idUsuario}}" class="btn btn-lg btn-success">
@@ -78,4 +80,11 @@
             <span class="glyphicon glyphicon-circle-arrow-left"></span>
             Regresar
         </a>
+<div id="notificaciones">
+
+</div>
+{% endblock %}
+{% block scripts %}
+{{super()}}
+    <script src="{{url_for('static',filename='js/usuarios.js')}}"></script>
 {% endblock %}

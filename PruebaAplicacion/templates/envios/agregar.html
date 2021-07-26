@@ -1,0 +1,61 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<div>
+    <h1 class="bg-primary text-center">Registro de Categorias</h1>
+    <form action="/Envios/agregar" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="IDPEDIDO"> IDPEDIDO: </label>
+            <select name='IDPEDIDO'>
+              {% for pe in ped %}
+                  <option value="{{pe.idPedido}}">
+                      {{pe.idPedido}}
+                  </option>
+              {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="IDPAQUETERIA">PAQUTERIA: </label>
+            <select name="IDPAQUETERIA">
+            {% for p in paq %}
+              <option value="{{p.IDPAQUETERIA}}">
+                {{p.NOMBRE}}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+         <div class="form-group">
+            <label for="FECHAENVIO">FECHA ENVIO:</label>
+            <input type="date" name="FECHAENVIO" required  placeholder="FECHA ENVIO" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="FECHAENTREGA">FECHA ENTREGA:</label>
+            <input type="date" name="FECHAENTREGA" required placeholder="FECHAENTREGA" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="NOGUIA">NO. GUIA:</label>
+            <input type="text" name="NOGUIA" required placeholder="NO. GUIA" maxlength="10" class="form-control">
+        </div>
+         <div class="form-group">
+            <label for="PESOPAQUETE">PESO DEL PAQUETE EN GRAMOS</label>
+            <input type="number" name="PESOPAQUETE" required placeholder="PESO DEL PAQUETE EN GRAMOS" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="PRECIOGR">PRECIO POR GRAMO DEL PAQUETE</label>
+            <input type="number" name="PRECIOGR" required placeholder="PESO DEL PAQUETE EN GRAMOS" class="form-control">
+        </div>
+         <div class="form-group">
+            <label for="TOTALPAGAR">TOTAL DEL PAGO:</label>
+            <input type="number" name="TOTALPAGAR" required placeholder="TOTAL DEL PAGO" class="form-control">
+        </div>
+
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a href="/Envios" class="btn btn-danger">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}

@@ -6,7 +6,7 @@
 {% block contenido %}
 {{super()}}
     <h1>LISTADO DE PRODUCTOS</h1>
-    {% if current_user.is_authenticated and current_user.is_vendedor() %}
+    {% if current_user.is_authenticated and current_user.is_admin() %}
     <a href="/productos/nuevo" class="btn btn-success">
          <span class="glyphicon glyphicon-plus-sign"></span>
         Agregar Producto
@@ -23,7 +23,10 @@
             <th>ESPECIFICACIONES</th>
             <th>STOCK</th>
             <th>ESTATUS</th>
-            {% if current_user.is_authenticated and current_user.is_vendedor() %}
+            {% if current_user.is_authenticated and current_user.is_comprador() %}
+            <th>AGREGAR AL CARRITO</th>
+            {% endif %}
+            {% if current_user.is_authenticated and current_user.is_admin() %}
             <th>Ver</th>
             {% endif %}
         </thead>
@@ -34,10 +37,34 @@
                 <td>{{prod.categoria.nombre}}</td>
                 <td>${{prod.precioVenta}}</td>
                 <td><img src="/productos/consultarImagen/{{prod.idProducto}}" width="100px" height="80px"></td>
-                <td><img src="/productos/consultarEspecificaciones/{{prod.idProducto}}" width="100px" height="80px"></td>
+                <td>
+                    <a href="#" data-toggle="modal" data-target="#especificaciones">
+                    <span class="glyphicon glyphicon-eye-open"></span>Ver Especificacione
+                    </a>
+                    <div id="especificaciones" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">especificaciones del producto: <b>{{prod.nombre}}</b></h4>
+      </div>
+      <div class="modal-body">
+        <img src="/productos/consultarEspecificaciones/{{prod.idProducto}}" width="500px" height="400px">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+                </td>
                 <td>{{prod.existencia}}</td>
                 <td>{{prod.estatus}}</td>
-                {% if current_user.is_authenticated and current_user.is_vendedor() %}
+                {% if current_user.is_authenticated and current_user.is_admin() %}
                     <td>
                         <a href="/productos/{{prod.idProducto}}">
                             <span class="glyphicon glyphicon-eye-open"></span>

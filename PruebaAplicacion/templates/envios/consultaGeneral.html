@@ -1,0 +1,55 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+{{super()}}
+    <h1>LISTADO DE ENVIOS</h1>
+    {% if current_user.is_authenticated and current_user.is_vendedor() %}
+    <a href="/Envios/nueva" class="btn btn-success">
+         <span class="glyphicon glyphicon-plus-sign"></span>
+        Agregar Envio
+    </a>
+    {% endif %}
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <th>IDENVIO</th>
+            <th>IDPEDIDO</th>
+            <th>IDPAQUETERIA</th>
+            <th>FECHA ENVIO</th>
+            <th>FECHA ENTREGA</th>
+            <th>NO. GUIA</th>
+            <th>PESO DEL PAQUETE </th>
+            <th>PRECIO POR GR.</th>
+            <th>TOTAL DEL PAGO</th>
+            <th>ESTATUS</th>
+            {% if current_user.is_authenticated and current_user.is_vendedor() %}
+            <th>Ver</th>
+            {% endif %}
+        </thead>
+        {% for env in envio %}
+            <tr>
+                <td>{{env.IDENVIO}}</td>
+                <td>{{env.IDPEDIDO}}</td>
+                <td>{{env.IDPAQUETERIA}}</td>
+                <td>{{env.FECHAENVIO}}</td>
+                <td>{{env.FECHAENTREGA}}</td>
+                <td>{{env.NOGUIA}}</td>
+                <td>{{env.PESOPAQUETE}}</td>
+                <td>{{env.PRECIOGR}}</td>
+                <td>{{env.TOTALPAGAR}}</td>
+                <td>{{env.ESTATUS}}</td>
+                {% if current_user.is_authenticated and current_user.is_vendedor() %}
+                    <td>
+                        <a href="/Envios/{{env.IDENVIO}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}

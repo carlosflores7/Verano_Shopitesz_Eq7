@@ -29,6 +29,17 @@
         </ul>
       </li>
         {% endif %}
+
+        {% if current_user.is_authenticated and current_user.is_admin() %}
+            <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">PAQUETERIAS
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Paqueterias">VER PAQUETERIAS</a></li>
+                 </ul>
+          </li>
+        {% endif %}
+
         {% if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_admin) %}
      <li class="dropdown">
          <a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
@@ -38,8 +49,34 @@
           <li><a href="/pedidosclt">PEDIDOS</a></li>
           <li><a href="/pedidosclt/pedidosdetalle">DETALLES PEDIDOS</a></li>
         </ul>
-         <li><a href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-user"></span>perfil</a></li>
+         <li><a href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-user"></span>{{current_user.nombreCompleto}}</a></li>
          {% endif %}
+            {% if current_user.is_authenticated and current_user.is_vendedor()  %}
+                <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">ENVIOS
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Envios">VER ENVIOS</a></li>
+                </ul>
+            {% endif %}
+
+                    {% if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_vendedor())%}
+                <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Pedidos/verpedidos/{{current_user.idUsuario}}">VER PEDIDOS</a></li>
+                </ul>
+            {% endif %}
+             {% if current_user.is_authenticated and current_user.is_comprador()%}
+                <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">CARRITO
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Usuarios/verCarrito/{{current_user.idUsuario}}">VER CARRITO</a></li>
+                </ul>
+            {% endif %}
+
             {% if not current_user.is_authenticated %}
             <li><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesion</a></li>
             {% else %}

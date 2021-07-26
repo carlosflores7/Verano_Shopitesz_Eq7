@@ -1,0 +1,47 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<div>
+    <h1 class="bg-primary text-center">Registro de Paqueterias</h1>
+    <form action="/Paqueterias/editar" method="post" enctype="multipart/form-data">
+
+         <div class="form-group">
+            <label for="IDPAQUETERIA">ID PAQUETERIA:</label>
+            <input type="text" name="IDPAQUETERIA" value="{{paqueteria.IDPAQUETERIA}}" readonly  class="form-control">
+        </div>
+
+
+        <div class="form-group">
+            <label for="NOMBRE">Nombre:</label>
+            <input type="text" name="NOMBRE" required maxlength="60" value="{{paqueteria.NOMBRE}}" class="form-control">
+        </div>
+
+         <div class="form-group">
+            <label for="PAGINAWEB">Pagina Web:</label>
+            <input type="text" name="PAGINAWEB" required maxlength="60" value="{{paqueteria.PAGINAWEB}}" class="form-control">
+        </div>
+
+         <div class="form-group">
+            <label for="PRECIOGR">Precio por Gramos de la paqueteria:</label>
+            <input type="float" name="PRECIOGR" required maxlength="60" value="{{paqueteria.PRECIOGR}}" class="form-control">
+        </div>
+
+         <div class="form-group">
+            <label for="TELEFONO">Telefono:</label>
+            <input type="text" name="TELEFONO" required maxlength="60" value="{{paqueteria.TELEFONO}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+         <select name="ESTATUS" class="form-control">
+            <option name="Activo">Activo</option>
+            <option name="Inactivo">Inactivo</option>
+          </select>
+        </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a href="/Paqueterias" class="btn btn-danger">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

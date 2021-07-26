@@ -1,34 +1,38 @@
 {% extends 'comunes/base.html' %}
 {% block navbar %}
-{{super()}}
-{% include 'comunes/menu.html' %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
 {% endblock %}
 {% block contenido %}
-    <h1 align="center">Carrito de compras</h1>
-    <center>
-        <table class="table table-bordered table-hover" id="tablaProductos">
-        <thead>
-            <th>NOMBRE</th>
-            <th>FECHA</th>
-            <th>CANTIDAD</th>
-            <th>TOTAL A PAGAR</th>
-            <th>ESTATUS</th>
-        </thead>
-        <tr>
-            <td>Laptop DELL</td>
-            <td>08/Julio/2021</td>
-            <td>5 unidades</td>
-            <td>$18,000</td>
-            <td>Pendiente</td>
-        </tr>
-        <tr>
-            <td>Laptop DELL</td>
-            <td>08/Julio/2021</td>
-            <td>5 unidades</td>
-            <td>$18,000</td>
-            <td>Pendiente</td>
-        </tr>
+{{super()}}
+
+    <h1 class="bg-primary text-center">Carrito</h1>
+    <table class="table table-bordered table-hover justify-content-center" id="tablametodos">
+        <th>ID DEL PRODUCTO</th>
+        <th>NOMBRE DEL PRODUCTO</th>
+        <th>IMAGEN DEL PRODUCTO</th>
+        <th>ESPECIFICACIONES DEL PRODCTO</th>
+        <th>FECHA EN QUE SE AGREGO</th>
+        <th>CANTIDAD</th>
+        <th>ESTATUS</th>
+        <th>VER</th>
+        {% for car in carrito %}
+            <tr>
+                <td>{{car.idProducto}}</td>
+                <td><img src="/productos/consultarNombre/{{car.idProducto}}"></td>
+                <td><img src="/productos/consultarImagen/{{car.idProducto}}" width="100px" height="80px"></td>
+                <td><img src="/productos/consultarEspecificaciones/{{car.idProducto}}" width="100px" height="80px"></td>
+                <td>{{car.fecha}}</td>
+                <td>{{car.cantidad}}</td>
+                <td>{{car.estatus}}</td>
+                <td><a href="/Usuarios/verCarrito/ed/{{car.idCarrito}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                </td>
+            </tr>
+        {% endfor %}
     </table>
+
     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Pagar</button>
 
     <div class="modal fade" id="myModal" role="dialog">
