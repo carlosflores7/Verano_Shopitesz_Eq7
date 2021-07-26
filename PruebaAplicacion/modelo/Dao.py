@@ -228,9 +228,9 @@ class Carrito(db.Model):
 class Pedido(db.Model):
     __tablename__ = 'Pedidos'
     idPedido = Column(Integer, primary_key=True, nullable=False)
-    idComprador = Column(Integer, ForeignKey('Usuario.idUsuario'), nullable=False)
-    idVendedor = Column(Integer, ForeignKey('Usuario.idUsuario'), nullable=False)
-    idTarjeta = Column(Integer, ForeignKey('Tarjeta.idTarjeta'),nullable=False)
+    idComprador = Column(Integer, ForeignKey('Usuarios.idUsuario'), nullable=False)
+    idVendedor = Column(Integer, ForeignKey('Usuarios.idUsuario'), nullable=False)
+    idTarjeta = Column(Integer, ForeignKey('Tarjetas.idTarjeta'),nullable=False)
     fechaRegistro = Column(String, nullable=False)
     fechaAtencion = Column(String, nullable=False)
     fechaRecepcion = Column(String, nullable=False)

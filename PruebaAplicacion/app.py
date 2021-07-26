@@ -684,25 +684,25 @@ def editarPedidos(id):
 @app.route('/Pedidos/editarPedidos',methods=['POST'])
 @login_required
 def modPedidos():
-    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
+    if current_user.is_authenticated and current_user.is_vendedor():
         try:
-            pedido = Pedido()
-            pedido.idPedido = request.form['idPedido']
-            pedido.idComprador = request.form['idComprador']
-            pedido.idVendedor = request.form['idVendedor']
-            pedido.idTarjeta = request.form['idTarjeta']
-            pedido.fechaRegistro = request.form['fechaRegistro']
-            pedido.fechaAtencion = request.form['fechaAtencion']
-            pedido.fechaRecepcion = request.form['fechaRecepcion']
-            pedido.fechaCierre = request.form['fechaCierre']
-            pedido.total = request.form['total']
-            pedido.estatus = request.form['estatus']
-            pedido.editar()
+            ped=Pedido()
+            ped.idPedido = request.form['idPedido']
+            ped.idComprador = request.form['idComprador']
+            ped.idVendedor = request.form['idVendedor']
+            ped.idTarjeta = request.form['idTarjeta']
+            ped.fechaRegistro = request.form['fechaRegistro']
+            ped.fechaAtencion = request.form['fechaAtencion']
+            ped.fechaRecepcion = request.form['fechaRecepcion']
+            ped.fechaCierre = request.form['fechaCierre']
+            ped.total = request.form['total']
+            ped.estatus = request.form['ESTATUS']
+            ped.editar()
             flash('! Pedido editada con exito')
-            return redirect(url_for('mostrar_login'))
+            return redirect(url_for('inicio'))
         except:
-            flash('! Error al editar la Paqueteria ')
-
+            flash('! Error al editar el pedido ')
+        return redirect(url_for('inicio'))
 #FIN DE CRUD DE PEDIDOS
 
 

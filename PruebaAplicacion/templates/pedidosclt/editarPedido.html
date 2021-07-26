@@ -6,7 +6,7 @@
 {% block contenido %}
 {{super()}}
 <div>
-    <h1 class="bg-primary text-center">Edicion de Pedidos</h1>
+    <h1 class="bg-primary text-center">Edicion de Pedos</h1>
     <form action="/Pedidos/editarPedidos" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="idPedido"> id Pedido: </label>
@@ -42,20 +42,13 @@
         </div>
          <div class="form-group">
             <label for="total">total:</label>
-            <input type="numbre" name="total" required maxlength="200" value="{{pedido.total}}" class="form-control">
+            <input type="number" name="total" required maxlength="200" value="{{pedido.total}}" class="form-control">
         </div>
-        <div class="form-control">
-            <label for="estatus">Estatus:</label>
-            <select name="estatus">
-            {% if pedido.estatus=='Activo' %}
-                <option selected>Activo</option>
-                <option>Pendiente</option>
-            {% else %}
-                <option>Activo</option>
-                <option selected>Pendiente</option>
-            {% endif %}
-            </select>
-        </div>
+         <select name="ESTATUS" class="form-control">
+            <option name="Pendiente">PENDIENTE</option>
+            <option name="Activo">ACTIVO</option>
+          </select>
+
 
            <button type="submit" class="btn btn-primary">
                 <span class="glyphicon glyphicon-floppy-disk"></span>
