@@ -107,4 +107,8 @@ grant select, insert, update, delete on Shopitesz.Usuarios to user_shopitesz1;
 grant select, insert, update, delete on Shopitesz.Tarjetas to user_shopitesz1; 
 grant select, insert, update, delete on Shopitesz.Carrito to user_shopitesz1; 
 grant select, insert, update, delete on Shopitesz.Pedidos to user_shopitesz1; 
-grant select, insert, update, delete on Shopitesz.DetallePedidos to user_shopitesz1; 
+grant select, insert, update, delete on Shopitesz.DetallePedidos to user_shopitesz1;
+grant select, insert, update, delete on Shopitesz.ENVIOS to user_shopitesz1; 
+grant select, insert, update, delete on Shopitesz.PAQUETERIAS to user_shopitesz1; 
+
+ALTER TABLE pedidos MODIFY COLUMN idVendedor int;
