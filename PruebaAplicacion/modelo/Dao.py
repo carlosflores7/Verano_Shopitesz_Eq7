@@ -1,3 +1,5 @@
+import datetime
+
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column,Integer,String,BLOB,ForeignKey,Float,Date
 from sqlalchemy.orm import relationship
@@ -86,6 +88,11 @@ class Producto(db.Model):
         prod.estatus='Inactivo'
         prod.editar()
 
+    def consultarProductosPorCategoria(self, idCategoria):
+        return self.query.filter(Producto.idCategoria == idCategoria, Producto.estatus == 'Activo').all()
+
+    def consultarFoto(self, id):
+        return self.consultaIndividuall(id).foto
 
 class Usuario(UserMixin,db.Model):
     __tablename__='Usuarios'
@@ -197,10 +204,12 @@ class Carrito(db.Model):
     __tablename__ ='Carrito'
     idCarrito = Column(Integer, primary_key=True)
     idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
-    idProducto = Column(Integer, ForeignKey ('Productos.idProducto'))
-    fecha = Column(String, nullable=False)
-    cantidad = Column(Integer, nullable=False)
-    estatus = Column(String, nullable=False)
+    idProducto = Column(Integer, ForeignKey('Productos.idProducto'))
+    fecha = Column(Date, default=datetime.date.today())
+    cantidad = Column(Integer, nullable=False, default=1)
+    estatus = Column(String, nullable=False, default='Pendiente')
+    producto = relationship('Producto', backref='carrito', lazy='select')
+    usuario = relationship('Usuario', backref='carrito', lazy='select')
 
     def consultaGeneral(self,id):
         return self.query.filter(Carrito.idUsuario==id).all()

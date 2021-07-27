@@ -19,7 +19,7 @@
         {% for car in carrito %}
             <tr>
                 <td>{{car.idProducto}}</td>
-                <td><img src="/productos/consultarNombre/{{car.idProducto}}"></td>
+                <td>{{car.producto.nombre}}</td>
                 <td><img src="/productos/consultarImagen/{{car.idProducto}}" width="100px" height="80px"></td>
                 <td><img src="/productos/consultarEspecificaciones/{{car.idProducto}}" width="100px" height="80px"></td>
                 <td>{{car.fecha}}</td>
@@ -49,7 +49,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+          <a href="#" class="btn btn-default" data-dismiss="modal">Aceptar</a>
         </div>
       </div>
       

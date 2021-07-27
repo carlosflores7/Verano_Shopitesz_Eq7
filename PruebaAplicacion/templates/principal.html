@@ -6,9 +6,10 @@
 {% block contenido %}
     {{super()}}
     {%if current_user.is_authenticated %}
-        <p>Bienvenido <b>{{current_user.nombreCompleto}}</b></p>
+        <h1 class="bg-primary text-center">Bienvenido <font color="black">{{current_user.nombreCompleto}}</font></h1>
+    {% else %}
+      <h1 class="bg-primary text-center">Bienvenido</h1>
     {% endif %}
-<h1 class="bg-primary text-center">Bienvenido</h1>
 <br>
 <center>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
