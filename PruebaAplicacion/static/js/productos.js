@@ -107,8 +107,7 @@ function agregarCarrito(){
     var carrito={idProducto:document.getElementById("id").value,
                  cantidad:document.getElementById("cantidad").value};
     var json=JSON.stringify(carrito);
-    var url='/carrito/agregar/'+encodeURI(json);
-    alert(url);   
+    var url='/carrito/agregar/'+encodeURI(json); 
     var ajax=new XMLHttpRequest();
     ajax.open("get",url,true);
     ajax.onreadystatechange=function(){

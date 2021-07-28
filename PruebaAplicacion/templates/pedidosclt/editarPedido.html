@@ -8,9 +8,10 @@
 <div>
     <h1 class="bg-primary text-center">Edicion de Pedidos</h1>
     <form action="/Pedidos/editarPedidos" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
+        {% if current_user.is_vendedor() %}
+            <div class="form-group">
             <label for="idPedido"> id Pedido: </label>
-            <input type="number" name="idPedido"  required class="form-control" value="{{pedido.idPedido }}" readonly class="form-control">
+            <input type="number" name="idPedido"  required class="form-control" value="{{pedido.idPedido}}" readonly class="form-control">
         </div>
          <div class="form-group">
             <label for="idComprador"> id Comprador: </label>
@@ -26,28 +27,120 @@
         </div>
         <div class="form-group">
             <label for="fechaRegistro">fecha de Registro:</label>
-            <input type="date" name="fechaRegistro"  required maxlength="100" value="{{pedido.fechaRegistro}}" class="form-control">
+            <input type="date" name="fechaRegistro"  required maxlength="100" value="{{pedido.fechaRegistro}}" class="form-control" readonly>
         </div>
         <div class="form-group">
             <label for="fechaAtencion">fecha de Atencion:</label>
-            <input type="date" name="fechaAtencion" required maxlength="100" value="{{pedido.fechaAtencion}}" class="form-control">
+            <input type="date" name="fechaAtencion" maxlength="100" value="{{pedido.fechaAtencion}}" class="form-control">
         </div>
         <div class="form-group">
             <label for="fechaRecepcion">fecha de Recepcion:</label>
-            <input type="date" name="fechaRecepcion" required maxlength="100" value="{{pedido.fechaRecepcion}}" class="form-control">
+            <input type="date" name="fechaRecepcion" maxlength="100" value="{{pedido.fechaRecepcion}}" class="form-control" readonly>
         </div>
         <div class="form-group">
             <label for="fechaCierre">fecha de Cierre:</label>
-            <input type="date" name="fechaCierre" required  maxlength="100" value="{{pedido.fechaCierre}}" class="form-control">
+            <input type="date" name="fechaCierre"  maxlength="100" value="{{pedido.fechaCierre}}" class="form-control">
         </div>
          <div class="form-group">
             <label for="total">total:</label>
-            <input type="number" name="total" required maxlength="200" value="{{pedido.total}}" class="form-control">
+            <input type="number" name="total" required maxlength="200" value="{{pedido.total}}" class="form-control" readonly>
         </div>
          <select name="ESTATUS" class="form-control">
-            <option>PENDIENTE</option>
-            <option>ACTIVO</option>
+            {% if pedido.estatus=='PENDIENTE' %}
+                <option selected>PENDIENTE</option>
+            {% else %}
+                <option>PENDIENTE</option>
+            {% endif %}
+
+            {% if pedido.estatus=='CANCELADO' %}
+                <option selected>CANCELADO</option>
+            {% else %}
+                <option>CANCELADO</option>
+            {% endif %}
+
+            {% if pedido.estatus=='CONFIRMADO' %}
+                <option selected>CONFIRMADO</option>
+            {% else %}
+                <option>CONFIRMADO</option>
+            {% endif %}
+
+            {% if pedido.estatus=='REEMBOLSO' %}
+                <option selected>REEMBOLSO</option>
+            {% else %}
+                <option>REEMBOLSO</option>
+            {% endif %}
+
+            {% if pedido.estatus=='NEGOCIACION' %}
+                <option selected>NEGOCIACION</option>
+            {% else %}
+                <option>NEGOCIACION</option>
+            {% endif %}
+
+            {% if pedido.estatus=='DISPUTA' %}
+                <option selected>DISPUTA</option>
+            {% else %}
+                <option>DISPUTA</option>
+            {% endif %}
+
+            {% if pedido.estatus=='SURTIDO' %}
+                <option selected>SURTIDO</option>
+            {% else %}
+                <option>SURTIDO</option>
+            {% endif %}
+
+            {% if pedido.estatus=='RECIBIDO' %}
+                <option selected>RECIBIDO</option>
+            {% else %}
+                <option>RECIBIDO</option>
+            {% endif %}
+
+            {% if pedido.estatus=='CERRADO' %}
+                <option selected>CERRADO</option>
+            {% else %}
+                <option>CERRADO</option>
+            {% endif %}
           </select>
+        {% else %}
+            <div class="form-group">
+            <label for="idPedido"> id Pedido: </label>
+            <input type="number" name="idPedido"  required class="form-control" value="{{pedido.idPedido}}" readonly class="form-control">
+        </div>
+         <div class="form-group">
+            <label for="idComprador"> id Comprador: </label>
+            <input type="number" name="idComprador"  required class="form-control" value="{{pedido.idComprador}}" readonly class="form-control">
+        </div>
+         <div class="form-group">
+            <label for="idVendedor"> id Vendedor: </label>
+            <input type="number" name="idVendedor"  required class="form-control" value="{{pedido.idVendedor}}" readonly class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="idTarjeta"> id Tarjeta: </label>
+            <input type="number" name="idTarjeta"  required class="form-control" value="{{pedido.idTarjeta}}" readonly class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="fechaRegistro">fecha de Registro:</label>
+            <input type="date" name="fechaRegistro"  required maxlength="100" value="{{pedido.fechaRegistro}}" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+            <label for="fechaAtencion">fecha de Atencion:</label>
+            <input type="date" name="fechaAtencion" maxlength="100" value="{{pedido.fechaAtencion}}" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+            <label for="fechaRecepcion">fecha de Recepcion:</label>
+            <input type="date" name="fechaRecepcion" maxlength="100" value="{{pedido.fechaRecepcion}}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="fechaCierre">fecha de Cierre:</label>
+            <input type="date" name="fechaCierre"  maxlength="100" value="{{pedido.fechaCierre}}" class="form-control" readonly>
+        </div>
+         <div class="form-group">
+            <label for="total">total:</label>
+            <input type="number" name="total" required maxlength="200" value="{{pedido.total}}" class="form-control" readonly>
+        </div>
+         <select name="ESTATUS" class="form-control" readonly>
+            <option selected>{{pedido.estatus}}</option>
+          </select>
+        {% endif%}
 
 
            <button type="submit" class="btn btn-primary">

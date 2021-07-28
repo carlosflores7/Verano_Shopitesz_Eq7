@@ -20,7 +20,6 @@
             <th>CATEGORIA</th>
             <th>PRECIO</th>
             <th>IMAGEN</th>
-            <th>ESPECIFICACIONES</th>
             <th>STOCK</th>
             <th>ESTATUS</th>
             {% if current_user.is_authenticated and current_user.is_comprador() %}
@@ -37,31 +36,6 @@
                 <td>{{prod.categoria.nombre}}</td>
                 <td>${{prod.precioVenta}}</td>
                 <td><img src="/productos/consultarImagen/{{prod.idProducto}}" width="100px" height="80px"></td>
-                <td>
-                    <a href="#" data-toggle="modal" data-target="#especificaciones">
-                    <span class="glyphicon glyphicon-eye-open"></span>Ver Especificacione
-                    </a>
-                    <div id="especificaciones" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">especificaciones del producto: <b>{{prod.nombre}}</b></h4>
-      </div>
-      <div class="modal-body">
-        <img src="/productos/consultarEspecificaciones/{{prod.idProducto}}" width="500px" height="400px">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-</div>
-                </td>
                 <td>{{prod.existencia}}</td>
                 <td>{{prod.estatus}}</td>
                 {% if current_user.is_authenticated and current_user.is_admin() %}

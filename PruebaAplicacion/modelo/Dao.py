@@ -266,7 +266,13 @@ class Pedido(db.Model):
         db.session.commit()
 
     def consultaGeneral(self, id):
-        return self.query.filter(Pedido.idComprador== id or Pedido.idVendedor==id).all()
+        return self.query.filter(Pedido.idVendedor==id).all()
+
+    def consultaComprador(self,id):
+        return self.query.filter(Pedido.idComprador==id).all()
+
+    def consultaTotal(self):
+        return self.query.all()
 
 class Paqueteria(db.Model):
     __tablename__='PAQUETERIAS'

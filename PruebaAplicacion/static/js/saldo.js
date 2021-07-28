@@ -19,7 +19,7 @@ function llenarCamposTarjeta(tarjeta){
 
 function hacerPago(){
     if(parseInt(document.getElementById("saldoTarjeta").value) >= parseInt(document.getElementById("totalAPagar").value)){
-        alert('Si');
+        alert('Procesando pago...');
         window.location = "/carrito/pagar"
     }else{
         alert('Asegúrate de tener un método de pago y que tenga suficiente saldo');

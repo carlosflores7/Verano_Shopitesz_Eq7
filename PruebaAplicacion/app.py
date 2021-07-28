@@ -584,7 +584,7 @@ def pagarCarrito():
                 return redirect(url_for('mostrar_login'))
 
         pedido.idComprador = current_user.idUsuario
-        pedido.idVendedor = 3
+        pedido.idVendedor = 6
         pedido.idTarjeta = idTarjeta
         pedido.fechaRegistro = datetime.date.today()
         pedido.total = total
@@ -805,10 +805,18 @@ def modEnvio():
 @login_required
 def verPedidos(id):
     pedido=Pedido()
-    if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_vendedor()) and current_user.idUsuario==id:
-        return render_template("pedidosclt/consulta.html",pedido=pedido.consultaGeneral(id))
+    if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_vendedor()):
+        if current_user.is_vendedor():
+            pedido=pedido.consultaGeneral(id)
+        else:
+            pedido=pedido.consultaComprador(id)
+        return render_template("pedidosclt/consulta.html",pedido=pedido)
     else:
-        abort(404)
+        if current_user.is_admin():
+            pedido = pedido.consultaTotal()
+            return render_template("pedidosclt/consulta.html",pedido=pedido)
+        else:
+            abort(404)
 
 @app.route('/Pedidos/verpedidos/en/<int:id>')
 @login_required
@@ -831,9 +839,12 @@ def modPedidos():
             ped.idVendedor = request.form['idVendedor']
             ped.idTarjeta = request.form['idTarjeta']
             ped.fechaRegistro = request.form['fechaRegistro']
-            ped.fechaAtencion = request.form['fechaAtencion']
-            ped.fechaRecepcion = request.form['fechaRecepcion']
-            ped.fechaCierre = request.form['fechaCierre']
+            if request.form['fechaAtencion']!='':
+                ped.fechaAtencion = request.form['fechaAtencion']
+            if request.form['fechaRecepcion']!='':
+                ped.fechaRecepcion = request.form['fechaRecepcion']
+            if request.form['fechaCierre']:
+                ped.fechaCierre = request.form['fechaCierre']
             ped.total = request.form['total']
             ped.estatus = request.form['ESTATUS']
             ped.editar()
@@ -941,6 +952,17 @@ def error_404(e):
 @app.errorhandler(405)
 def error_405(e):
     return render_template("comunes/error_405.html"),405
+
+@app.route("/prueba/form")
+def pr():
+    return render_template('hola.html')
+
+@app.route("/gg",methods=['post'])
+def gg():
+    if request.form['fecha']=='':
+        return 'Hola'
+    else:
+        return request.form['fecha']
 
 if __name__=='__main__':
     db.init_app(app)#Inicializar la BD - pasar la configuración de la url de la BD
