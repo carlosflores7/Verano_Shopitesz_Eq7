@@ -188,6 +188,7 @@ class Tarjeta(db.Model):
     def agregar(self):
         db.session.add(self)
         db.session.commit()
+
     def consulta(self, id):
         return Tarjeta.query.get(id)
 
@@ -233,17 +234,23 @@ class Carrito(db.Model):
         db.session.delete(carrito)
         db.session.commit()
 
+    def total(self,id):
+        carrito = self.consultaGeneral(id)
+        total = 0
+        for c in carrito:
+            total += c.producto.precioVenta*c.cantidad
+        return total
 
 class Pedido(db.Model):
     __tablename__ = 'Pedidos'
     idPedido = Column(Integer, primary_key=True, nullable=False)
     idComprador = Column(Integer, ForeignKey('Usuarios.idUsuario'), nullable=False)
-    idVendedor = Column(Integer, ForeignKey('Usuarios.idUsuario'), nullable=False)
+    idVendedor = Column(Integer, ForeignKey('Usuarios.idUsuario'))
     idTarjeta = Column(Integer, ForeignKey('Tarjetas.idTarjeta'),nullable=False)
     fechaRegistro = Column(String, nullable=False)
-    fechaAtencion = Column(String, nullable=False)
-    fechaRecepcion = Column(String, nullable=False)
-    fechaCierre = Column(String, nullable=False)
+    fechaAtencion = Column(String)
+    fechaRecepcion = Column(String)
+    fechaCierre = Column(String)
     total = Column(Float, nullable=False)
     estatus = Column(String, nullable=False)
 
@@ -259,7 +266,7 @@ class Pedido(db.Model):
         db.session.commit()
 
     def consultaGeneral(self, id):
-        return self.query.filter(Pedido.idComprador== id and Pedido.idVendedor==id).all()
+        return self.query.filter(Pedido.idComprador== id or Pedido.idVendedor==id).all()
 
 class Paqueteria(db.Model):
     __tablename__='PAQUETERIAS'
@@ -324,6 +331,7 @@ class DetallePedidos(db.Model):
     subtotal = Column(Float, nullable=False)
     estatus = Column(String, nullable=False)
     comentario = Column(String, nullable=False)
+    pedido = relationship('Pedido', backref='DetallePedidos', lazy='select')
 
     def consultaGeneral(self, id):
         return self.query.filter(DetallePedidos.idPedido== id).all()
@@ -334,3 +342,7 @@ class DetallePedidos(db.Model):
 
     def consultaIndividual(self, id):
         return self.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()

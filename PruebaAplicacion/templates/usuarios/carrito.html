@@ -14,6 +14,7 @@
         <th>ESPECIFICACIONES DEL PRODCTO</th>
         <th>FECHA EN QUE SE AGREGO</th>
         <th>CANTIDAD</th>
+        <th>TOTAL</th>
         <th>ESTATUS</th>
         <th>VER</th>
         {% for car in carrito %}
@@ -24,6 +25,7 @@
                 <td><img src="/productos/consultarEspecificaciones/{{car.idProducto}}" width="100px" height="80px"></td>
                 <td>{{car.fecha}}</td>
                 <td>{{car.cantidad}}</td>
+                <td>{{car.producto.precioVenta*car.cantidad}}</td>
                 <td>{{car.estatus}}</td>
                 <td><a href="/Usuarios/verCarrito/ed/{{car.idCarrito}}">
                             <span class="glyphicon glyphicon-eye-open"></span>
@@ -32,7 +34,14 @@
             </tr>
         {% endfor %}
     </table>
-
+    <label>Total a pagar:</label>
+    $ <input type="number" id="totalAPagar" value="{{total}}" readonly>
+    <br>
+    <br>
+    <button type="button" class="btn btn-warning" onclick="mostrarSaldo();">Actualizar saldo disponible</button>
+    <input type="number" id="saldoTarjeta" readonly>
+    <br>
+    <br>
     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Pagar</button>
 
     <div class="modal fade" id="myModal" role="dialog">
@@ -49,7 +58,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <a href="#" class="btn btn-default" data-dismiss="modal">Aceptar</a>
+          <button type="button" class="btn btn-default" onclick="hacerPago();">Pagar</button>
         </div>
       </div>
       
@@ -57,4 +66,12 @@
   </div>
 
     </center>
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('static',filename='js/saldo.js')}}">
+</script>
+<script type="text/javascript">
+    window.onload=inicio;
+</script>
 {% endblock %}

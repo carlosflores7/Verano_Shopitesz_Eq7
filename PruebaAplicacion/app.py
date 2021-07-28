@@ -1,3 +1,4 @@
+import datetime
 from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
@@ -27,7 +28,7 @@ login_manager.login_message_category="info"
 @app.before_request
 def before_request():
     session.permanent=True
-    app.permanent_session_lifetime=timedelta(minutes=10)
+    #app.permanent_session_lifetime=timedelta(minutes=10)
 
 @app.route("/")
 def inicio():
@@ -247,6 +248,18 @@ def eliminarTarjeta(id):
     else:
         return redirect(url_for('mostrar_login'))
 
+@app.route('/tarjeta/saldo')
+@login_required
+def saldoTarjeta():
+    if current_user.is_authenticated and current_user.is_comprador():
+        tarjeta = Tarjeta()
+        tarjeta = tarjeta.consultaGeneral(current_user.idUsuario)
+        for t in tarjeta:
+            dict_tarjeta = {"idTarjeta": t.idTarjeta, "saldo": t.saldo}
+        return json.dumps(dict_tarjeta)
+    else:
+        msg = {"estatus": "error", "mensaje": "Debes iniciar sesion"}
+        return json.dumps(msg)
 #Fin CRUD Tarjetas
 
 #fin de manejo de usuarios
@@ -428,17 +441,23 @@ def consultarFotoPorducto(id):
 @login_required
 def verDetallesPedido(id):
     detallepedido=DetallePedidos()
-    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
-     return render_template("/pedidosclt/consultaDetallespedido.html",detallepedido=detallepedido.consultaGeneral(id))
+    detallepedido = detallepedido.consultaGeneral(id)
+    for c in detallepedido:
+        idUsuario = c.pedido.idComprador
+        idVendedor = c.pedido.idVendedor
+    if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_vendedor()) and (current_user.idUsuario==idUsuario or current_user.idUsuario==idVendedor):
+        return render_template("/pedidosclt/consultaDetallespedido.html",detallepedido=detallepedido)
+    else:
+        abort(404)
 
 @app.route('/Pedidos/verpedidos/detallespedidos/en/<int:id>')
 @login_required
 def editarDetallesPedidos(id):
     detallepedido=DetallePedidos()
-    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
+    if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_vendedor()):
         return render_template("pedidosclt/editarDetallespedido.html",detallepedido=detallepedido.consultaIndividual(id))
     else:
-        return redirect(url_for('mostrar_login'))
+        abort(404)
 
 @app.route('/Pedidos/verpedidos/detallespedidos/editarPedidos',methods=['POST'])
 @login_required
@@ -473,16 +492,19 @@ def modDetallesPedidos():
 @app.route('/Usuarios/verCarrito/<int:id>')
 @login_required
 def verCarrito(id):
-    carrito=Carrito()
-    prod=Producto()
-    return render_template("/usuarios/carrito.html",carrito=carrito.consultaGeneral(id),prod=prod.consultaGeneral())
+    if current_user.is_comprador() and current_user.idUsuario==id:
+        carrito = Carrito()
+        prod = Producto()
+        return render_template("/usuarios/carrito.html", carrito=carrito.consultaGeneral(id),prod=prod.consultaGeneral(), total=carrito.total(id))
+    else:
+        abort(404)
 
 @app.route('/Usuarios/verCarrito/ed/<int:id>')
 @login_required
 def editarCarrrito(id):
     carrito=Carrito()
     if current_user.is_authenticated and current_user.is_comprador():
-        return render_template("usuarios/carritoEditar.html",carrito=carrito.consultaIndividual(id))
+        return render_template("usuarios/carritoEditar.html",carrito=carrito.consultaIndividual(id),total=0)
     else:
         return redirect(url_for('mostrar_login'))
 
@@ -533,6 +555,71 @@ def agregarProductoCarrito(data):
     else:
         msg = {"estatus": "error", "mensaje": "Debes iniciar sesion"}
     return json.dumps(msg)
+
+@app.route('/carrito/pagar')
+@login_required
+def pagarCarrito():
+    if current_user.is_comprador():
+        carrito = Carrito()
+        tarjeta = Tarjeta()
+        producto = Producto()
+        tarjeta = tarjeta.consultaGeneral(current_user.idUsuario)
+        total = 0
+
+        idTarjeta = 0
+        for t in tarjeta:
+            idTarjeta = t.idTarjeta
+
+        if idTarjeta == 0:
+            flash('No tienes una tarjeta asociada')
+            return redirect(url_for('mostrar_login'))
+        pedido = Pedido()
+
+        carrito = carrito.consultaGeneral(current_user.idUsuario)
+        for c in carrito:
+            producto = producto.consultaIndividuall(c.idProducto)
+            total += (producto.precioVenta * c.cantidad)
+            if producto.existencia < c.cantidad:
+                flash('No hay suficiente producto de ' + producto.nombre)
+                return redirect(url_for('mostrar_login'))
+
+        pedido.idComprador = current_user.idUsuario
+        pedido.idVendedor = 3
+        pedido.idTarjeta = idTarjeta
+        pedido.fechaRegistro = datetime.date.today()
+        pedido.total = total
+        if total==0:
+            abort(404)
+        for t in tarjeta:
+            if total>t.saldo:
+                flash('No tienes saldo suficiente')
+                return redirect(url_for('mostrar_login'))
+        pedido.estatus = 'PENDIENTE'
+        pedido.agregar()
+
+        for c in carrito:
+            producto = producto.consultaIndividuall(c.idProducto)
+            detalle = DetallePedidos()
+            detalle.idPedido = pedido.idPedido
+            detalle.idProducto = producto.idProducto
+            detalle.precio = producto.precioVenta
+            detalle.cantidadPedida = c.cantidad
+            detalle.cantidadEnviada = c.cantidad
+            detalle.cantidadAceptada = 0
+            detalle.cantidadRechazada = 0
+            detalle.subtotal = producto.precioVenta * c.cantidad
+            detalle.estatus = 'pendiente'
+            detalle.comentario = ''
+            detalle.agregar()
+            producto.existencia = producto.existencia - c.cantidad
+            c.eliminar(c.idCarrito)
+            for t in tarjeta:
+                t.saldo = t.saldo - pedido.total
+                t.editar()
+            flash('Pago realizado con éxito')
+    else:
+        abort(404)
+    return redirect(url_for('mostrar_login'))
 #FIN DE CRUD CARRITO
 
 
@@ -718,19 +805,20 @@ def modEnvio():
 @login_required
 def verPedidos(id):
     pedido=Pedido()
-    if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_vendedor()):
-     return render_template("pedidosclt/consulta.html",pedido=pedido.consultaGeneral(id))
+    if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_vendedor()) and current_user.idUsuario==id:
+        return render_template("pedidosclt/consulta.html",pedido=pedido.consultaGeneral(id))
     else:
-        return redirect(url_for('mostrar_login'))
+        abort(404)
 
 @app.route('/Pedidos/verpedidos/en/<int:id>')
 @login_required
 def editarPedidos(id):
     pedido = Pedido()
-    if current_user.is_authenticated and current_user.is_comprador() or current_user.is_vendedor():
-        return render_template("pedidosclt/editarPedido.html",pedido=pedido.consultaIndividual(id))
+    pedido = pedido.consultaIndividual(id)
+    if current_user.is_authenticated and (current_user.is_comprador() or current_user.is_vendedor()) and (current_user.idUsuario==pedido.idComprador or current_user.idUsuario==pedido.idVendedor):
+        return render_template("pedidosclt/editarPedido.html",pedido=pedido)
     else:
-        return redirect(url_for('mostrar_login'))
+        abort(404)
 
 @app.route('/Pedidos/editarPedidos',methods=['post'])
 @login_required

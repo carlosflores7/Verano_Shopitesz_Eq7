@@ -6,7 +6,7 @@
 {% block contenido %}
 {{super()}}
 <div>
-    <h1 class="bg-primary text-center">Edicion de Pedos</h1>
+    <h1 class="bg-primary text-center">Edicion de Pedidos</h1>
     <form action="/Pedidos/editarPedidos" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="idPedido"> id Pedido: </label>
@@ -45,8 +45,8 @@
             <input type="number" name="total" required maxlength="200" value="{{pedido.total}}" class="form-control">
         </div>
          <select name="ESTATUS" class="form-control">
-            <option name="Pendiente">PENDIENTE</option>
-            <option name="Activo">ACTIVO</option>
+            <option>PENDIENTE</option>
+            <option>ACTIVO</option>
           </select>
 
 

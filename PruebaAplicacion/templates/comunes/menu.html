@@ -13,8 +13,10 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">CATALOGOS
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="/Categorias">CATEGORIAS</a></li>
-          <li><a href="/productos">PRODUCTOS</a></li>
+          {% if current_user.is_authenticated and current_user.is_admin() %}
+            <li><a href="/Categorias">CATEGORIAS</a></li>
+            <li><a href="/productos">PRODUCTOS</a></li>
+          {% endif %}
           <li><a href="/productos/categorias">PRODUCTOS POR CATEGORIA</a></li>
         </ul>
       </li>
@@ -45,11 +47,10 @@
          <a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="/pedidosclt/pedidospedir">HACER UN PEDIDO</a></li>
-          <li><a href="/pedidosclt">PEDIDOS</a></li>
+          <!--<li><a href="/pedidosclt/pedidospedir">HACER UN PEDIDO</a></li>
+          <li><a href="/pedidosclt">PEDIDOS</a></li>-->
           <li><a href="/Pedidos/verpedidos/{{current_user.idUsuario}}">VER PEDIDOS</a></li>
         </ul>
-         <li><a href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-user"></span>{{current_user.nombreCompleto}}</a></li>
          {% endif %}
             {% if current_user.is_authenticated and current_user.is_vendedor()  %}
                 <li class="dropdown">
@@ -71,6 +72,7 @@
             {% if not current_user.is_authenticated %}
             <li><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesion</a></li>
             {% else %}
+            <li><a href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-user"></span> {{current_user.nombreCompleto}}</a></li>
             <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
             {% endif %}
 

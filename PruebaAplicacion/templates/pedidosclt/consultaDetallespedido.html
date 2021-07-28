@@ -6,10 +6,8 @@
 {% block contenido %}
 {{super()}}
 
-    <h1 class="bg-primary text-center">Carrito</h1>
+    <h1 class="bg-primary text-center">Detalles del pedido</h1>
     <table class="table table-bordered table-hover justify-content-center" id="tablametodos">
-        <th>ID DETALLE DE PEDIDO</th>
-        <th>ID DEL PEDIDO</th>
         <th>ID DEL PRODUCTO</th>
         <th>IMAGEN DEL PRODUCTO</th>
         <th>ESPECIFICACIONES DEL PRODCTO</th>
@@ -24,8 +22,6 @@
         <th>VER</th>
         {% for detped in detallepedido %}
             <tr>
-                <td>{{detped.idDetalle}}</td>
-                <td>{{detped.idPedido}}</td>
                 <td>{{detped.idProducto}}</td>
                 <td><img src="/productos/consultarImagen/{{detped.idProducto}}" width="100px" height="80px"></td>
                 <td><img src="/productos/consultarEspecificaciones/{{detped.idProducto}}" width="100px" height="80px"></td>
