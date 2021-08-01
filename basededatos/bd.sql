@@ -98,6 +98,35 @@ constraint fk_DetallesPedidos_Pedidos foreign key (idPedido) references Pedidos 
 constraint fk_DetallePedidos_Productos foreign key (idProducto) references Productos (idProducto)
 );
 
+create table ENVIOS
+(
+   IDENVIO              int not null auto_increment,
+   IDPEDIDO             int,
+   IDPAQUETERIA         int,
+   FECHAENVIO           date,
+   FECHAENTREGA         date,
+   NOGUIA               varchar(10),
+   PESOPAQUETE          float,
+   PRECIOGR             float,
+   TOTALPAGAR           float,
+   ESTATUS              varchar(10),
+   primary key (IDENVIO)
+);
+
+create table PAQUETERIAS
+(
+   IDPAQUETERIA         int not null auto_increment,
+   NOMBRE               varchar(50),
+   PAGINAWEB            varchar(200),
+   PRECIOGR             float,
+   TELEFONO             varchar(12),
+   ESTATUS              varchar(10),
+   primary key (IDPAQUETERIA)
+);
+
+alter table ENVIOS add constraint FK_ENVIOS_PEDIDOS foreign key (IDPEDIDO) references PEDIDOS (IDPEDIDO);
+
+alter table ENVIOS add constraint FK_PEDIDOS_PAQUETERIAS foreign key (IDPAQUETERIA) references PAQUETERIAS (IDPAQUETERIA);
 
 /*Crear un usuario para la conexion con la app*/
 create user user_shopitesz1 identified by 'Banano0420';
@@ -109,6 +138,4 @@ grant select, insert, update, delete on Shopitesz.Carrito to user_shopitesz1;
 grant select, insert, update, delete on Shopitesz.Pedidos to user_shopitesz1; 
 grant select, insert, update, delete on Shopitesz.DetallePedidos to user_shopitesz1;
 grant select, insert, update, delete on Shopitesz.ENVIOS to user_shopitesz1; 
-grant select, insert, update, delete on Shopitesz.PAQUETERIAS to user_shopitesz1; 
-
-ALTER TABLE pedidos MODIFY COLUMN idVendedor int;
+grant select, insert, update, delete on Shopitesz.PAQUETERIAS to user_shopitesz1;

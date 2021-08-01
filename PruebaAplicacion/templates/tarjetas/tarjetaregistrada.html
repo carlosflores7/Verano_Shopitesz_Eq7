@@ -7,7 +7,7 @@
 {{super()}}
 <div>
     <h1 class="bg-primary text-center">Listado de Metodos de pagos</h1>
-     {% if current_user.is_authenticated() %}
+     {% if current_user.is_authenticated() and control=='' %}
     <a href="/usuarios/agregarNuevaTarjeta/{{current_user.idUsuario}}" class="btn btn-danger mb-3">
          <span class="glyphicon glyphicon-plus-sign"></span>
         Agregar Nueva Tarjeta

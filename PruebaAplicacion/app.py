@@ -175,7 +175,11 @@ def usuarioIndividual(id):
 @login_required
 def verTarjetas(id):
     tar=Tarjeta()
-    return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar.consultaGeneral(id))
+    tar=tar.consultaGeneral(id)
+    control = ''
+    for t in tar:
+        control = str(t.idTarjeta)
+    return render_template("/tarjetas/tarjetaregistrada.html",Tarjetas=tar,control=control)
 
 @app.route('/usuarios/agregarNuevaTarjeta/<int:id>')
 @login_required
