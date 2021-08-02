@@ -588,7 +588,7 @@ def pagarCarrito():
                 return redirect(url_for('mostrar_login'))
 
         pedido.idComprador = current_user.idUsuario
-        pedido.idVendedor = 6
+        pedido.idVendedor = 3
         pedido.idTarjeta = idTarjeta
         pedido.fechaRegistro = datetime.date.today()
         pedido.total = total
@@ -612,13 +612,13 @@ def pagarCarrito():
             detalle.cantidadAceptada = 0
             detalle.cantidadRechazada = 0
             detalle.subtotal = producto.precioVenta * c.cantidad
-            detalle.estatus = 'pendiente'
+            detalle.estatus = 'Pendiente'
             detalle.comentario = ''
             detalle.agregar()
             producto.existencia = producto.existencia - c.cantidad
             c.eliminar(c.idCarrito)
             for t in tarjeta:
-                t.saldo = t.saldo - pedido.total
+                t.saldo = t.saldo - detalle.subtotal
                 t.editar()
             flash('Pago realizado con éxito')
     else:
